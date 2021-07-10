@@ -11,7 +11,7 @@ import Foundation
 print("Part 1. Solving quadratic equations\n")
 
 let a: Double = 2
-let b: Double = -6
+let b: Double = 9
 let c: Double = 5
 let d: Double = pow(b, 2) - (4 * a * c)
 
