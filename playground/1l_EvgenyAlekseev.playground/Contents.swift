@@ -46,6 +46,9 @@ let cathetus1: Double = 3
 let cathetus2: Double = 4
 
 print("Cathetus 1 = \(cathetus1), cathetus 2 = \(cathetus2)")
+if cathetus1 == 0 || cathetus2 == 0 {
+    print("This is not a triangle")
+}
 
 let area = cathetus1 * cathetus2 / 2
 let hypotenuse = sqrt(pow(cathetus1, 2) + pow(cathetus2, 2))
