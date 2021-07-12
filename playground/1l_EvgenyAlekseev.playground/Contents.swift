@@ -42,23 +42,23 @@ print("\n******************\n")
 // Part 2. Calculate area, perimeter, and hypotenuse of a right triangle by its catheti
 print("Part 2. Calculate area, perimeter, and hypotenuse of a right triangle by its catheti\n")
 
-let cathetus1: Double = 3
-let cathetus2: Double = 4
+let cathetus1: Double = 6
+let cathetus2: Double = 8
 
 print("Cathetus 1 = \(cathetus1), cathetus 2 = \(cathetus2)")
 if cathetus1 == 0 || cathetus2 == 0 {
     print("This is not a triangle")
+} else {
+    let area = cathetus1 * cathetus2 / 2
+    let hypotenuse = sqrt(pow(cathetus1, 2) + pow(cathetus2, 2))
+    let perimeter = cathetus1 + cathetus2 + hypotenuse
+
+    print("""
+    Hypotenuse: \(hypotenuse)
+    Area: \(area)
+    Perimeter: \(perimeter)
+    """)
 }
-
-let area = cathetus1 * cathetus2 / 2
-let hypotenuse = sqrt(pow(cathetus1, 2) + pow(cathetus2, 2))
-let perimeter = cathetus1 + cathetus2 + hypotenuse
-
-print("""
-Hypotenuse: \(hypotenuse)
-Area: \(area)
-Perimeter: \(perimeter)
-""")
 
 print("\n******************\n")
 
