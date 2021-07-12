@@ -10,19 +10,23 @@ import Foundation
 // Part 1. Solving quadratic equations
 print("Part 1. Solving quadratic equations\n")
 
-let a: Double = 2
-let b: Double = 9
-let c: Double = 5
+let a: Double = 5
+let b: Double = 10
+let c: Double = 10
 let d: Double = pow(b, 2) - (4 * a * c)
 
 print("a = \(a), b = \(b), c = \(c)")
-print("D = \(d)")
 
-if d < 0 {
+if a == 0 {
+    print("x = \(-c / b)")
+} else if d < 0 {
+    print("D = \(d)")
     print("x1 = \(-b / (2 * a)) + \(sqrt(-d) / (2 * a))i; x2 = \(-b / (2 * a)) - \(sqrt(-d) / (2 * a))i")
 } else if d == 0 {
+    print("D = \(d)")
     print("x = \(-b / (2 * a))")
 } else {
+    print("D = \(d)")
     print("x1 = \((-b + sqrt(d)) / (2 * a)); x2 = \((-b - sqrt(d)) / (2 * a))")
 }
 print("\n******************\n")
@@ -67,3 +71,10 @@ for _ in 1...years {
 }
 
 print("Deposit amount after \(years) years at \(interest)% interest: \(result)\n")
+
+var testDouble: Double = 42
+var testInt: Int = 0
+if testDouble.truncatingRemainder(dividingBy: 1) != 0 {
+    testInt = Int(testDouble)
+}
+print(testInt)

@@ -21,3 +21,4 @@ func trip() -> (String) -> Void {
 
 let result = trip()
 result("London")
+
