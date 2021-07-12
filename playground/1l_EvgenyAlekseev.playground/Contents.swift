@@ -17,7 +17,13 @@ let d: Double = pow(b, 2) - (4 * a * c)
 
 print("a = \(a), b = \(b), c = \(c)")
 
-if a == 0 {
+if a == 0 && b == 0 && c == 0 {
+    print("Any root possible")
+} else if (a == 0 && c == 0) || (b == 0 && c == 0) {
+    print("x = 0")
+} else if a == 0 && b == 0 {
+    print("No roots found")
+} else if a == 0 {
     print("x = \(-c / b)")
 } else if d < 0 {
     print("D = \(d)")
