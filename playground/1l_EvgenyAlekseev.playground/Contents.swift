@@ -71,10 +71,3 @@ for _ in 1...years {
 }
 
 print("Deposit amount after \(years) years at \(interest)% interest: \(result)\n")
-
-var testDouble: Double = 42
-var testInt: Int = 0
-if testDouble.truncatingRemainder(dividingBy: 1) != 0 {
-    testInt = Int(testDouble)
-}
-print(testInt)
