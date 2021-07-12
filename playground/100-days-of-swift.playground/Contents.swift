@@ -1,17 +1,23 @@
 import Cocoa
 
-let driving = { (place: String) in
-    print("I'm driving to \(place)!")
+let driving = { (place: String, speed: Int) -> String in
+    return "I'm driving to \(place) at \(speed) km/h!"
 }
 
-func travel(action: (String) -> Void) {
+func travel(action: (String, Int) -> String) {
     print("You know what?")
-    action("London")
+    let description = action("London", 60)
+    print(description)
     print("And that is fucking great!")
 }
 
 travel(action: driving)
 
-travel { (place: String) in
-    print("I'm driving to \(place)!")
+func trip() -> (String) -> Void {
+    return {
+        print("I'm going to \($0)!")
+    }
 }
+
+let result = trip()
+result("London")
