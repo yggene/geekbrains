@@ -17,8 +17,16 @@ for i in 1...100 {
 }
 
 
-// 4. Remove all numbers that are even and not divisible by 3 from newArr
+// 4. Remove all numbers that are even and not divisible by 3 from newArr. Solution #1
 newArr.removeAll(where: { isEven($0) || !isDivisibleByThree($0) })
+print(newArr)
+
+// 4. Solution #2
+for num in newArr {
+    if isEven(num) || !isDivisibleByThree(num) {
+        newArr.remove(at: newArr.firstIndex(of: num)!)
+    }
+}
 print(newArr)
 
 
@@ -26,7 +34,7 @@ print(newArr)
 func fibonacciArray(count n: Int) -> [Int] {
     var result = [Int]()
     
-    guard n >= 0 else { return result }
+    if n < 0 { return result }
     
     for i in 0 ..< n {
         if i == 0 {
@@ -37,23 +45,24 @@ func fibonacciArray(count n: Int) -> [Int] {
             result.append(result[i - 1] + result[i - 2])
         }
     }
+
     return result
 }
 
 print(fibonacciArray(count: 50))
 
 
-// 6. Fill an array with prime numbers up to n, negative numbers excluded
+// 6. Fill an array with prime numbers up to n, negative numbers excluded. Solution #1
 func primesArray(in n: Int) -> [Int] {
     var result = [Int]()
     var boolArray = [Bool]()
-    
-    guard n >= 0 else { return result }
-    
+
+    if n < 0 { return result }
+
     for _ in 0 ... n {
         boolArray.append(true)
     }
-    
+
     for p in stride(from: 2, through: n, by: 1) {
         if !boolArray[p] {
             continue
@@ -63,10 +72,35 @@ func primesArray(in n: Int) -> [Int] {
             boolArray[i] = false
         }
     }
-
+    
     return result
 }
 
 print(primesArray(in: 100))
 
 
+// 6. Solution #2, almost the same, but using a single array
+func anotherPrimesArray(in n: Int) -> [Int] {
+    var result = [Int]()
+    
+    if n <= 0 { return result }
+    
+    for i in 0 ... n {
+        result.append(i)
+    }
+
+    for p in stride(from: 2, through: n, by: 1) {
+        if result[p] == -1 {
+            continue
+        }
+        for i in stride(from: p + p, through: n, by: p) {
+            result[i] = -1
+        }
+    }
+    
+    return result.filter({ num in
+        num > 1
+    })
+}
+
+print(anotherPrimesArray(in: 100))
