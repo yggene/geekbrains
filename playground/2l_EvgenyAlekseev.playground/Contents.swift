@@ -5,8 +5,8 @@ func isEven(_ num: Int) -> Bool {
 
 
 // 2. Compose a func to check if a number is divided by 3 without remainder
-func isDivisibleByThree(_ num: Int) -> Bool {
-    num % 3 == 0
+func isMultipleOfThree(_ num: Int) -> Bool {
+    num.isMultiple(of: 3)
 }
 
 
@@ -18,12 +18,12 @@ for i in 1...100 {
 
 
 // 4. Remove all numbers that are even and not divisible by 3 from newArr. Solution #1
-newArr.removeAll(where: { isEven($0) || !isDivisibleByThree($0) })
+newArr.removeAll(where: { isEven($0) || !isMultipleOfThree($0) })
 print(newArr)
 
 // 4. Solution #2
 for num in newArr {
-    if isEven(num) || !isDivisibleByThree(num) {
+    if isEven(num) || !isMultipleOfThree(num) {
         newArr.remove(at: newArr.firstIndex(of: num)!)
     }
 }
@@ -59,7 +59,7 @@ func primesArray(in n: Int) -> [Int] {
 
     if n < 0 { return result }
 
-    for _ in 0 ... n {
+    for _ in 0...n {
         boolArray.append(true)
     }
 
@@ -85,7 +85,7 @@ func anotherPrimesArray(in n: Int) -> [Int] {
     
     if n <= 0 { return result }
     
-    for i in 0 ... n {
+    for i in 0...n {
         result.append(i)
     }
 
