@@ -10,9 +10,9 @@ import Foundation
 // Part 1. Solving quadratic equations
 print("Part 1. Solving quadratic equations\n")
 
-let a: Double = 5
-let b: Double = 10
-let c: Double = 10
+let a = 5.0
+let b = 10.0
+let c = 10.0
 let d: Double = pow(b, 2) - (4 * a * c)
 
 print("a = \(a), b = \(b), c = \(c)")
