@@ -299,13 +299,16 @@ mySportCar.startEngine()
 print(mySportCar.engineState)
 mySportCar.openWindows()
 print(mySportCar.windowsState)
+
 print("\n*****************\n")
+
 print(myTrunkCar.model)
 print(myTrunkCar.manufactureYear)
 myTrunkCar.startEngine()
 print(myTrunkCar.engineState)
 myTrunkCar.openWindows()
 print(myTrunkCar.windowsState)
+
 print("\n*****************\n")
 
 // Print Trunk car properties using Mirror
@@ -317,6 +320,7 @@ print("\n*****************\n")
 
 // Print Sports car properties using struct method
 mySportCar.printInfo()
+
 print("\n*****************\n")
 
 // Testing luggage actions
