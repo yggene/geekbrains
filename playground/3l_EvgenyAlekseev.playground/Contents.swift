@@ -1,5 +1,3 @@
-import Foundation
-
 // creating enums
 enum EngineState {
     case started, stopped
@@ -11,10 +9,10 @@ enum WindowsState: String {
 }
 
 enum LuggageActions {
-    case loadIntoBody(volume: Double)
-    case unloadFromBody(volume: Double)
-    case loadIntoTrunk(volume: Double)
-    case unloadFromTrunk(volume: Double)
+    case loadIntoBody(_ volume: Double)
+    case unloadFromBody(_ volume: Double)
+    case loadIntoTrunk(_ volume: Double)
+    case unloadFromTrunk(_ volume: Double)
 }
 
 enum LuggageErrors: String {
@@ -324,9 +322,9 @@ mySportCar.printInfo()
 print("\n*****************\n")
 
 // Testing luggage actions
-mySportCar.luggage(action: .loadIntoBody(volume: 400))
-myTrunkCar.luggage(action: .loadIntoTrunk(volume: 1000))
-mySportCar.luggage(action: .unloadFromBody(volume: 300))
-myTrunkCar.luggage(action: .unloadFromTrunk(volume: 900))
-mySportCar.luggage(action: .unloadFromBody(volume: 300))
-myTrunkCar.luggage(action: .unloadFromTrunk(volume: 900))
+mySportCar.luggage(action: .loadIntoBody(400))
+myTrunkCar.luggage(action: .loadIntoTrunk(1000))
+mySportCar.luggage(action: .unloadFromBody(300))
+myTrunkCar.luggage(action: .unloadFromTrunk(900))
+mySportCar.luggage(action: .unloadFromBody(300))
+myTrunkCar.luggage(action: .unloadFromTrunk(900))
