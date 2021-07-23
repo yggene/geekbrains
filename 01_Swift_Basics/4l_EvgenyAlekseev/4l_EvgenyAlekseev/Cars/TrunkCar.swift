@@ -36,7 +36,7 @@ class TrunkCar: Car {
     override func carAction(_ action: CarActions) {
         switch action {
         case let .loadIntoTrunk(volume):
-            if volume > maxTrunkVolume {
+            if volume > trunkVolumeAvailable {
                 print(LuggageErrors.maxVolumeExceeded.rawValue,
                       "Volume available: \(currentTrunkLoad)")
             } else {
