@@ -11,26 +11,32 @@ class Car {
     let manufactureYear: Int
     
     // Variables
-    var engineState: EngineState {
+    private(set) var engineState: EngineState {
         didSet {
             print(engineState.rawValue)
         }
     }
     
-    var windowsState: WindowsState {
+    private(set) var windowsState: WindowsState {
         didSet {
             print(windowsState.rawValue)
         }
     }
     
-    init(model: String,
-         manufactureYear: Int,
-         engineState: EngineState,
-         windowsState: WindowsState) {
+    // Methods
+    init(
+        model: String,
+        manufactureYear: Int,
+        engineState: EngineState,
+        windowsState: WindowsState) {
         self.model = model
         self.manufactureYear = manufactureYear
         self.engineState = engineState
         self.windowsState = windowsState
+    }
+    
+    deinit {
+        print("\(model) was removed from this world.")
     }
     
     func carAction(_ action: CarActions) {
@@ -39,33 +45,37 @@ class Car {
             if engineState == .started {
                 print("Hey, you've already started it!")
             } else {
-            engineState = .started
+                engineState = .started
             }
         case .stopEngine:
             if engineState == .stopped {
                 print("Hey, you're not driving yet!")
             } else {
-            engineState = .stopped
+                engineState = .stopped
             }
         case .openWindows:
             if windowsState == .opened {
-                print("The windows are opened already")
+                print("The windows are opened already.")
             } else {
-            windowsState = .opened
+                windowsState = .opened
             }
         case .closeWindows:
             if windowsState == .closed {
-                print("The windows are closed already")
+                print("The windows are closed already.")
             } else {
-            windowsState = .closed
+                windowsState = .closed
             }
+        default:
+            print("Action not available for this car type.")
         }
     }
     
     func printInfo() {
-        print("Model: \(model)")
-        print("Manufacture year: \(manufactureYear)")
-        print("Engine state: \(engineState)")
-        print("Windows state: \(windowsState)")
+        print("""
+              Model: \(model)
+              Manufacture year: \(manufactureYear)
+              Engine state: \(engineState)
+              Windows state: \(windowsState)
+              """)
     }
 }
