@@ -15,19 +15,18 @@ enum WindowsState: String {
     case closed = "Closing the windows..."
 }
 
+enum NitroState: String {
+    case on = "Woo-hoo! This is some serious shit, man!"
+    case off = "You coward!"
+}
+
 enum CarActions {
     case startEngine
     case stopEngine
     case openWindows
     case closeWindows
-}
-
-enum SportCarActions {
     case nitroOn
-    case nitrOff
-}
-
-enum TrunkCarActions {
+    case nitroOff
     case loadIntoTrunk(_ volume: Double)
     case unloadFromTrunk(_ volume: Double)
 }

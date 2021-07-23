@@ -6,35 +6,75 @@
 //
 
 class TrunkCar: Car {
+    // Constants
+    let carType = "Trunk car"
     let maxTrunkVolume: Double
     
     // Variables
-    var currentTrunkLoad = 0.0
+    private(set) var currentTrunkLoad = 0.0 
     var trunkVolumeAvailable: Double {
         get {
             maxTrunkVolume - currentTrunkLoad
         }
     }
     
-    func carAction(_ action: TrunkCarActions) {
+    // Methods
+    init(
+        model: String,
+        manufactureYear: Int,
+        engineState: EngineState,
+        windowsState: WindowsState,
+        maxTrunkVolume: Double) {
+        self.maxTrunkVolume = maxTrunkVolume
+        super.init(
+            model: model,
+            manufactureYear: manufactureYear,
+            engineState: engineState,
+            windowsState: windowsState)
+    }
+    
+    override func carAction(_ action: CarActions) {
         switch action {
         case let .loadIntoTrunk(volume):
-            if volume > trunkVolumeAvailable {
+            if volume > maxTrunkVolume {
                 print(LuggageErrors.maxVolumeExceeded.rawValue,
-                      "Volume available:",
-                      trunkVolumeAvailable)
+                      "Volume available: \(currentTrunkLoad)")
             } else {
-            currentTrunkLoad += volume
-            print("\(volume) loaded! Trunk volume available: \(trunkVolumeAvailable)")
+                currentTrunkLoad += volume
+                print("""
+                      Loading...
+                      \(volume) loaded!
+                      Current trunk load: \(currentTrunkLoad).
+                      Trunk volume available: \(trunkVolumeAvailable).
+                      """
+                      )
             }
         case let .unloadFromTrunk(volume):
             if volume > currentTrunkLoad {
-                print(LuggageErrors.insuficientLuggage.rawValue, "Luggage stored:", currentTrunkLoad)
+                print(LuggageErrors.insuficientLuggage.rawValue,
+                      "Current load:",
+                      currentTrunkLoad)
             } else {
-            currentTrunkLoad -= volume
-            print("\(volume) unloaded! Body volume available: \(trunkVolumeAvailable)")
+                currentTrunkLoad -= volume
+                print("""
+                      Unloading...
+                      \(volume) unloaded!
+                      Current trunk load: \(currentTrunkLoad).
+                      Trunk volume available: \(trunkVolumeAvailable).
+                      """)
             }
+        default:
+            super.carAction(action)
         }
     }
     
+    override func printInfo() {
+        print("*** My \(carType) info ***")
+        super.printInfo()
+        print("""
+              Max trunk volume: \(maxTrunkVolume)
+              Current trunk load: \(currentTrunkLoad)
+              Available trunk volume: \(trunkVolumeAvailable)\n
+              """)
+    }
 }
