@@ -16,6 +16,9 @@ for i in 1...100 {
     newArr.append(i)
 }
 
+// 3. Solution #2
+newArr = [Int](1...100)
+
 
 // 4. Remove all numbers that are even and not divisible by 3 from newArr. Solution #1
 newArr.removeAll(where: { isEven($0) || !isMultipleOfThree($0) })

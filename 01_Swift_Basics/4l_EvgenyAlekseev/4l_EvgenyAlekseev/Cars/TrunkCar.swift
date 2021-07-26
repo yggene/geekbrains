@@ -11,7 +11,7 @@ class TrunkCar: Car {
     let maxTrunkVolume: Double
     
     // Variables
-    private(set) var currentTrunkLoad = 0.0 
+    private var currentTrunkLoad = 0.0 
     var trunkVolumeAvailable: Double {
         get {
             maxTrunkVolume - currentTrunkLoad
