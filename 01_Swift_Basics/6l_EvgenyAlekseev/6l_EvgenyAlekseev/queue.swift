@@ -5,7 +5,7 @@
 //  Created by Evgeny Alekseev on 29.07.2021.
 //
 
-struct Queue<T> {
+struct Queue<T, U> {
     private var elements: [T] = []
     
     // add to queue
@@ -56,8 +56,8 @@ struct Queue<T> {
     }
     
     // map implemented
-    func map(_ action: (T) -> T) -> [T] {
-        var result: [T] = []
+    func map(_ action: (T) -> U) -> [U] {
+        var result: [U] = []
         for element in elements {
             result.append(action(element))
         }
@@ -65,8 +65,8 @@ struct Queue<T> {
     }
     
     // reduce implemented
-    func reduce(_ accumulator: T,
-                _ action: (T, T) -> T) -> T {
+    func reduce(_ accumulator: U,
+                _ action: (U, T) -> U) -> U {
         var result = accumulator
         for element in elements {
             result = action(result, element)
