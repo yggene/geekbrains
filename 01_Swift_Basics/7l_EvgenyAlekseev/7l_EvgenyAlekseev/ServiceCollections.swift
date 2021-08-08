@@ -1,5 +1,5 @@
 //
-//  WeakPasswords.swift
+//  ServiceCollections.swift
 //  7l_EvgenyAlekseev
 //
 //  Created by Evgeny Alekseev on 08.08.2021.

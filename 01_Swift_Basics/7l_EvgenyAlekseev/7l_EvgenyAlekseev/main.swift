@@ -42,6 +42,7 @@ func main() {
     
     print(getPassword(of: "CEREAL KILLER"))
     
+    // setting age of a user
     do {
         try user1?.setAge(to: 28)
     } catch AccountErrors.ageInvalid {
@@ -50,6 +51,7 @@ func main() {
         print("ERROR: Unknown")
     }
     
+    // checking age of a user
     let ageOfUser = user1?.getAge()
     if let error = ageOfUser?.1 {
         print("ERROR: \(error)")
