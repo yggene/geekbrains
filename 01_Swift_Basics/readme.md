@@ -1,4 +1,3 @@
-# GeekBrains Swift course
 ## 1. Swift Basics
 ### 1L_Homework
 1. Решить квадратное уравнение.
