@@ -7,5 +7,4 @@
 * ООП: требование к классам, протоколы, расширения, полиморфизм, композиция
 * Продвинутое ООП
 * Управление ошибками в приложениях
-### 2. UI Design
-* Loading...
+### 2. [UI Design](https://github.com/yggene/geekbrains/tree/main/02_UI_Design/fakeVKapp)
