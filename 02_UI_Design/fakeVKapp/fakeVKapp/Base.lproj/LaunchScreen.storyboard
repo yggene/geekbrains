@@ -31,20 +31,15 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="dX3-0r-LCU">
-                                <rect key="frame" x="197" y="520" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dX3-0r-LCU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9ct-Zy-8kz"/>
                             <constraint firstItem="D1z-t5-HSW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9mx-89-adx"/>
                             <constraint firstItem="isk-QR-YjV" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="DiW-O3-N64"/>
                             <constraint firstItem="isk-QR-YjV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Wtc-23-ac2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="D1z-t5-HSW" secondAttribute="bottom" constant="10" id="YS0-0o-eMh"/>
                             <constraint firstItem="isk-QR-YjV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="h8T-uC-sRx"/>
-                            <constraint firstItem="dX3-0r-LCU" firstAttribute="top" secondItem="isk-QR-YjV" secondAttribute="bottom" constant="8" symbolic="YES" id="q1N-0Y-GVV"/>
                             <constraint firstItem="isk-QR-YjV" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="tfL-8N-zkM"/>
                         </constraints>
                     </view>
