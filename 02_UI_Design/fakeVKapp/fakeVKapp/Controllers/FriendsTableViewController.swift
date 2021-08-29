@@ -42,22 +42,19 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "friendCell",
-            for: indexPath)
+                for: indexPath) as? FriendCell else { return UITableViewCell() }
+        
+        let currentFriend = friends[indexPath.row]
+        cell.configure(with: currentFriend)
         
         // cell styles
         tableView.separatorStyle = .none
-        cell.imageView?.layer.masksToBounds = true
-        cell.imageView?.layer.cornerRadius = 25
+        cell.avatarImageView.layer.masksToBounds = true
+        cell.avatarImageView?.layer.cornerRadius = 20
         cell.accessoryType = .disclosureIndicator
-        cell.detailTextLabel?.textColor = UIColor.systemGray
-        
-        let currentFriend = friends[indexPath.row]
-        
-        cell.textLabel?.text = currentFriend.firstName + " " + currentFriend.secondName
-        cell.imageView?.image = currentFriend.avatar
-        cell.detailTextLabel?.text = currentFriend.origin.rawValue
+        cell.originLabel?.textColor = UIColor.systemGray
         
         return cell
     }
@@ -71,5 +68,19 @@ class FriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: "friendPhotoSegue",
                      sender: nil)
         
+    }
+    
+    // transfer data for the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // check the destination controller
+        guard let destinationController = segue.destination
+                as? FriendsPhotoCollectionViewController
+        else { return }
+        
+        // get the inde of the selected cell
+        if let index = tableView.indexPathForSelectedRow {
+            // assign profile to the destination controller
+            destinationController.friendProfile = friends[index.row]
+        }
     }
 }

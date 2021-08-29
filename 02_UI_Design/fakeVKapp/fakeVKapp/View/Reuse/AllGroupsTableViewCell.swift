@@ -12,7 +12,7 @@ class AllGroupsTableViewCell: UITableViewCell {
     @IBOutlet var allGroupsImageView: UIImageView!
     @IBOutlet var allGroupsNameLabel: UILabel!
     
-    func configure(group: Group) {
+    func configure(with group: Group) {
         allGroupsImageView.image = group.image
         allGroupsNameLabel.text = group.name
     }

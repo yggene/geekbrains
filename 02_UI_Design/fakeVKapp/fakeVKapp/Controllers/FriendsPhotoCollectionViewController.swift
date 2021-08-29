@@ -8,7 +8,9 @@
 import UIKit
 
 class FriendsPhotoCollectionViewController: UICollectionViewController {
-
+    
+    var friendProfile: Friend?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +27,9 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendPhotoCollectionViewCell", for: indexPath) as? FriendPhotoCollectionViewCell else { return UICollectionViewCell() }
         
+        cell.configure(with: friendProfile!)
+        
+        // cell style
         cell.photoImageView?.layer.masksToBounds = true
         cell.photoImageView?.layer.cornerRadius = 50
     

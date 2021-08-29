@@ -9,34 +9,11 @@ import UIKit
 
 class MyGroupsTableViewController: UITableViewController {
     
-    var myGroups = [Group(name: "Narnia Dimension",
-                          image: UIImage(named: "group-narnia-dimension"))]
+    var myGroups = [Group]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    //unwind segue
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        // Проверяем идентификатор перехода
-        if segue.identifier == "addGroupSegue" {
-            // Получаем ссылку на контроллер, с которого осуществлен переход
-            guard let groupAdd = segue.source as?
-                    AllGroupsTableViewController else { return }
-            // Получаем индекс выделенной ячейки
-            if let indexPath = groupAdd.tableView.indexPathForSelectedRow {
-                // Получаем группу по индексу
-                let selectedGroup = groupAdd.allGroups[indexPath.row]
-                // Проверяем на наличие дубликата
-                 if !myGroups.contains(selectedGroup) {
-                    // добавляем город в список
-                    myGroups.append(selectedGroup)
-                    // обновляем таблицу
-                    tableView.reloadData()
-                    // и ни хрена не работает :D
-                }
-            }
-        }
+        
     }
     
     // MARK: - Table view data source
@@ -48,39 +25,55 @@ class MyGroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myGroupsCell", for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
         
-        // Configure the cell...
-        tableView.separatorStyle = .none
-        cell.imageView?.layer.masksToBounds = true
-        cell.imageView?.layer.cornerRadius = 5
-        
         let currentGroup = myGroups[indexPath.row]
+        cell.configure(with: currentGroup)
         
-        cell.textLabel?.text = currentGroup.name
-        cell.imageView?.image = currentGroup.image
+        // cell style
+        tableView.separatorStyle = .none
+        cell.myGroupsImageView?.layer.masksToBounds = true
+        cell.myGroupsImageView?.layer.cornerRadius = 5
         
         return cell
     }
     
-    // Метод выделения ячейки
+    // selecting cell
     override func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
         
+        // deselecting cell
         defer {
-            // Метод для снятия выделения с ячейки
             tableView.deselectRow(at: indexPath, animated: true)
         }
 
     }
     
+    // unwind segue
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        // check segue id
+        if segue.identifier == "addGroupSegue" {
+            // get destination segue
+            guard let allGroupsController = segue.source as?
+                    AllGroupsTableViewController else { return }
+            // get the index of the selected group cell
+            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+                // get group
+                let selectedGroup = allGroupsController.allGroups[indexPath.row]
+                // check if no such group in my list
+                 if !myGroups.contains(selectedGroup) {
+                    myGroups.append(selectedGroup)
+                    tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    // deleting groups from profile
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
-            // Если была нажата кнопка «Удалить»
             if editingStyle == .delete {
-            // Удаляем город из массива
                 myGroups.remove(at: indexPath.row)
-            // И удаляем строку из таблицы
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }

@@ -39,16 +39,13 @@ class AllGroupsTableViewController: UITableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsTableViewCell", for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
         
-        // Configure the cell...
-        
-        tableView.separatorStyle = .none
-        cell.imageView?.layer.masksToBounds = true
-        cell.imageView?.layer.cornerRadius = 5
-        
         let currentGroup = allGroups[indexPath.row]
+        cell.configure(with: currentGroup)
         
-        cell.textLabel?.text = currentGroup.name
-        cell.imageView?.image = currentGroup.image
+        // Cell style
+        tableView.separatorStyle = .none
+        cell.allGroupsImageView?.layer.masksToBounds = true
+        cell.allGroupsImageView?.layer.cornerRadius = 5
         
         return cell
     }
