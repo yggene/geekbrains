@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  fakeVKapp
 //
 //  Created by Evgeny Alekseev on 12.08.2021.
@@ -20,7 +20,6 @@ class LoginViewController: UIViewController {
     @IBAction func enterButtonPressed(_ sender: Any) {
         if isValidUser() {
             print("Welcome, \(loginInputField.text!)!")
-            performSegue(withIdentifier: "loginSegue", sender: nil)
         } else {
             print("Incorrect username and/or password")
             showAlert()
