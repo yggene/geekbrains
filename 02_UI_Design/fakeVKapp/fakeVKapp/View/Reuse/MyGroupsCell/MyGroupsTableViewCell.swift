@@ -9,12 +9,12 @@ import UIKit
 
 class MyGroupsTableViewCell: UITableViewCell {
 
-    @IBOutlet var myGroupsImageView: UIImageView!
-    @IBOutlet var myGroupsLabel: UILabel!
+    @IBOutlet var myGroupsImageView: UIImageView?
+    @IBOutlet var myGroupsLabel: UILabel?
     
     func configure(group: Group) {
-        myGroupsImageView.image = group.image
-        myGroupsLabel.text = group.name
+        myGroupsImageView?.image = group.image
+        myGroupsLabel?.text = group.name
     }
     
 }

@@ -16,6 +16,29 @@ class MyGroupsTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    //unwind segue
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        // Проверяем идентификатор перехода
+        if segue.identifier == "addGroupSegue" {
+            // Получаем ссылку на контроллер, с которого осуществлен переход
+            guard let groupAdd = segue.source as?
+                    AllGroupsTableViewController else { return }
+            // Получаем индекс выделенной ячейки
+            if let indexPath = groupAdd.tableView.indexPathForSelectedRow {
+                // Получаем группу по индексу
+                let selectedGroup = groupAdd.allGroups[indexPath.row]
+                // Проверяем на наличие дубликата
+                 if !myGroups.contains(selectedGroup) {
+                    // добавляем город в список
+                    myGroups.append(selectedGroup)
+                    // обновляем таблицу
+                    tableView.reloadData()
+                    // и ни хрена не работает :D
+                }
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,12 +49,28 @@ class MyGroupsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myGroupsCell", for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
         
         // Configure the cell...
+        tableView.separatorStyle = .none
         cell.imageView?.layer.masksToBounds = true
         cell.imageView?.layer.cornerRadius = 5
         
-        cell.configure(group: myGroups[indexPath.row])
+        let currentGroup = myGroups[indexPath.row]
+        
+        cell.textLabel?.text = currentGroup.name
+        cell.imageView?.image = currentGroup.image
         
         return cell
+    }
+    
+    // Метод выделения ячейки
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath) {
+        
+        defer {
+            // Метод для снятия выделения с ячейки
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+
     }
     
     override func tableView(_ tableView: UITableView,
@@ -45,26 +84,4 @@ class MyGroupsTableViewController: UITableViewController {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
-    
-    //unwind segue
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        // Проверяем идентификатор перехода
-        if segue.identifier == "addGroupSegue" {
-            // Получаем ссылку на контроллер, с которого осуществлен переход
-            guard let groupsSearch = segue.source as?
-                    AllGroupsTableViewController else { return }
-            // Получаем индекс выделенной ячейки
-            if let indexPath = groupsSearch.tableView.indexPathForSelectedRow {
-                // Получаем группу по индексу
-                let selectedGroup = myGroups[indexPath.row]
-                // Проверяем на наличие дубликата
-                if !myGroups.contains(selectedGroup) {
-                    // Если дубликата нет, то добавляем группу в список
-                    myGroups.append(selectedGroup)
-                    // Обновляем таблицу
-                    tableView.reloadData()
-                }
-            }
-        }
-    }
 }
