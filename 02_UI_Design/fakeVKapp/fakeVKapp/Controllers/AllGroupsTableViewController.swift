@@ -31,13 +31,16 @@ class AllGroupsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         allGroups.count
     }
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsTableViewCell", for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "allGroupsTableViewCell",
+                for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
         
         let currentGroup = allGroups[indexPath.row]
         cell.configure(with: currentGroup)
@@ -50,7 +53,8 @@ class AllGroupsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
         
         defer { tableView.deselectRow(
             at: indexPath,

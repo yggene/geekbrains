@@ -300,12 +300,12 @@
         <scene sceneID="qVy-xh-qM5">
             <objects>
                 <tableViewController id="z9Q-uO-IOg" customClass="MyGroupsTableViewController" customModule="fakeVKapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zFJ-Io-BxG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zFJ-Io-BxG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myGroupsCell" rowHeight="60" id="Qlg-iD-5ZK" customClass="MyGroupsTableViewCell" customModule="fakeVKapp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myGroupsCell" id="Qlg-iD-5ZK" customClass="MyGroupsTableViewCell" customModule="fakeVKapp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qlg-iD-5ZK" id="TLW-A4-MNL">
@@ -313,10 +313,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZO-Ol-x3x">
-                                            <rect key="frame" x="107" y="11" width="200" height="38"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="zpL-uP-vll"/>
-                                            </constraints>
+                                            <rect key="frame" x="107" y="11" width="41.333333333333343" height="38"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -335,6 +332,7 @@
                                         <constraint firstItem="Yv7-qg-Lhl" firstAttribute="leading" secondItem="TLW-A4-MNL" secondAttribute="leading" constant="10" id="T3H-le-yac"/>
                                         <constraint firstItem="xZO-Ol-x3x" firstAttribute="top" secondItem="TLW-A4-MNL" secondAttribute="top" constant="11" id="XhX-9X-U4u"/>
                                         <constraint firstItem="xZO-Ol-x3x" firstAttribute="centerY" secondItem="TLW-A4-MNL" secondAttribute="centerY" id="Zsa-Od-7ql"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xZO-Ol-x3x" secondAttribute="trailing" constant="20" symbolic="YES" id="paQ-JL-Uam"/>
                                         <constraint firstAttribute="bottom" secondItem="Yv7-qg-Lhl" secondAttribute="bottom" constant="2" id="qLj-7B-68x"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -384,10 +382,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51X-hi-wIr">
-                                            <rect key="frame" x="107" y="11" width="250" height="38"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="250" id="OWt-GA-Plg"/>
-                                            </constraints>
+                                            <rect key="frame" x="107" y="11" width="41.333333333333343" height="38"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -395,6 +390,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="5sE-7E-81K" firstAttribute="top" secondItem="gbh-2q-3Wt" secondAttribute="top" constant="2" id="5Kb-kC-3yc"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="51X-hi-wIr" secondAttribute="trailing" constant="20" symbolic="YES" id="F6B-UF-0we"/>
                                         <constraint firstItem="51X-hi-wIr" firstAttribute="top" secondItem="gbh-2q-3Wt" secondAttribute="topMargin" id="Ib4-2j-Mih"/>
                                         <constraint firstAttribute="trailing" secondItem="5sE-7E-81K" secondAttribute="trailing" constant="278" id="Itt-MY-NKo"/>
                                         <constraint firstItem="51X-hi-wIr" firstAttribute="centerY" secondItem="gbh-2q-3Wt" secondAttribute="centerY" id="fKL-cx-UIt"/>

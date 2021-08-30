@@ -18,12 +18,16 @@ class MyGroupsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         myGroups.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "myGroupsCell", for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "myGroupsCell",
+                for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
         
         let currentGroup = myGroups[indexPath.row]
         cell.configure(with: currentGroup)
@@ -58,7 +62,7 @@ class MyGroupsTableViewController: UITableViewController {
             // get the index of the selected group cell
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
                 // get group
-                var selectedGroup = allGroupsController.allGroups[indexPath.row]
+                let selectedGroup = allGroupsController.allGroups[indexPath.row]
                 // check if no such group in my list
                 if !myGroups.contains(selectedGroup) {
                     myGroups.append(selectedGroup)
