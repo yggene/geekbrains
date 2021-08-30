@@ -45,7 +45,7 @@ class AllGroupsTableViewController: UITableViewController {
         // Cell style
         tableView.separatorStyle = .none
         cell.allGroupsImageView?.layer.masksToBounds = true
-        cell.allGroupsImageView?.layer.cornerRadius = 5
+        cell.allGroupsImageView?.layer.cornerRadius = 10
         
         return cell
     }

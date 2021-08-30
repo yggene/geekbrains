@@ -8,7 +8,7 @@
 import UIKit
 
 class FriendCell: UITableViewCell {
-
+    
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var originLabel: UILabel!

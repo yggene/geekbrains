@@ -31,7 +31,7 @@ class MyGroupsTableViewController: UITableViewController {
         // cell style
         tableView.separatorStyle = .none
         cell.myGroupsImageView?.layer.masksToBounds = true
-        cell.myGroupsImageView?.layer.cornerRadius = 5
+        cell.myGroupsImageView?.layer.cornerRadius = 10
         
         return cell
     }
@@ -45,7 +45,7 @@ class MyGroupsTableViewController: UITableViewController {
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-
+        
     }
     
     // unwind segue
@@ -58,9 +58,9 @@ class MyGroupsTableViewController: UITableViewController {
             // get the index of the selected group cell
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
                 // get group
-                let selectedGroup = allGroupsController.allGroups[indexPath.row]
+                var selectedGroup = allGroupsController.allGroups[indexPath.row]
                 // check if no such group in my list
-                 if !myGroups.contains(selectedGroup) {
+                if !myGroups.contains(selectedGroup) {
                     myGroups.append(selectedGroup)
                     tableView.reloadData()
                 }
@@ -72,9 +72,9 @@ class MyGroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                myGroups.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
+        if editingStyle == .delete {
+            myGroups.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
 }
