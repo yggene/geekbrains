@@ -2,7 +2,7 @@
 //  AvatarImageView.swift
 //  fakeVKapp
 //
-//  Created by Evgeny Alekseev on 02.09.2021.
+//  Created by Evgeny Alekseev on 03.09.2021.
 //
 
 import UIKit
