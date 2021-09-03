@@ -26,16 +26,16 @@ class AvatarImage: UIImageView {
 class AvatarShadow: UIView {
     
     // how long the shadow will be. The longer the shadow, the more blurred it will be
-    @IBInspectable var shadowRadius: CGFloat = 1.0
+    @IBInspectable var shadowRadius: CGFloat = 2.0
     
     // the color of the shadow
     @IBInspectable var shadowColor: UIColor = .darkGray
     
     // opacity of the shadow
-    @IBInspectable var shadowOpacity: Float = 0.2
+    @IBInspectable var shadowOpacity: Float = 0.7
     
     // negative value will place it on left / above of the image view
-    @IBInspectable var shadowOffset: CGSize = CGSize(width: 2.0, height: 2.0)
+    @IBInspectable var shadowOffset: CGSize = CGSize(width: 1.0, height: 1.0)
     
 
     override func awakeFromNib() {
