@@ -427,36 +427,6 @@
             </objects>
             <point key="canvasLocation" x="3829.5999999999999" y="431.5270935960591"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="e38-uo-bhE">
-            <objects>
-                <viewController id="4R2-m1-cpt" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MXj-8h-por">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRF-be-Leu" customClass="AvatarImageView" customModule="fakeVKapp" customModuleProvider="target">
-                                <rect key="frame" x="57.666666666666657" y="127" width="260" height="260"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="CRF-be-Leu" secondAttribute="height" id="8hc-ie-tRZ"/>
-                                    <constraint firstAttribute="width" constant="260" id="TAm-Ff-Hb1"/>
-                                    <constraint firstAttribute="height" constant="260" id="rpt-fe-hPy"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="ffX-8r-Z4g"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="CRF-be-Leu" firstAttribute="top" secondItem="ffX-8r-Z4g" secondAttribute="top" constant="83" id="i2l-HH-c3L"/>
-                            <constraint firstItem="CRF-be-Leu" firstAttribute="centerX" secondItem="MXj-8h-por" secondAttribute="centerX" id="xfS-u9-t9x"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qjg-c8-IL2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="599" y="1161"/>
-        </scene>
         <!--My Groups-->
         <scene sceneID="pzm-74-Vcp">
             <objects>
