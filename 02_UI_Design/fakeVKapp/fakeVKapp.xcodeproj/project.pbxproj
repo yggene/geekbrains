@@ -19,6 +19,9 @@
 		1A6CE40926E0B9EB0030EE50 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CE40826E0B9EB0030EE50 /* AvatarImageView.swift */; };
 		1A7A09EA26D2A1240065C852 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A09E926D2A1240065C852 /* FriendsTableViewController.swift */; };
 		1A7F5FCF26DC462F00B50E37 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7F5FCE26DC462F00B50E37 /* FriendTableViewCell.swift */; };
+		1A926BB826E2EFAB00D8B371 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BB726E2EFAB00D8B371 /* DB.swift */; };
+		1A926BBA26E50E6B00D8B371 /* randoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BB926E50E6B00D8B371 /* randoms.swift */; };
+		1A926BBD26E5249B00D8B371 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BBC26E5249B00D8B371 /* LikeControl.swift */; };
 		1A9D0AB926DAE83800EDD7FD /* AllGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D0AB726DAE83800EDD7FD /* AllGroupsTableViewCell.swift */; };
 		1A9D0ABF26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D0ABD26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift */; };
 		1ABC351826D6D7EF0086B441 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABC351726D6D7EF0086B441 /* Group.swift */; };
@@ -41,6 +44,9 @@
 		1A6CE40826E0B9EB0030EE50 /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		1A7A09E926D2A1240065C852 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		1A7F5FCE26DC462F00B50E37 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		1A926BB726E2EFAB00D8B371 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
+		1A926BB926E50E6B00D8B371 /* randoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randoms.swift; sourceTree = "<group>"; };
+		1A926BBC26E5249B00D8B371 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		1A9D0AB726DAE83800EDD7FD /* AllGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		1A9D0ABD26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		1ABC351726D6D7EF0086B441 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -89,6 +95,9 @@
 			children = (
 				1A35C66326C5B9860054456D /* AppDelegate.swift */,
 				1A35C66526C5B9860054456D /* SceneDelegate.swift */,
+				1A926BB926E50E6B00D8B371 /* randoms.swift */,
+				1A926BB726E2EFAB00D8B371 /* DB.swift */,
+				1A926BBB26E5244700D8B371 /* Controls */,
 				1A23241526D579BD00B2E43C /* Model */,
 				1A7A09E726D2A0900065C852 /* Controllers */,
 				1A7A09E826D2A0EC0065C852 /* View */,
@@ -118,6 +127,14 @@
 				1ABC351626D6D76B0086B441 /* Reuse */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1A926BBB26E5244700D8B371 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				1A926BBC26E5249B00D8B371 /* LikeControl.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		1ABC351626D6D76B0086B441 /* Reuse */ = {
@@ -212,7 +229,10 @@
 				1A52A6A826D8A35800C5A912 /* MyGroupsTableViewController.swift in Sources */,
 				1A52A6AA26D8A36F00C5A912 /* AllGroupsTableViewController.swift in Sources */,
 				1ABC352826D70C580086B441 /* FriendsPhotoCollectionViewController.swift in Sources */,
+				1A926BBD26E5249B00D8B371 /* LikeControl.swift in Sources */,
+				1A926BB826E2EFAB00D8B371 /* DB.swift in Sources */,
 				1A35C66626C5B9860054456D /* SceneDelegate.swift in Sources */,
+				1A926BBA26E50E6B00D8B371 /* randoms.swift in Sources */,
 				1A23241726D5816700B2E43C /* Friend.swift in Sources */,
 				1A7F5FCF26DC462F00B50E37 /* FriendTableViewCell.swift in Sources */,
 				1A9D0AB926DAE83800EDD7FD /* AllGroupsTableViewCell.swift in Sources */,

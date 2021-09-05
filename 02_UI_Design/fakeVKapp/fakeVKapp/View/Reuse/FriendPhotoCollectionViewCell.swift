@@ -15,7 +15,7 @@ class FriendPhotoCollectionViewCell: UICollectionViewCell {
     
     func configure(with friend: Friend) {
         photoImageView.image = friend.avatar
-        nameLabel.text = "Name: " + friend.firstName + " " + friend.secondName
+        nameLabel.text = "Name: " + friend.firstName + " " + friend.lastName
         originLabel.text = "Origin: " + friend.origin.rawValue
     }
     

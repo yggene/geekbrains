@@ -15,7 +15,7 @@ class FriendTableViewCell: UITableViewCell {
     
     func configure(with friend: Friend) {
         avatarImageView?.image = friend.avatar
-        nameLabel?.text = friend.firstName + " " + friend.secondName
+        nameLabel?.text = friend.firstName + " " + friend.lastName
         originLabel?.text = friend.origin.rawValue
     }
 }
