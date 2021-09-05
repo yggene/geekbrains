@@ -44,13 +44,15 @@ class FriendsTableViewController: UITableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "friendCell",
-                for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
+                for: indexPath) as? FriendCell else { return UITableViewCell() }
         
         let currentFriend = friends[indexPath.row]
         cell.configure(with: currentFriend)
         
         // cell styles
         tableView.separatorStyle = .none
+        cell.avatarImageView.layer.masksToBounds = true
+        cell.avatarImageView?.layer.cornerRadius = 25
         cell.accessoryType = .disclosureIndicator
         cell.originLabel?.textColor = UIColor.systemGray
         
