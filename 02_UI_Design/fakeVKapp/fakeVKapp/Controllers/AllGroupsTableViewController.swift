@@ -9,12 +9,14 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController {
     
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    // MARK: - Table view data source
+    // MARK: Table view data source
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {

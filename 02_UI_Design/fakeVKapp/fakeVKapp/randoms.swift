@@ -10,11 +10,11 @@ public func randomName() -> String {
     }
     
 public func randomFirstName() -> String {
-    let firstNameList = ["Anna", "Barbara", "Carl", "Dorothea", "Elsa", "Fred", "Garry", "Henry", "Isaac", "Jack", "Kenny", "Lara", "Megan", "Nancy", "Olga", "Priscilla", "Robert", "Sidney", "Terry", "Ubunton", "Victor", "Wendy", "Xenomorph", "Zack"]
+    let firstNameList = ["Anna", "Barbara", "Carl", "Dorothea", "Elsa", "Fred", "Garry", "Henry", "Isaac", "Jack", "Kenny", "Lara", "Megan", "Nancy", "Olga", "Priscilla", "Quinn", "Robert", "Sidney", "Terry", "Ubunti", "Victor", "Wendy", "Xenomorph", "Yakov", "Zack"]
         return firstNameList.randomElement()!
     }
     
 public func randomLastName() -> String {
-        let lastNameList = ["Adams", "Berry", "Cole", "De la Rocha", "Enigma", "Freeman", "Goodwill", "Hendrix", "Isaac", "Jacobs", "Kenneth", "Laurie", "Martin", "Nox", "O'Reilly", "Pratchett", "Quinn", "Richards", "Stevens", "Thomas", "Ubuntson", "Ventrell", "Windsor", "X", "Zappa"]
+        let lastNameList = ["Adams", "Berry", "Cole", "De la Rocha", "Enigma", "Freeman", "Goodwill", "Hendrix", "Isaac", "Jacobs", "Kenneth", "Laurie", "Martin", "Nox", "O'Reilly", "Pratchett", "Quinn", "Richards", "Stevens", "Thomas", "Ubuntson", "Ventrell", "Windsor", "Xavier", "Zappa"]
         return lastNameList.randomElement()!
 }

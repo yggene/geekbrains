@@ -17,5 +17,9 @@ class FriendTableViewCell: UITableViewCell {
         avatarImageView?.image = friend.avatar
         nameLabel?.text = friend.firstName + " " + friend.lastName
         originLabel?.text = friend.origin.rawValue
+        
+        //tableView.separatorStyle = .none
+        accessoryType = .disclosureIndicator
+        originLabel?.textColor = UIColor.systemGray
     }
 }

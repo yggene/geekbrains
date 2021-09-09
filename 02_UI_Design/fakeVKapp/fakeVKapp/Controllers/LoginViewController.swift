@@ -9,6 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: Outlets
     
     @IBOutlet var appLogo: UIImageView!
     @IBOutlet var loginLabel: UILabel!
@@ -16,6 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordLabel: UILabel!
     @IBOutlet var passwordInputField: UITextField!
     @IBOutlet var myScrollView: UIScrollView!
+    
+    // MARK: Actions
     
     @IBAction func enterButtonPressed(_ sender: Any) {
         if isValidUser() {
@@ -57,15 +60,17 @@ class LoginViewController: UIViewController {
                 completion: nil)
     }
     
+    @objc func hideKeyboard() {
+        self.myScrollView?.endEditing(true)
+    }
+    
+    
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myScrollView.addGestureRecognizer(UITapGestureRecognizer(
                                             target: self,
                                             action: #selector(hideKeyboard)))
     }
-    
-    @objc func hideKeyboard() {
-        self.myScrollView?.endEditing(true)
-    }
-    
 }

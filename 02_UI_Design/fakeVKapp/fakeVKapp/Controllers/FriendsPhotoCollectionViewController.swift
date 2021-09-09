@@ -9,6 +9,8 @@ import UIKit
 
 class FriendsPhotoCollectionViewController: UICollectionViewController {
     
+    // MARK: Variables
+    
     var friendProfile: Friend?
     
     override func viewDidLoad() {
@@ -37,7 +39,5 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
     }
     
     // MARK: UICollectionViewDelegate
-    
-    
     
 }

@@ -8,11 +8,13 @@
 import UIKit
 
 struct Friend {
+    
     let firstName: String
     let lastName: String
     let origin: Origin
     let avatar: UIImage?
     var photos: [UIImage?]
+    
 }
 
 enum Origin: String {

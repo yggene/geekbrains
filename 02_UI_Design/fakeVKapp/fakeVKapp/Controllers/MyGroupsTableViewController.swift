@@ -9,12 +9,14 @@ import UIKit
 
 class MyGroupsTableViewController: UITableViewController {
     
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    // MARK: - Table view data source
+    // MARK: Table view data source
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +52,18 @@ class MyGroupsTableViewController: UITableViewController {
         
     }
     
+    // deleting groups from profile
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            myGroups.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    // MARK: Actions
+    
     // add group on unwind
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         // check segue id
@@ -70,13 +84,4 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    // deleting groups from profile
-    override func tableView(_ tableView: UITableView,
-                            commit editingStyle: UITableViewCell.EditingStyle,
-                            forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            myGroups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
 }
