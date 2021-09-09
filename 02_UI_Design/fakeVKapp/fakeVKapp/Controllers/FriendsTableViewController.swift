@@ -9,6 +9,25 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
     
+    var friends = [
+        Friend(firstName: "Morty",
+               secondName: "Smith",
+               origin: .earth,
+               avatar: UIImage(named: "morty-avatar")),
+        Friend(firstName: "Beth",
+               secondName: "Smith",
+               origin: .earth,
+               avatar: UIImage(named: "beth-avatar")),
+        Friend(firstName: "Summer",
+               secondName: "Smith",
+               origin: .earth,
+               avatar: UIImage(named: "summer-avatar")),
+        Friend(firstName: "Bird",
+               secondName: "Person",
+               origin: .birdWorld,
+               avatar: UIImage(named: "birdie-avatar"))
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +38,7 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
         friends.count
+
     }
     
     override func tableView(_ tableView: UITableView,

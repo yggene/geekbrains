@@ -50,7 +50,9 @@ class MyGroupsTableViewController: UITableViewController {
         
     }
     
+
     // add group on unwind
+
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         // check segue id
         if segue.identifier == "addGroupSegue" {
@@ -61,6 +63,7 @@ class MyGroupsTableViewController: UITableViewController {
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
                 // get group
                 let selectedGroup = allGroups[indexPath.row]
+
                 // check if no such group in my list
                 if !myGroups.contains(selectedGroup) {
                     myGroups.append(selectedGroup)

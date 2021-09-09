@@ -129,6 +129,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+
 		1A926BBB26E5244700D8B371 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +138,7 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+
 		1ABC351626D6D76B0086B441 /* Reuse */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +147,7 @@
 				1A9D0AB726DAE83800EDD7FD /* AllGroupsTableViewCell.swift */,
 				1A7F5FCE26DC462F00B50E37 /* FriendTableViewCell.swift */,
 				1A6CE40826E0B9EB0030EE50 /* AvatarImageView.swift */,
+
 			);
 			path = Reuse;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				1A9D0ABF26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift in Sources */,
 				1A7A09EA26D2A1240065C852 /* FriendsTableViewController.swift in Sources */,
 				1A6CE40926E0B9EB0030EE50 /* AvatarImageView.swift in Sources */,
+
 				1ABC352626D70AE10086B441 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				1A52A6A826D8A35800C5A912 /* MyGroupsTableViewController.swift in Sources */,
 				1A52A6AA26D8A36F00C5A912 /* AllGroupsTableViewController.swift in Sources */,
