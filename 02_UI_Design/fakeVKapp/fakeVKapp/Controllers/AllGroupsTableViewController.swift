@@ -9,21 +9,6 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController {
     
-    var allGroups = [
-        Group(name: "Narnia Dimension",
-              image: UIImage(named: "group-narnia-dimension")),
-        Group(name: "Wasp Universe",
-              image: UIImage(named: "group-wasp-universe")),
-        Group(name: "Cronenberged Dimension",
-              image: UIImage(named: "group-cronenberged-dimension")),
-        Group(name: "Dimension C-132",
-              image: UIImage(named: "group-dimension-c132")),
-        Group(name: "Corn World",
-              image: UIImage(named: "group-corn-world")),
-        Group(name: "Froopyland",
-              image: UIImage(named: "group-froopyland"))
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

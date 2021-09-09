@@ -9,8 +9,6 @@ import UIKit
 
 class MyGroupsTableViewController: UITableViewController {
     
-    var myGroups = [Group]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +50,9 @@ class MyGroupsTableViewController: UITableViewController {
         
     }
     
-    // unwind segue
+
+    // add group on unwind
+
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         // check segue id
         if segue.identifier == "addGroupSegue" {
@@ -62,7 +62,8 @@ class MyGroupsTableViewController: UITableViewController {
             // get the index of the selected group cell
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
                 // get group
-                let selectedGroup = allGroupsController.allGroups[indexPath.row]
+                let selectedGroup = allGroups[indexPath.row]
+
                 // check if no such group in my list
                 if !myGroups.contains(selectedGroup) {
                     myGroups.append(selectedGroup)

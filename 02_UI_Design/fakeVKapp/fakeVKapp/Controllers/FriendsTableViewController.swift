@@ -38,21 +38,20 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
         friends.count
+
     }
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "friendCell",
-                for: indexPath) as? FriendCell else { return UITableViewCell() }
+                for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
         
         let currentFriend = friends[indexPath.row]
         cell.configure(with: currentFriend)
         
         // cell styles
         tableView.separatorStyle = .none
-        cell.avatarImageView.layer.masksToBounds = true
-        cell.avatarImageView?.layer.cornerRadius = 25
         cell.accessoryType = .disclosureIndicator
         cell.originLabel?.textColor = UIColor.systemGray
         
