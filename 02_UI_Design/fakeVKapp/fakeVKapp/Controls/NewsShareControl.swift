@@ -7,37 +7,38 @@
 
 import UIKit
 
-class LikeControl: UIButton {
+class NewsShareControl: UIButton {
     
     // MARK: Private properties
     
-    private var heartIcon = UIImageView()
-    private var likesCounter = UILabel()
-    private var isLiked = false
+    private var shareIcon = UIImageView()
+    private var shareCounter = UILabel()
+    private var isShared = false
     private var counter = 0
     
     // MARK: Private methods
     
     private func setupView() {
-        addSubview(heartIcon)
-        heartIcon.image = UIImage(systemName: "heart")
-        heartIcon.tintColor = .systemRed
+        addSubview(shareIcon)
+        shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right")
+        shareIcon.tintColor = .systemGray
         
         // action on tap
         self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
         
-        updateLikesCounter()
+        updateSharesCounter()
     }
     
-    private func updateLikesCounter() {
-        addSubview(likesCounter)
-        likesCounter.text = String(counter)
-        likesCounter.translatesAutoresizingMaskIntoConstraints = false
-        likesCounter.trailingAnchor.constraint(
-            equalTo: heartIcon.leadingAnchor,
-            constant: -5).isActive = true
-        likesCounter.centerYAnchor.constraint(
-            equalTo: heartIcon.centerYAnchor).isActive = true
+    private func updateSharesCounter() {
+        addSubview(shareCounter)
+        shareCounter.text = String(counter)
+        shareCounter.font = UIFont.systemFont(ofSize: 14)
+        shareCounter.translatesAutoresizingMaskIntoConstraints = false
+        shareCounter.trailingAnchor.constraint(
+            equalTo: shareIcon.trailingAnchor,
+            constant: self.frame.width / 2).isActive = true
+        shareCounter.centerYAnchor.constraint(
+            equalTo: shareIcon.centerYAnchor).isActive = true
     }
     
     private func animation() {
@@ -50,19 +51,19 @@ class LikeControl: UIButton {
                             self.transform = CGAffineTransform.identity
                         })
                        })
-        updateLikesCounter()
+        updateSharesCounter()
     }
     
     // MARK: Actions
     
     @objc func onTap() {
-        isLiked = !isLiked
-        if !isLiked {
+        isShared = !isShared
+        if !isShared {
             counter -= 1
-            heartIcon.image = UIImage(systemName: "heart")
+            shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right")
         } else {
             counter += 1
-            heartIcon.image = UIImage(systemName: "heart.fill")
+            shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right.fill")
         }
         animation()
     }
@@ -76,7 +77,7 @@ class LikeControl: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        heartIcon.frame = bounds
+        shareIcon.frame = bounds
     }
     
 }
