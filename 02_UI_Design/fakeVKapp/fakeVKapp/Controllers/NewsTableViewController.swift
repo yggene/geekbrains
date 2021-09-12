@@ -9,6 +9,8 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
@@ -17,15 +19,16 @@ class NewsTableViewController: UITableViewController {
         for _ in 1...7 {
             news.append(News())
         }
-        
     }
+}
+
+extension NewsTableViewController {
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         news.count
     }
-    
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {

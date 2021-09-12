@@ -35,6 +35,7 @@
 		1ADACF4426ED88E5005E1FE7 /* NewsPhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF4326ED88E5005E1FE7 /* NewsPhotoImageView.swift */; };
 		1ADACF4B26ED9DB1005E1FE7 /* NewsShareControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF4A26ED9DB1005E1FE7 /* NewsShareControl.swift */; };
 		1ADACF5126EDA960005E1FE7 /* NewsLikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF5026EDA960005E1FE7 /* NewsLikeControl.swift */; };
+		1ADACF5726EDB46C005E1FE7 /* NewsCommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF5626EDB46C005E1FE7 /* NewsCommentControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		1ADACF4326ED88E5005E1FE7 /* NewsPhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPhotoImageView.swift; sourceTree = "<group>"; };
 		1ADACF4A26ED9DB1005E1FE7 /* NewsShareControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsShareControl.swift; sourceTree = "<group>"; };
 		1ADACF5026EDA960005E1FE7 /* NewsLikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsLikeControl.swift; sourceTree = "<group>"; };
+		1ADACF5626EDB46C005E1FE7 /* NewsCommentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCommentControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				1ADACF5026EDA960005E1FE7 /* NewsLikeControl.swift */,
+				1ADACF5626EDB46C005E1FE7 /* NewsCommentControl.swift */,
 				1ADACF4A26ED9DB1005E1FE7 /* NewsShareControl.swift */,
 				1A926BBC26E5249B00D8B371 /* FriendLikeControl.swift */,
 			);
@@ -323,6 +326,7 @@
 				1A23241726D5816700B2E43C /* Friend.swift in Sources */,
 				1A7F5FCF26DC462F00B50E37 /* FriendTableViewCell.swift in Sources */,
 				1ADACF3E26ED2EB0005E1FE7 /* News.swift in Sources */,
+				1ADACF5726EDB46C005E1FE7 /* NewsCommentControl.swift in Sources */,
 				1A9D0AB926DAE83800EDD7FD /* AllGroupsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

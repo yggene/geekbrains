@@ -12,9 +12,9 @@ class NewsShareControl: UIButton {
     // MARK: Private properties
     
     private var shareIcon = UIImageView()
-    private var shareCounter = UILabel()
+    private var sharesCounterLabel = UILabel()
     private var isShared = false
-    private var counter = 0
+    private var sharesTotal = 0
     
     // MARK: Private methods
     
@@ -30,14 +30,14 @@ class NewsShareControl: UIButton {
     }
     
     private func updateSharesCounter() {
-        addSubview(shareCounter)
-        shareCounter.text = String(counter)
-        shareCounter.font = UIFont.systemFont(ofSize: 14)
-        shareCounter.translatesAutoresizingMaskIntoConstraints = false
-        shareCounter.trailingAnchor.constraint(
+        addSubview(sharesCounterLabel)
+        sharesCounterLabel.text = String(sharesTotal)
+        sharesCounterLabel.font = UIFont.systemFont(ofSize: 14)
+        sharesCounterLabel.translatesAutoresizingMaskIntoConstraints = false
+        sharesCounterLabel.trailingAnchor.constraint(
             equalTo: shareIcon.trailingAnchor,
             constant: self.frame.width / 2).isActive = true
-        shareCounter.centerYAnchor.constraint(
+        sharesCounterLabel.centerYAnchor.constraint(
             equalTo: shareIcon.centerYAnchor).isActive = true
     }
     
@@ -59,10 +59,10 @@ class NewsShareControl: UIButton {
     @objc func onTap() {
         isShared = !isShared
         if !isShared {
-            counter -= 1
+            sharesTotal -= 1
             shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right")
         } else {
-            counter += 1
+            sharesTotal += 1
             shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right.fill")
         }
         animation()

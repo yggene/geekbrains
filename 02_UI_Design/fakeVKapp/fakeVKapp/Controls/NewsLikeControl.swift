@@ -11,17 +11,17 @@ class NewsLikeControl: UIButton {
     
     // MARK: Private properties
     
-    private var heartIcon = UIImageView()
-    private var likeCounter = UILabel()
+    private var likeIcon = UIImageView()
+    private var likesCounterLabel = UILabel()
     private var isLiked = false
-    private var counter = 0
+    private var likesTotal = 0
     
     // MARK: Private methods
     
     private func setupView() {
-        addSubview(heartIcon)
-        heartIcon.image = UIImage(systemName: "heart")
-        heartIcon.tintColor = .systemGray
+        addSubview(likeIcon)
+        likeIcon.image = UIImage(systemName: "heart")
+        likeIcon.tintColor = .systemGray
         
         // action on tap
         self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
@@ -30,15 +30,15 @@ class NewsLikeControl: UIButton {
     }
     
     private func updateLikesCounter() {
-        addSubview(likeCounter)
-        likeCounter.text = String(counter)
-        likeCounter.font = UIFont.systemFont(ofSize: 14)
-        likeCounter.translatesAutoresizingMaskIntoConstraints = false
-        likeCounter.trailingAnchor.constraint(
-            equalTo: heartIcon.trailingAnchor,
+        addSubview(likesCounterLabel)
+        likesCounterLabel.text = String(likesTotal)
+        likesCounterLabel.font = UIFont.systemFont(ofSize: 14)
+        likesCounterLabel.translatesAutoresizingMaskIntoConstraints = false
+        likesCounterLabel.trailingAnchor.constraint(
+            equalTo: likeIcon.trailingAnchor,
             constant: self.frame.width / 2).isActive = true
-        likeCounter.centerYAnchor.constraint(
-            equalTo: heartIcon.centerYAnchor).isActive = true
+        likesCounterLabel.centerYAnchor.constraint(
+            equalTo: likeIcon.centerYAnchor).isActive = true
     }
     
     private func animation() {
@@ -59,11 +59,11 @@ class NewsLikeControl: UIButton {
     @objc func onTap() {
         isLiked = !isLiked
         if !isLiked {
-            counter -= 1
-            heartIcon.image = UIImage(systemName: "heart")
+            likesTotal -= 1
+            likeIcon.image = UIImage(systemName: "heart")
         } else {
-            counter += 1
-            heartIcon.image = UIImage(systemName: "heart.fill")
+            likesTotal += 1
+            likeIcon.image = UIImage(systemName: "heart.fill")
         }
         animation()
     }
@@ -77,7 +77,7 @@ class NewsLikeControl: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        heartIcon.frame = bounds
+        likeIcon.frame = bounds
     }
     
 }
