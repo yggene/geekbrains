@@ -20,15 +20,12 @@ class NewsShareControl: UIButton {
     
     private func setupView() {
         addSubview(shareIcon)
+        addSubview(sharesCounterLabel)
+        
         shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right")
         shareIcon.tintColor = .systemGray
+        shareIcon.frame = bounds
         
-        // action on tap
-        self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
-    }
-    
-    private func updateSharesCounter() {
-        addSubview(sharesCounterLabel)
         sharesCounterLabel.text = String(sharesTotal)
         sharesCounterLabel.font = UIFont.systemFont(ofSize: 14)
         sharesCounterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +34,14 @@ class NewsShareControl: UIButton {
             constant: self.frame.width / 2).isActive = true
         sharesCounterLabel.centerYAnchor.constraint(
             equalTo: shareIcon.centerYAnchor).isActive = true
+        
+        // action on tap
+        self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
+        
+    }
+    
+    private func updateSharesCounter() {
+        sharesCounterLabel.text = String(sharesTotal)
     }
     
     private func animation() {
@@ -58,10 +63,9 @@ class NewsShareControl: UIButton {
             isShared = !isShared
             sharesTotal += 1
             shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right.fill")
-            animation()
-        } else {
-            animation()
         }
+        animation()
+        updateSharesCounter()
     }
     
     // MARK: Lifecycle
@@ -69,12 +73,6 @@ class NewsShareControl: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setupView()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updateSharesCounter()
-        shareIcon.frame = bounds
     }
     
 }

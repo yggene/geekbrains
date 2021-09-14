@@ -28,9 +28,9 @@ class NewsTableViewCell: UITableViewCell {
         postDateLabel.text = news.postDate
         newsTextLabel.text = news.text
         newsImageView?.image = news.photo?.image
-        likesControl.likesTotal = news.likesCount
-        commentsControl.totalComments = news.commentsCount
-        sharesControl.sharesTotal = news.sharesCount
+        self.likesControl.likesTotal = news.likesCount
+        self.commentsControl.totalComments = news.commentsCount
+        self.sharesControl.sharesTotal = news.sharesCount
         seenLabel.text = String(news.viewCount)
         
         // cell style

@@ -20,19 +20,12 @@ class NewsLikeControl: UIButton {
     
     private func setupView() {
         addSubview(likeIcon)
+        addSubview(likesCounterLabel)
         
         likeIcon.image = UIImage(systemName: "heart")
         likeIcon.tintColor = .systemGray
+        likeIcon.frame = bounds
         
-        // action on tap
-        self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
-        
-        updateLikesCounter()
-        
-    }
-    
-    private func updateLikesCounter() {
-        addSubview(likesCounterLabel)
         likesCounterLabel.text = String(likesTotal)
         likesCounterLabel.font = UIFont.systemFont(ofSize: 14)
         likesCounterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +34,14 @@ class NewsLikeControl: UIButton {
             constant: self.frame.width / 6).isActive = true
         likesCounterLabel.centerYAnchor.constraint(
             equalTo: likeIcon.centerYAnchor).isActive = true
+        
+        // action on tap
+        self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
+        
+    }
+    
+    private func updateLikesCounter() {
+        likesCounterLabel.text = String(likesTotal)
     }
     
     private func animation() {
@@ -67,6 +68,7 @@ class NewsLikeControl: UIButton {
             likeIcon.image = UIImage(systemName: "heart.fill")
         }
         animation()
+        updateLikesCounter()
     }
     
     // MARK: Lifecycle
@@ -75,12 +77,5 @@ class NewsLikeControl: UIButton {
         super.init(coder: coder)
         self.setupView()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updateLikesCounter()
-        likeIcon.frame = bounds
-    }
-    
 }
 

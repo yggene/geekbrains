@@ -12,12 +12,13 @@ class NewsTableViewController: UITableViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        for _ in 1...15 {
-            news.append(News())
-        }
         
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        
+        for _ in 1...15 {
+            news.append(News())
+        }
 
     }
 }
@@ -36,10 +37,6 @@ extension NewsTableViewController {
         
         let currentNews = news[indexPath.row]
         cell.configure(with: currentNews)
-        
-        cell.addSubview(NewsLikeControl(coder: NSCoder())!)
-        cell.addSubview(NewsShareControl(coder: NSCoder())!)
-        cell.addSubview(NewsCommentControl(coder: NSCoder())!)
         
         return cell
     }

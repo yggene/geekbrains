@@ -491,16 +491,16 @@
         <scene sceneID="Vqq-KG-NjW">
             <objects>
                 <tableViewController id="l83-qZ-576" customClass="NewsTableViewController" customModule="fakeVKapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="572" estimatedRowHeight="520" sectionHeaderHeight="28" sectionFooterHeight="28" id="0EE-lJ-r3s">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="533" estimatedRowHeight="520" sectionHeaderHeight="28" sectionFooterHeight="28" id="0EE-lJ-r3s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="separatorColor" systemColor="opaqueSeparatorColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" rowHeight="572" id="iJo-3C-vuR" customClass="NewsTableViewCell" customModule="fakeVKapp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="572"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" rowHeight="533" id="iJo-3C-vuR" customClass="NewsTableViewCell" customModule="fakeVKapp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="533"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJo-3C-vuR" id="tsh-dt-TpA">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="533"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CnA-ZQ-zQn" customClass="AvatarShadow" customModule="fakeVKapp" customModuleProvider="target">
@@ -541,7 +541,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="newsTextLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtO-7E-32I">
-                                            <rect key="frame" x="10" y="61.000000000000007" width="355" height="20.333333333333336"/>
+                                            <rect key="frame" x="10" y="61.000000000000007" width="355" height="18.333333333333336"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="355" id="B7e-Pk-rnc"/>
                                             </constraints>
@@ -549,21 +549,22 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oeB-9L-sDw" userLabel="newsImageView" customClass="NewsPhotoImageView" customModule="fakeVKapp" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="91.333333333333314" width="375" height="416"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oeB-9L-sDw" userLabel="newsImageView">
+                                            <rect key="frame" x="0.0" y="89.333333333333314" width="375" height="375"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="375" id="g34-sk-R5a"/>
+                                                <constraint firstAttribute="width" secondItem="oeB-9L-sDw" secondAttribute="height" id="pJa-ZH-txl"/>
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axX-Km-OpR" userLabel="Like button" customClass="NewsLikeControl" customModule="fakeVKapp" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="522.33333333333337" width="25" height="18.666666666666629"/>
+                                            <rect key="frame" x="16" y="479.33333333333331" width="25" height="18.666666666666686"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="axX-Km-OpR" secondAttribute="height" multiplier="4:3" id="Amw-jV-4px"/>
                                                 <constraint firstAttribute="width" constant="25" id="ht5-FC-9oV"/>
                                             </constraints>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gj8-me-7mn" userLabel="Comment button" customClass="NewsCommentControl" customModule="fakeVKapp" customModuleProvider="target">
-                                            <rect key="frame" x="71" y="522.33333333333337" width="25" height="18.666666666666629"/>
+                                            <rect key="frame" x="71" y="479.33333333333331" width="25" height="18.666666666666686"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="Ebt-ph-7tR"/>
                                                 <constraint firstAttribute="width" secondItem="gj8-me-7mn" secondAttribute="height" multiplier="4:3" id="QHQ-cD-PgZ"/>
@@ -575,7 +576,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJw-aX-0Xv" userLabel="Share button" customClass="NewsShareControl" customModule="fakeVKapp" customModuleProvider="target">
-                                            <rect key="frame" x="124" y="522.33333333333337" width="25" height="18.666666666666629"/>
+                                            <rect key="frame" x="124" y="479.33333333333331" width="25" height="18.666666666666686"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="QVA-Dh-5cJ"/>
                                                 <constraint firstAttribute="width" secondItem="qJw-aX-0Xv" secondAttribute="height" multiplier="4:3" id="YbK-w5-RYx"/>
@@ -583,7 +584,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-Y0-hJv" userLabel="Seen Image VIew">
-                                            <rect key="frame" x="308" y="526.33333333333337" width="20" height="11.000000000000057"/>
+                                            <rect key="frame" x="308" y="483.33333333333331" width="20" height="11"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="9oW-CT-nzl"/>
                                                 <constraint firstAttribute="width" secondItem="Ke7-Y0-hJv" secondAttribute="height" multiplier="4:3" id="nPD-0o-0jO"/>
@@ -595,7 +596,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rP-tc-Sut" userLabel="Seen count label">
-                                            <rect key="frame" x="333" y="523" width="25" height="17"/>
+                                            <rect key="frame" x="333" y="480" width="25" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="zOv-7W-o8y"/>
                                             </constraints>
@@ -604,7 +605,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVU-Hz-X8V" userLabel="Separator">
-                                            <rect key="frame" x="0.0" y="554" width="375" height="7"/>
+                                            <rect key="frame" x="0.0" y="511" width="375" height="7"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="7" id="Ma1-Qh-uYu"/>
@@ -618,6 +619,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gj8-me-7mn" firstAttribute="leading" secondItem="axX-Km-OpR" secondAttribute="trailing" constant="30" id="02w-rm-TsP"/>
+                                        <constraint firstAttribute="bottom" secondItem="sVU-Hz-X8V" secondAttribute="bottom" constant="15" id="5bh-TA-NlY"/>
                                         <constraint firstItem="CnA-ZQ-zQn" firstAttribute="top" secondItem="tsh-dt-TpA" secondAttribute="top" constant="5" id="7X4-Vv-hfD"/>
                                         <constraint firstItem="axX-Km-OpR" firstAttribute="top" secondItem="oeB-9L-sDw" secondAttribute="bottom" constant="15" id="FyX-RK-ZJy"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gQb-9B-4U6" secondAttribute="trailing" constant="20" symbolic="YES" id="HOf-LY-cUp"/>
@@ -630,7 +632,6 @@
                                         <constraint firstItem="sVU-Hz-X8V" firstAttribute="top" secondItem="axX-Km-OpR" secondAttribute="bottom" constant="13" id="YfL-Py-OCj"/>
                                         <constraint firstItem="qJw-aX-0Xv" firstAttribute="centerY" secondItem="gj8-me-7mn" secondAttribute="centerY" id="bPg-Yr-J21"/>
                                         <constraint firstAttribute="trailing" secondItem="oeB-9L-sDw" secondAttribute="trailing" id="d7B-Ei-XpX"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="sVU-Hz-X8V" secondAttribute="bottom" id="eGs-Mr-0T6"/>
                                         <constraint firstAttribute="trailing" secondItem="Ke7-Y0-hJv" secondAttribute="trailing" constant="47" id="fx9-E7-69B"/>
                                         <constraint firstItem="hzx-Mi-Aag" firstAttribute="top" secondItem="tsh-dt-TpA" secondAttribute="top" constant="10" id="gmi-h9-YXz"/>
                                         <constraint firstItem="CtO-7E-32I" firstAttribute="top" secondItem="CnA-ZQ-zQn" secondAttribute="bottom" constant="10.000000000000007" id="hKU-h3-ena"/>

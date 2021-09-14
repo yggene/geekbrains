@@ -19,17 +19,12 @@ class NewsCommentControl: UIButton {
     
     private func setupView() {
         addSubview(commentIcon)
-        updateCommentsCounter()
+        addSubview(commentCounter)
+    
         commentIcon.image = UIImage(systemName: "bubble.left")
         commentIcon.tintColor = .systemGray
+        commentIcon.frame = bounds
         
-        // action on tap
-        self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
-        
-    }
-    
-    private func updateCommentsCounter() {
-        addSubview(commentCounter)
         commentCounter.text = String(totalComments)
         commentCounter.font = UIFont.systemFont(ofSize: 14)
         commentCounter.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +33,14 @@ class NewsCommentControl: UIButton {
             constant: self.frame.width / 6).isActive = true
         commentCounter.centerYAnchor.constraint(
             equalTo: commentIcon.centerYAnchor).isActive = true
+        
+        // action on tap
+        self.addTarget(self, action: #selector(onTap), for: .touchUpInside)
+        
+    }
+    
+    private func updateCommentsCounter() {
+        commentCounter.text = String(totalComments)
     }
     
     private func animation() {
@@ -55,14 +58,7 @@ class NewsCommentControl: UIButton {
     // MARK: Actions
     
     @objc func onTap() {
-//        isLiked = !isLiked
-//        if !isLiked {
-//            likesCounter -= 1
-//            heartIcon.image = UIImage(systemName: "heart")
-//        } else {
-//            likesCounter += 1
-//            heartIcon.image = UIImage(systemName: "heart.fill")
-//        }
+        updateCommentsCounter()
         animation()
     }
     
@@ -71,12 +67,6 @@ class NewsCommentControl: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setupView()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updateCommentsCounter()
-        commentIcon.frame = bounds
     }
 
 }
