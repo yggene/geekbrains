@@ -38,4 +38,5 @@ class AvatarShadow: UIView {
         self.layer.shadowOffset = shadowOffset
         self.backgroundColor = .clear
     }
+    
 }

@@ -30,6 +30,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         // filter friends list according to search
         friendsDictionary = updateFriendsDictionary(with: nil)
         
+        self.hideKeyboardWhenTappedAround()
+        
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{

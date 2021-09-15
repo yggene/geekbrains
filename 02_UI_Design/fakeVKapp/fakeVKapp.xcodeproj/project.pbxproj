@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */; };
+		1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */; };
 		1A23241726D5816700B2E43C /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A23241626D5816700B2E43C /* Friend.swift */; };
 		1A35C66426C5B9860054456D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A35C66326C5B9860054456D /* AppDelegate.swift */; };
 		1A35C66626C5B9860054456D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A35C66526C5B9860054456D /* SceneDelegate.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A23241626D5816700B2E43C /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		1A35C66026C5B9850054456D /* fakeVKapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fakeVKapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A35C66326C5B9860054456D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +97,22 @@
 			path = News;
 			sourceTree = "<group>";
 		};
+		1A1AF35726F16A1F001E1CE8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1A1AF35A26F276A2001E1CE8 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				1ADACF4126ED6CD1005E1FE7 /* NewsTableViewController.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
 		1A23241526D579BD00B2E43C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +143,7 @@
 		1A35C66226C5B9850054456D /* fakeVKapp */ = {
 			isa = PBXGroup;
 			children = (
+				1A1AF35726F16A1F001E1CE8 /* Extensions */,
 				1A35C66326C5B9860054456D /* AppDelegate.swift */,
 				1A35C66526C5B9860054456D /* SceneDelegate.swift */,
 				1A93C04D26EAD9F300386D50 /* Service */,
@@ -142,10 +163,11 @@
 		1A7A09E726D2A0900065C852 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A35C66726C5B9860054456D /* LoginViewController.swift */,
-				1ADACF4526ED8ECB005E1FE7 /* Friends */,
 				1ADACF4626ED8ED6005E1FE7 /* Groups */,
-				1ADACF4126ED6CD1005E1FE7 /* NewsTableViewController.swift */,
+				1ADACF4526ED8ECB005E1FE7 /* Friends */,
+				1A1AF35A26F276A2001E1CE8 /* News */,
+				1A35C66726C5B9860054456D /* LoginViewController.swift */,
+				1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -309,6 +331,8 @@
 				1ABC351826D6D7EF0086B441 /* Group.swift in Sources */,
 				1A9D0ABF26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift in Sources */,
 				1ADACF4226ED6CD1005E1FE7 /* NewsTableViewController.swift in Sources */,
+				1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */,
+				1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */,
 				1A7A09EA26D2A1240065C852 /* FriendsTableViewController.swift in Sources */,
 				1A6CE40926E0B9EB0030EE50 /* AvatarImageView.swift in Sources */,
 				1ABC352626D70AE10086B441 /* FriendPhotoCollectionViewCell.swift in Sources */,

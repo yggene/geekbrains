@@ -28,7 +28,10 @@ var friends = [
     Friend(firstName: "Morty",
            lastName: "Smith",
            origin: .earth,
-           avatar: Photo(image: UIImage(named: "morty-avatar"))),
+           avatar: Photo(image: UIImage(named: "morty-avatar")),
+           photos: [Photo(image: UIImage(named: "morty-photo-1")),
+                    Photo(image: UIImage(named: "morty-photo-2")),
+                    Photo(image: UIImage(named: "morty-photo-3"))]),
     Friend(firstName: "Beth",
            lastName: "Smith",
            origin: .earth,
@@ -40,11 +43,16 @@ var friends = [
     Friend(firstName: "Summer",
            lastName: "Smith",
            origin: .earth,
-           avatar: Photo(image: UIImage(named: "summer-avatar"))),
+           avatar: Photo(image: UIImage(named: "summer-avatar")),
+           photos: [Photo(image: UIImage(named: "summer-photo-1")),
+                    Photo(image: UIImage(named: "summer-photo-2"))]),
     Friend(firstName: "Bird",
            lastName: "Person",
            origin: .birdWorld,
-           avatar: Photo(image: UIImage(named: "birdie-avatar"))),
+           avatar: Photo(image: UIImage(named: "bird-avatar")),
+           photos: [Photo(image: UIImage(named: "bird-photo-1")),
+                    Photo(image: UIImage(named: "bird-photo-2")),
+                    Photo(image: UIImage(named: "bird-photo-3"))])
 ]
 
 var news = [News]()

@@ -19,6 +19,8 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
         
         allGroupsToShow = updateAllGroups(with: nil)
         
+        self.hideKeyboardWhenTappedAround()
+        
     }
     
     // MARK: Table view data source
