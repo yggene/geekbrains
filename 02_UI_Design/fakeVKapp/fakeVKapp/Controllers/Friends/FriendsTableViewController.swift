@@ -119,3 +119,10 @@ extension FriendsTableViewController {
         header.textLabel?.font = UIFont.systemFont(ofSize: 14)
     }
 }
+
+extension FriendsTableViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
