@@ -371,15 +371,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="Mkz-yz-jkz">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="Mkz-yz-jkz">
                             <size key="itemSize" width="70" height="70"/>
-                            <size key="headerReferenceSize" width="50" height="490"/>
+                            <size key="headerReferenceSize" width="50" height="500"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="friendPhotoCollectionViewCell" id="LJd-CT-ERu" customClass="FriendPhotoCollectionViewCell" customModule="fakeVKapp" customModuleProvider="target">
-                                <rect key="frame" x="10" y="500" width="70" height="70"/>
+                                <rect key="frame" x="10" y="510" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G2U-zU-hhP">
                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -406,7 +406,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="friendsHeader" id="put-lR-ACs" customClass="HeaderCollectionReusableView" customModule="fakeVKapp" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vP8-LN-UFz">
@@ -417,18 +417,18 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCn-Ji-jJb" userLabel="Name Header">
-                                    <rect key="frame" x="28" y="359" width="150" height="12"/>
+                                    <rect key="frame" x="28" y="359" width="100" height="12"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="SOQ-bE-ohm"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="SOQ-bE-ohm"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JI-de-X7U" userLabel="Name Label">
-                                    <rect key="frame" x="28" y="371" width="250" height="20"/>
+                                    <rect key="frame" x="28" y="371" width="150" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="MIE-AD-CFu"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="MIE-AD-CFu"/>
                                         <constraint firstAttribute="height" constant="20" id="zn8-MN-Dwt"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -437,18 +437,18 @@
                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Origin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ey2-wh-704" userLabel="Origin Header">
-                                    <rect key="frame" x="28" y="406" width="150" height="11"/>
+                                    <rect key="frame" x="28" y="406" width="100" height="11"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="SF8-Ps-Ej3"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="SF8-Ps-Ej3"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Origin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LA0-EZ-cAQ" userLabel="Origin Label">
-                                    <rect key="frame" x="28" y="417" width="200" height="20"/>
+                                    <rect key="frame" x="28" y="417" width="100" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="JcF-dn-9dA"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="JcF-dn-9dA"/>
                                         <constraint firstAttribute="height" constant="20" id="NxS-zw-aL5"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -522,7 +522,7 @@
                                     <constraint firstAttribute="height" constant="30" id="pai-jZ-AWJ"/>
                                     <constraint firstAttribute="width" constant="30" id="rLT-ET-8oz"/>
                                 </constraints>
-                                <state key="normal" image="xmark" catalog="system"/>
+                                <state key="normal" title="Button" image="xmark" catalog="system"/>
                                 <connections>
                                     <segue destination="3On-FQ-JTc" kind="unwind" identifier="backToPhotosSegue" unwindAction="unwindToFriendsSegueWithSegue:" id="AeR-39-XLN"/>
                                 </connections>

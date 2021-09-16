@@ -160,8 +160,19 @@
 				1A35C66E26C5B9860054456D /* LaunchScreen.storyboard */,
 				1A35C66C26C5B9860054456D /* Assets.xcassets */,
 				1A35C67126C5B9860054456D /* Info.plist */,
+				1A74C34C26F3E005002BAD2A /* View */,
 			);
 			path = fakeVKapp;
+			sourceTree = "<group>";
+		};
+		1A74C34C26F3E005002BAD2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1ADACF4326ED88E5005E1FE7 /* TrueScalePhotoImageView.swift */,
+				1A6CE40826E0B9EB0030EE50 /* AvatarImageView.swift */,
+				1A74C34826F36B33002BAD2A /* HeaderCollectionReusableView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1A7A09E726D2A0900065C852 /* Controllers */ = {
@@ -205,7 +216,6 @@
 		1ABC351626D6D76B0086B441 /* Reuse */ = {
 			isa = PBXGroup;
 			children = (
-				1A6CE40826E0B9EB0030EE50 /* AvatarImageView.swift */,
 				1ADACF4726ED8EE5005E1FE7 /* Friends */,
 				1ADACF4826ED8EEE005E1FE7 /* Groups */,
 				1ADACF4926ED8EF8005E1FE7 /* News */,
@@ -235,7 +245,6 @@
 		1ADACF4726ED8EE5005E1FE7 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				1A74C34826F36B33002BAD2A /* HeaderCollectionReusableView.swift */,
 				1A7F5FCE26DC462F00B50E37 /* FriendTableViewCell.swift */,
 				1ABC352526D70AE10086B441 /* FriendPhotoCollectionViewCell.swift */,
 			);
@@ -255,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				1ADACF3F26ED5DE1005E1FE7 /* NewsTableViewCell.swift */,
-				1ADACF4326ED88E5005E1FE7 /* TrueScalePhotoImageView.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
