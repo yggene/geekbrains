@@ -7,7 +7,8 @@
 
 import UIKit
 
-class FriendsPhotoCollectionViewController: UICollectionViewController {
+class FriendsPhotoCollectionViewController: UICollectionViewController,
+                                            UICollectionViewDelegateFlowLayout {
     
     // MARK: Variables
     
@@ -22,20 +23,56 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        1
+        friendProfile?.photos.count ?? 0
     }
     
-    override func collectionView(_ collectionView: UICollectionView,
-                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendPhotoCollectionViewCell", for: indexPath) as? FriendPhotoCollectionViewCell else { return UICollectionViewCell() }
+    // cell config
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "friendPhotoCollectionViewCell",
+                for: indexPath) as? FriendPhotoCollectionViewCell else {
+            return UICollectionViewCell() }
         
-        cell.configure(with: friendProfile!)
-        
-        // cell style
-        cell.photoImageView?.layer.masksToBounds = true
-        cell.photoImageView?.layer.cornerRadius = 50
+        let photo = friendProfile?.photos[indexPath.row]
+        cell.photoImageView.image = photo?.image
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.size.width
+        return CGSize(width: width * 0.3, height: width * 0.3)
+    }
+    
+    // header config
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        	at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+          case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+              ofKind: kind,
+              withReuseIdentifier: "friendsHeader",
+              for: indexPath)
+
+            guard let header = headerView as? HeaderCollectionReusableView
+            else { return headerView }
+
+            header.configure(with: friendProfile!)
+            
+            header.avatarImageView.layer.masksToBounds = true
+            header.avatarImageView.layer.cornerRadius = 25
+            
+            return header
+            
+          default:
+            assert(false, "Invalid element type")
+          }
     }
     
     // MARK: UICollectionViewDelegate
