@@ -82,7 +82,6 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
         if segue.identifier == "showPhoto" {
             guard let gallery = segue.destination as? FriendPhotoViewController else { return }
             
-            // индекс нажатой ячейки
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
                 gallery.allPhotos = friendProfile!.photos
                 gallery.currentPhotoCounter = indexPath.row
