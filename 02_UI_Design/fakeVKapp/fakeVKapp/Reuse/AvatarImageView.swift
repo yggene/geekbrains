@@ -48,16 +48,14 @@ class AvatarShadow: UIView {
     }
     
     @objc func onTap(gestureRecognizer: UITapGestureRecognizer) {
-        let original = self.transform
         UIView.animate(withDuration: 0.1,
                        delay: 0,
                        usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 0.1,
-                       options: .autoreverse,
                        animations: {
                         self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                        }, completion: { _ in
-                        self.transform = original
+                        self.transform = .identity
                        })
     }
     
