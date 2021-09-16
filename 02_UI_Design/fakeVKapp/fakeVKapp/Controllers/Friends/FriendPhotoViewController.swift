@@ -40,6 +40,7 @@ class FriendPhotoViewController: UIViewController {
                 curve: .easeInOut,
                 animations: {
                     self.currentPhoto.alpha = 0.2
+                    self.currentPhoto.transform = .init(scaleX: 2.0, y: 2.0)
                 })
             interactiveAnimator.pauseAnimation()
             

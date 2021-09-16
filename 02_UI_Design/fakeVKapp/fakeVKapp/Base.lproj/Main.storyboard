@@ -371,7 +371,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="Mkz-yz-jkz">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="Mkz-yz-jkz">
                             <size key="itemSize" width="70" height="70"/>
                             <size key="headerReferenceSize" width="50" height="490"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
