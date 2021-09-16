@@ -45,6 +45,9 @@ final class Friend: Equatable {
                      Photo(image: randomNewsImage()),
                      Photo(image: randomNewsImage()),
                      Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
                      Photo(image: randomNewsImage())]
         )
     }

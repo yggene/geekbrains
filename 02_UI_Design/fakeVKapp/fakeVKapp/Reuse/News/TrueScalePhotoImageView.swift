@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsPhotoImageView: UIImageView {
+class TrueScalePhotoImageView: UIImageView {
     
     override var intrinsicContentSize: CGSize {
         

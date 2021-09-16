@@ -1,5 +1,5 @@
 //
-//  FriendsPhotoCollectionViewController.swift
+//  FriendPhotoCollectionViewController.swift
 //  fakeVKapp
 //
 //  Created by Evgeny Alekseev on 26.08.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FriendsPhotoCollectionViewController: UICollectionViewController,
+class FriendPhotoCollectionViewController: UICollectionViewController,
                                             UICollectionViewDelegateFlowLayout {
     
     // MARK: Variables
@@ -41,6 +41,7 @@ class FriendsPhotoCollectionViewController: UICollectionViewController,
         return cell
     }
     
+    // cell size config
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -75,6 +76,22 @@ class FriendsPhotoCollectionViewController: UICollectionViewController,
           }
     }
     
-    // MARK: UICollectionViewDelegate
+    // segue for full photo view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showPhoto" {
+            guard let gallery = segue.destination as? FriendPhotoViewController else { return }
+            
+            // индекс нажатой ячейки
+            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+                gallery.allPhotos = friendProfile!.photos //фотки
+                gallery.currentPhotoCounter = indexPath.row // indexPath[0][1] если не использовать ?.first выше
+            }
+        }
+    }
+    
+    @IBAction func unwindToFriendsSegue(segue: UIStoryboardSegue){
+            
+        }
     
 }

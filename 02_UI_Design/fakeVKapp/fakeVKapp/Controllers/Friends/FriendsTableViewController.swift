@@ -51,7 +51,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     // transfer data for the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationController = segue.destination
-                as? FriendsPhotoCollectionViewController else { return }
+                as? FriendPhotoCollectionViewController else { return }
         
         if let index = tableView.indexPathForSelectedRow {
             let key = lastNamesFirstLetters[index.section]
@@ -118,6 +118,7 @@ extension FriendsTableViewController {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont.systemFont(ofSize: 14)
     }
+    
 }
 
 extension FriendsTableViewController: UIGestureRecognizerDelegate {
