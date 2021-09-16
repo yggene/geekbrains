@@ -84,8 +84,8 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             
             // индекс нажатой ячейки
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                gallery.allPhotos = friendProfile!.photos //фотки
-                gallery.currentPhotoCounter = indexPath.row // indexPath[0][1] если не использовать ?.first выше
+                gallery.allPhotos = friendProfile!.photos
+                gallery.currentPhotoCounter = indexPath.row
             }
         }
     }
