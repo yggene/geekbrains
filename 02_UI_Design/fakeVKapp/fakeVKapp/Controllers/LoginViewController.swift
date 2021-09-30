@@ -29,9 +29,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func watchAnimationsButtonPressed(_ sender: Any) {
+        
+    }
+    
+    
     override func shouldPerformSegue(withIdentifier identifier: String,
                                      sender: Any?) -> Bool {
-        if identifier == "loginSegue" {
+        if identifier == "loginSegue" || identifier == "animationsSegue" {
             return isValidUser()
         } else {
             return false
@@ -64,13 +69,15 @@ class LoginViewController: UIViewController {
         self.myScrollView?.endEditing(true)
     }
     
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue){
+            
+        }
+    
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myScrollView.addGestureRecognizer(UITapGestureRecognizer(
-                                            target: self,
-                                            action: #selector(hideKeyboard)))
+        hideKeyboardWhenTappedAround()
     }
 }

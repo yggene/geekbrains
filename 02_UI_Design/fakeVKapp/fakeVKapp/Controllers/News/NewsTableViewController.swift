@@ -19,7 +19,7 @@ class NewsTableViewController: UITableViewController {
         for _ in 1...15 {
             news.append(News())
         }
-
+        
     }
 }
 

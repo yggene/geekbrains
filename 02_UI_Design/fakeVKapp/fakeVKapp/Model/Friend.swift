@@ -40,7 +40,15 @@ final class Friend: Equatable {
             lastName: randomLastName(),
             origin: Origin.random(),
             avatar: Photo(image: randomAvatar()),
-            photos: []
+            photos: [Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage()),
+                     Photo(image: randomNewsImage())]
         )
     }
     

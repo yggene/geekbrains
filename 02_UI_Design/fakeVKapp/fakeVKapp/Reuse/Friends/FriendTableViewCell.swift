@@ -22,4 +22,9 @@ class FriendTableViewCell: UITableViewCell {
         accessoryType = .disclosureIndicator
         originLabel?.textColor = UIColor.systemGray
     }
+    
+    override class func awakeFromNib() {
+        // add animation here
+    }
+    
 }
