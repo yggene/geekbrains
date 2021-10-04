@@ -114,7 +114,7 @@ extension FriendsTableViewController {
     override func tableView(
         _ tableView: UITableView,
         heightForHeaderInSection section: Int) -> CGFloat {
-        20.0
+        15.0
     }
     
     // sections' headers' style
