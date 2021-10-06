@@ -20,8 +20,8 @@ final class NetworkService {
     
     // MARK: URLSession request
     func sendRequest(requestName: Requests,
-                     ofUser userID: Int? = Session.instance.userID,
-                     groupSearchQuery: String? = ""
+                     ofUser userID: Int = Session.instance.userID,
+                     groupSearchQuery: String = ""
     ){
         
         urlConstructor.path = "/method/" + requestName.rawValue
@@ -39,7 +39,7 @@ final class NetworkService {
             urlConstructor.queryItems?.append(
                 URLQueryItem(
                     name: "user_id",
-                    value: String(userID ?? Session.instance.userID))
+                    value: String(userID))
             )
             urlConstructor.queryItems?.append(
                 URLQueryItem(
@@ -50,7 +50,7 @@ final class NetworkService {
             urlConstructor.queryItems?.append(
                 URLQueryItem(
                     name: "user_id",
-                    value: String(userID ?? Session.instance.userID))
+                    value: String(userID))
             )
             urlConstructor.queryItems?.append(
                 URLQueryItem(
@@ -66,13 +66,13 @@ final class NetworkService {
             urlConstructor.queryItems?.append(
                 URLQueryItem(
                     name: "owner_id",
-                    value: String(userID ?? Session.instance.userID))
+                    value: String(userID))
             )
         case .searchGroups:
             urlConstructor.queryItems?.append(
                 URLQueryItem(
                     name: "q",
-                    value: groupSearchQuery ?? "")
+                    value: groupSearchQuery)
             )
         }
         
