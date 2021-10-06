@@ -26,7 +26,7 @@ final class VKLoginController: UIViewController {
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "336918"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.130")
+            URLQueryItem(name: "v", value: "5.131")
     ]
         return urlComp
     }()
@@ -38,7 +38,6 @@ final class VKLoginController: UIViewController {
         webView.load(request)
 
     }
-    
 }
 
 extension VKLoginController: WKNavigationDelegate {
@@ -70,6 +69,9 @@ extension VKLoginController: WKNavigationDelegate {
             
             Session.instance.token = token
             Session.instance.userID = userID
+            
+            print("My Token: \(token)")
+            print("My UserID: \(userID)\n")
             
             performSegue(
                 withIdentifier: "vkLoginSegue",

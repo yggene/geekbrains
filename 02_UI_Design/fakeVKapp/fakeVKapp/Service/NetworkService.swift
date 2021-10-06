@@ -15,14 +15,16 @@ final class NetworkService {
         var constructor = URLComponents()
         constructor.scheme = "https"
         constructor.host = "api.vk.com"
-        
         return constructor
     }()
     
     // MARK: URLSession request
-    func sendRequest(_ request: String) {
+    func sendRequest(requestName: Requests,
+                     ofUser userID: Int? = Session.instance.userID,
+                     groupSearchQuery: String? = ""
+    ){
         
-        urlConstructor.path = "/method/" + request
+        urlConstructor.path = "/method/" + requestName.rawValue
         urlConstructor.queryItems = [
             URLQueryItem(
                 name: "access_token",
@@ -32,22 +34,51 @@ final class NetworkService {
                 value: "5.131"),
         ]
         
-        switch request {
-        case "friends.get":
-            return
-        case "groups.get":
-            return
-        case "photos.getAll":
-            return
-        case "groups.search":
-            return
-        default:
-            return
+        switch requestName {
+        case .getFriends:
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "user_id",
+                    value: String(userID ?? Session.instance.userID))
+            )
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "fields",
+                    value: "city,photo_200_orig")
+            )
+        case .getGroups:
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "user_id",
+                    value: String(userID ?? Session.instance.userID))
+            )
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "extended",
+                    value: "1")
+            )
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "fields",
+                    value: "name,photo_100")
+            )
+        case .getAllPhotos:
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "owner_id",
+                    value: String(userID ?? Session.instance.userID))
+            )
+        case .searchGroups:
+            urlConstructor.queryItems?.append(
+                URLQueryItem(
+                    name: "q",
+                    value: groupSearchQuery ?? "")
+            )
         }
         
         guard let url = urlConstructor.url else { return }
         var request = URLRequest(url: url)
-        request.timeoutInterval = 50.0
+        request.timeoutInterval = 5.0
         request.setValue(
             "",
             forHTTPHeaderField: "Token")
@@ -70,4 +101,6 @@ final class NetworkService {
         .resume()
         
     }
+    
+    
 }

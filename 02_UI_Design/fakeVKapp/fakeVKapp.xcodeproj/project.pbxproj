@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A17D3E3270B9F4900E3BD02 /* VKLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */; };
 		1A17D3E5270BA9DC00E3BD02 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */; };
+		1A17D3E9270E608200E3BD02 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A17D3E8270E608200E3BD02 /* Requests.swift */; };
 		1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */; };
 		1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */; };
 		1A23241726D5816700B2E43C /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A23241626D5816700B2E43C /* Friend.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginController.swift; sourceTree = "<group>"; };
 		1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1A17D3E8270E608200E3BD02 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A23241626D5816700B2E43C /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				1A93C04B26EACBCF00386D50 /* OriginEnum.swift */,
+				1A17D3E8270E608200E3BD02 /* Requests.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				1A35C66826C5B9860054456D /* LoginViewController.swift in Sources */,
 				1A35C66426C5B9860054456D /* AppDelegate.swift in Sources */,
 				1ADACF5126EDA960005E1FE7 /* NewsLikeControl.swift in Sources */,
+				1A17D3E9270E608200E3BD02 /* Requests.swift in Sources */,
 				1ADACF4B26ED9DB1005E1FE7 /* NewsShareControl.swift in Sources */,
 				1ABC351826D6D7EF0086B441 /* Group.swift in Sources */,
 				1A9D0ABF26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift in Sources */,

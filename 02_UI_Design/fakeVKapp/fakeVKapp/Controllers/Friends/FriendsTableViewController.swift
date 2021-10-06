@@ -18,6 +18,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    private let networkService = NetworkService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
@@ -31,6 +33,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         friendsDictionary = updateFriendsDictionary(with: nil)
         
         self.hideKeyboardWhenTappedAround()
+        
+        networkService.sendRequest(requestName: .getFriends)
         
     }
     
