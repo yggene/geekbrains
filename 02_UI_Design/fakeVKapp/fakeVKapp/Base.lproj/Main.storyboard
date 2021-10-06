@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wzj-TM-c9X">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="-259"/>
+            <point key="canvasLocation" x="-970" y="-1042"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="VBm-Jw-uQq">
@@ -254,13 +254,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nk7-Jn-vSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7.2000000000000002" y="-932.51231527093603"/>
+            <point key="canvasLocation" x="-15" y="-1041"/>
+        </scene>
+        <!--Login Controller-->
+        <scene sceneID="5r4-EU-5I1">
+            <objects>
+                <viewController id="Wzj-TM-c9X" customClass="VKLoginController" customModule="fakeVKapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BqJ-Cw-DR6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2q-c3-RxK">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="odV-wg-11F"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="odV-wg-11F" firstAttribute="bottom" secondItem="E2q-c3-RxK" secondAttribute="bottom" id="CJ7-6O-xT0"/>
+                            <constraint firstItem="E2q-c3-RxK" firstAttribute="leading" secondItem="odV-wg-11F" secondAttribute="leading" id="Eq9-Bn-CU9"/>
+                            <constraint firstItem="E2q-c3-RxK" firstAttribute="top" secondItem="odV-wg-11F" secondAttribute="top" id="O8t-l7-S0f"/>
+                            <constraint firstItem="odV-wg-11F" firstAttribute="trailing" secondItem="E2q-c3-RxK" secondAttribute="trailing" id="YFB-J7-PX1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="E2q-c3-RxK" id="Gbf-ec-6rs"/>
+                        <segue destination="Ebg-sC-Ecn" kind="presentation" identifier="vkLoginSegue" modalPresentationStyle="fullScreen" id="O8Z-jd-YVt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbR-3m-ez5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1191" y="-163"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Wji-Aa-7Z0">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Ebg-sC-Ecn" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="OUi-NA-r6v"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ntb-Oj-irv">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -274,7 +310,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aqi-tK-VqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663" y="-259"/>
+            <point key="canvasLocation" x="-15" y="-163"/>
         </scene>
         <!--My Friends-->
         <scene sceneID="9cK-cm-PSS">
@@ -372,7 +408,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="Mkz-yz-jkz">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="Mkz-yz-jkz">
                             <size key="itemSize" width="70" height="70"/>
                             <size key="headerReferenceSize" width="50" height="500"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -523,7 +559,7 @@
                                     <constraint firstAttribute="height" constant="30" id="pai-jZ-AWJ"/>
                                     <constraint firstAttribute="width" constant="30" id="rLT-ET-8oz"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="xmark" catalog="system"/>
+                                <state key="normal" image="xmark" catalog="system"/>
                                 <connections>
                                     <segue destination="3On-FQ-JTc" kind="unwind" identifier="backToPhotosSegue" unwindAction="unwindToFriendsSegueWithSegue:" id="AeR-39-XLN"/>
                                 </connections>
@@ -922,6 +958,9 @@
             <point key="canvasLocation" x="1993" y="329"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="O8Z-jd-YVt"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="app_logo" width="1000" height="320"/>
         <image name="circle.fill" catalog="system" width="128" height="121"/>

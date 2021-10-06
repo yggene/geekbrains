@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A17D3E3270B9F4900E3BD02 /* VKLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */; };
+		1A17D3E5270BA9DC00E3BD02 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */; };
 		1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */; };
 		1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */; };
 		1A23241726D5816700B2E43C /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A23241626D5816700B2E43C /* Friend.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginController.swift; sourceTree = "<group>"; };
+		1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A23241626D5816700B2E43C /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 				1A1AF35A26F276A2001E1CE8 /* News */,
 				1A35C66726C5B9860054456D /* LoginViewController.swift */,
 				1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */,
+				1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			children = (
 				1A926BB926E50E6B00D8B371 /* randoms.swift */,
 				1A926BB726E2EFAB00D8B371 /* db.swift */,
+				1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -357,11 +363,13 @@
 				1A52A6A826D8A35800C5A912 /* MyGroupsTableViewController.swift in Sources */,
 				1ADACF4426ED88E5005E1FE7 /* TrueScalePhotoImageView.swift in Sources */,
 				1ADACF4026ED5DE1005E1FE7 /* NewsTableViewCell.swift in Sources */,
+				1A17D3E3270B9F4900E3BD02 /* VKLoginController.swift in Sources */,
 				1A52A6AA26D8A36F00C5A912 /* AllGroupsTableViewController.swift in Sources */,
 				1ABC352826D70C580086B441 /* FriendPhotoCollectionViewController.swift in Sources */,
 				1A926BBD26E5249B00D8B371 /* FriendLikeControl.swift in Sources */,
 				1AA48539270904F5008E6673 /* Session.swift in Sources */,
 				1A93C04C26EACBCF00386D50 /* OriginEnum.swift in Sources */,
+				1A17D3E5270BA9DC00E3BD02 /* NetworkService.swift in Sources */,
 				1A74C34926F36B33002BAD2A /* HeaderCollectionReusableView.swift in Sources */,
 				1A926BB826E2EFAB00D8B371 /* db.swift in Sources */,
 				1A93C04926EAA1C700386D50 /* Photo.swift in Sources */,
