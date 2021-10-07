@@ -24,6 +24,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         
+        self.hideKeyboardWhenTappedAround()
+        
         // populate friends list
         for _ in 1...20 {
             friends.append(Friend())
@@ -32,9 +34,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         // filter friends list according to search
         friendsDictionary = updateFriendsDictionary(with: nil)
         
-        self.hideKeyboardWhenTappedAround()
-        
-        networkService.sendRequest(requestName: .getFriends)
+        networkService.composeRequest(requestName: .getFriends)
+        networkService.sendRequest()
         
     }
     

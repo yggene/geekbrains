@@ -10,23 +10,14 @@ import Foundation
 final class NetworkService {
     
     private let session = URLSession.shared
-
+    
+    // Compose the constant part of the API url
     private var urlConstructor: URLComponents = {
         var constructor = URLComponents()
         constructor.scheme = "https"
         constructor.host = "api.vk.com"
         constructor.path = "/method/"
-        return constructor
-    }()
-    
-    // MARK: URLSession request
-    func sendRequest(requestName: Requests,
-                     ofUser userID: Int = Session.instance.userID,
-                     groupSearchQuery: String = ""
-    ){
-        
-        urlConstructor.path += requestName.rawValue
-        urlConstructor.queryItems = [
+        constructor.queryItems = [
             URLQueryItem(
                 name: "access_token",
                 value: Session.instance.token),
@@ -34,6 +25,16 @@ final class NetworkService {
                 name: "v",
                 value: "5.131"),
         ]
+        return constructor
+    }()
+    
+    // Compose the optional part and parameters for the API url
+    func composeRequest(
+        requestName: Requests,
+        ofUser userID: Int = Session.instance.userID,
+        groupSearchQuery: String = ""
+    ){
+        urlConstructor.path += requestName.rawValue
         
         switch requestName {
         case .getFriends:
@@ -76,8 +77,12 @@ final class NetworkService {
                     value: groupSearchQuery)
             )
         }
-        
+    }
+    
+    // Create the request
+    func sendRequest() {
         guard let url = urlConstructor.url else { return }
+        
         var request = URLRequest(url: url)
         request.timeoutInterval = 5.0
         request.setValue(
@@ -92,6 +97,7 @@ final class NetworkService {
                 error == nil,
                 let responseData = responseData
             else { return }
+            
             let json = try? JSONSerialization.jsonObject(
                 with: responseData,
                 options: .fragmentsAllowed)
@@ -100,6 +106,6 @@ final class NetworkService {
             }
         }
         .resume()
-        
     }
+    
 }
