@@ -70,7 +70,7 @@ extension VKLoginController: WKNavigationDelegate {
             Session.instance.token = token
             Session.instance.userID = userID
             
-            print("My Token: \(token)")
+            print("My token: \(token)")
             print("My UserID: \(userID)\n")
             
             performSegue(

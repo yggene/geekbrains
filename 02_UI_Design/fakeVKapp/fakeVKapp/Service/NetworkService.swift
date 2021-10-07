@@ -10,11 +10,12 @@ import Foundation
 final class NetworkService {
     
     private let session = URLSession.shared
-    
+
     private var urlConstructor: URLComponents = {
         var constructor = URLComponents()
         constructor.scheme = "https"
         constructor.host = "api.vk.com"
+        constructor.path = "/method/"
         return constructor
     }()
     
@@ -24,7 +25,7 @@ final class NetworkService {
                      groupSearchQuery: String = ""
     ){
         
-        urlConstructor.path = "/method/" + requestName.rawValue
+        urlConstructor.path += requestName.rawValue
         urlConstructor.queryItems = [
             URLQueryItem(
                 name: "access_token",
@@ -101,6 +102,4 @@ final class NetworkService {
         .resume()
         
     }
-    
-    
 }
