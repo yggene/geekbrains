@@ -8,15 +8,15 @@
 import UIKit
 
 class FriendPhotoCollectionViewController: UICollectionViewController,
-                                            UICollectionViewDelegateFlowLayout {
+                                           UICollectionViewDelegateFlowLayout {
     
     // MARK: Variables
     
     var friendProfile: Friend?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     // MARK: UICollectionViewDataSource
@@ -30,16 +30,16 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     override func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
+            guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "friendPhotoCollectionViewCell",
                 for: indexPath) as? FriendPhotoCollectionViewCell else {
-            return UICollectionViewCell() }
-        
-        let photo = friendProfile?.photos[indexPath.row]
-        cell.photoImageView.image = photo?.image
-        
-        return cell
-    }
+                    return UICollectionViewCell() }
+            
+            let photo = friendProfile?.photos[indexPath.row]
+            cell.photoImageView.image = photo?.image
+            
+            return cell
+        }
     
     // cell size config
     func collectionView(_ collectionView: UICollectionView,
@@ -53,28 +53,28 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     override func collectionView(
         _ collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
-        	at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-          case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(
-              ofKind: kind,
-              withReuseIdentifier: "friendsHeader",
-              for: indexPath)
-
-            guard let header = headerView as? HeaderCollectionReusableView
-            else { return headerView }
-
-            header.configure(with: friendProfile!)
-            
-            header.avatarImageView.layer.masksToBounds = true
-            header.avatarImageView.layer.cornerRadius = 25
-            
-            return header
-            
-          default:
-            assert(false, "Invalid element type")
-          }
-    }
+        at indexPath: IndexPath) -> UICollectionReusableView {
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: "friendsHeader",
+                    for: indexPath)
+                
+                guard let header = headerView as? HeaderCollectionReusableView
+                else { return headerView }
+                
+                header.configure(with: friendProfile!)
+                
+                header.avatarImageView.layer.masksToBounds = true
+                header.avatarImageView.layer.cornerRadius = 25
+                
+                return header
+                
+            default:
+                assert(false, "Invalid element type")
+            }
+        }
     
     // segue for full photo view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,7 +90,7 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     }
     
     @IBAction func unwindToFriendsSegue(segue: UIStoryboardSegue){
-            
-        }
+        
+    }
     
 }
