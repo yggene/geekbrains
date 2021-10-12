@@ -23,7 +23,7 @@ class NewsTableViewCell: UITableViewCell {
         
         guard let currentFriend = friends.filter({ $0.id == news.authorID }).first else { return }
         
-        authorAvatarImageView.image = currentFriend.avatar.image
+        authorAvatarImageView.image = randomAvatar() //currentFriend.avatar.image
         authorNameLabel.text = currentFriend.firstName + " " + currentFriend.lastName
         postDateLabel.text = news.postDate
         newsTextLabel.text = news.text

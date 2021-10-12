@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class HeaderCollectionReusableView: UICollectionReusableView {
         
@@ -14,9 +15,9 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet var originLabel: UILabel!
     
     func configure(with friend: Friend) {
-        avatarImageView.image = friend.avatar.image
+        Nuke.loadImage(with: friend.avatarURL, into: avatarImageView)
         nameLabel.text = friend.firstName + " " + friend.lastName
-        originLabel.text = friend.origin.rawValue
+        originLabel.text = friend.city?.title ?? "🌎"
     }
     
 }

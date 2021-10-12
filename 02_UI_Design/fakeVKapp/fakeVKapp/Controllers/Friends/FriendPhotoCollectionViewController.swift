@@ -23,7 +23,7 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        friendProfile?.photos.count ?? 0
+        0 //friendProfile?.photos.count ?? 0
     }
     
     // cell config
@@ -35,8 +35,8 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
                 for: indexPath) as? FriendPhotoCollectionViewCell else {
                     return UICollectionViewCell() }
             
-            let photo = friendProfile?.photos[indexPath.row]
-            cell.photoImageView.image = photo?.image
+            let photo = Photo(image: randomNewsImage()) //friendProfile?.photos[indexPath.row]
+            cell.photoImageView.image = photo.image
             
             return cell
         }
@@ -83,7 +83,7 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             guard let gallery = segue.destination as? FriendPhotoViewController else { return }
             
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                gallery.allPhotos = friendProfile!.photos
+                gallery.allPhotos = [Photo(image: randomNewsImage()), Photo(image: randomNewsImage())] //friendProfile!.photos
                 gallery.currentPhotoCounter = indexPath.row
             }
         }

@@ -10,7 +10,7 @@ import UIKit
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
-    
+    private var friends = [Friend]()
     private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
         get {
@@ -23,19 +23,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        
+        friendsDictionary = updateFriendsDictionary(with: nil)
         self.hideKeyboardWhenTappedAround()
         
-        // populate friends list
-        for _ in 1...20 {
-            friends.append(Friend())
+        networkService.getFriends { [weak self] data in
+            guard let self = self else { return }
+            self.friends = data
         }
-        
-        // filter friends list according to search
-        friendsDictionary = updateFriendsDictionary(with: nil)
-        
-        networkService.composeRequest(requestName: .getFriends)
-        networkService.sendRequest()
         
     }
     
@@ -44,7 +38,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         if let text = searchText?.lowercased(), searchText != "" {
             friendsCopy = friendsCopy.filter{ $0.lastName.lowercased().contains(text) }
         }
-        
         return Dictionary(grouping: friendsCopy) { $0.lastName.lowercased().first ?? "👽" }
     }
     

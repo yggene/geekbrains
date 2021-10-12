@@ -28,6 +28,30 @@ final class NetworkService {
         return constructor
     }()
     
+    func getFriends(completion: @escaping ([Friend]) -> Void) {
+        urlConstructor.path += "friends.get"
+        
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "user_id",
+                value: String(Session.instance.userID))
+        )
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "fields",
+                value: "city,photo_200_orig")
+        )
+        
+        sendRequest(url: urlConstructor.url!) { data in
+            do {
+                let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
+                completion(friends.response.items)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     // Compose the optional part and parameters for the API url
     func composeRequest(
         requestName: Requests,
@@ -80,14 +104,9 @@ final class NetworkService {
     }
     
     // Create the request
-    func sendRequest() {
-        guard let url = urlConstructor.url else { return }
-        
+    func sendRequest(url: URL, completion: @escaping (Data) -> Void) {
         var request = URLRequest(url: url)
         request.timeoutInterval = 5.0
-        request.setValue(
-            "",
-            forHTTPHeaderField: "Token")
         
         session.dataTask(with: request) { responseData, urlResponse, error in
             if let response = urlResponse as? HTTPURLResponse {
@@ -98,11 +117,8 @@ final class NetworkService {
                 let responseData = responseData
             else { return }
             
-            let json = try? JSONSerialization.jsonObject(
-                with: responseData,
-                options: .fragmentsAllowed)
             DispatchQueue.main.async {
-                print(json as Any)
+                completion(responseData)
             }
         }
         .resume()
