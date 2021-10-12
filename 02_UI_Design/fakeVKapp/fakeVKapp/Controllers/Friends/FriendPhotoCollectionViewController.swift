@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class FriendPhotoCollectionViewController: UICollectionViewController,
                                            UICollectionViewDelegateFlowLayout {
@@ -13,9 +14,17 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     // MARK: Variables
     
     var friendProfile: Friend?
+    var userPhotos = [Photo]()
+    
+    var networkService = NetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        networkService.getPhotos(ofUser: friendProfile!.id) { [weak self] userPhotos in
+            guard let self = self else { return }
+            self.userPhotos = userPhotos
+        }
         
     }
     
@@ -35,8 +44,9 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
                 for: indexPath) as? FriendPhotoCollectionViewCell else {
                     return UICollectionViewCell() }
             
-            let photo = Photo(image: randomNewsImage()) //friendProfile?.photos[indexPath.row]
-            cell.photoImageView.image = photo.image
+            let photo = userPhotos[indexPath.row]
+            Nuke.loadImage(with: photo.photoURL, into: cell.photoImageView)
+            // cell.photoImageView.image = photo.photoURL
             
             return cell
         }
@@ -77,17 +87,17 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
         }
     
     // segue for full photo view
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "showPhoto" {
-            guard let gallery = segue.destination as? FriendPhotoViewController else { return }
-            
-            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                gallery.allPhotos = [Photo(image: randomNewsImage()), Photo(image: randomNewsImage())] //friendProfile!.photos
-                gallery.currentPhotoCounter = indexPath.row
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if segue.identifier == "showPhoto" {
+//            guard let gallery = segue.destination as? FriendPhotoViewController else { return }
+//            
+//            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+//                gallery.allPhotos = [Photo(image: randomNewsImage()), Photo(image: randomNewsImage())] //friendProfile!.photos
+//                gallery.currentPhotoCounter = indexPath.row
+//            }
+//        }
+//    }
     
     @IBAction func unwindToFriendsSegue(segue: UIStoryboardSegue){
         

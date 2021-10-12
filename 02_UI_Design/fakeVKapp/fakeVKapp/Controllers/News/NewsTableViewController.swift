@@ -16,9 +16,9 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         
-        for _ in 1...15 {
-            news.append(News())
-        }
+//        for _ in 1...15 {
+//            news.append(News())
+//        }
         
     }
 }

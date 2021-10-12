@@ -70,7 +70,7 @@ struct Friends: Decodable {
     var items: [Friend]
 }
 
-struct Friend {
+final class Friend {
     var id: Int
     var firstName: String
     var lastName: String
@@ -79,9 +79,19 @@ struct Friend {
         URL(string: avatar)
     }
     var city: City?
+    
+    init(from decoder: Decoder) throws {
+        let responseContainer = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try responseContainer.decode(Int.self, forKey: .id)
+        self.firstName = try responseContainer.decode(String.self, forKey: .firstName)
+        self.lastName = try responseContainer.decode(String.self, forKey: .lastName)
+        self.avatar = try responseContainer.decode(String.self, forKey: .avatar)
+        self.city = try responseContainer.decodeIfPresent(City.self, forKey: .city)
+    }
+    
 }
 
-struct City: Decodable {
+final class City: Decodable {
     var id: Int
     var title: String
 }
@@ -98,14 +108,4 @@ extension Friend: Decodable {
     enum CityKeys: String, CodingKey {
         case id, title
     }
-    
-    init(from decoder: Decoder) throws {
-        let responseContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try responseContainer.decode(Int.self, forKey: .id)
-        self.firstName = try responseContainer.decode(String.self, forKey: .firstName)
-        self.lastName = try responseContainer.decode(String.self, forKey: .lastName)
-        self.avatar = try responseContainer.decode(String.self, forKey: .avatar)
-        self.city = try responseContainer.decodeIfPresent(City.self, forKey: .city)
-    }
-        
 }

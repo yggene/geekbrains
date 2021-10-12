@@ -7,24 +7,24 @@
 
 import UIKit
 
-var myGroups = [Group]()
-
-var allGroups = [
-    Group(name: "Narnia Dimension",
-          image: UIImage(named: "group-narnia-dimension")),
-    Group(name: "Wasp Universe",
-          image: UIImage(named: "group-wasp-universe")),
-    Group(name: "Cronenberged Dimension",
-          image: UIImage(named: "group-cronenberged-dimension")),
-    Group(name: "Dimension C-132",
-          image: UIImage(named: "group-dimension-c132")),
-    Group(name: "Corn World",
-          image: UIImage(named: "group-corn-world")),
-    Group(name: "Froopyland",
-          image: UIImage(named: "group-froopyland"))
-]
-
-var friends = [Friend
+// var myGroups = [Group]()
+//
+//var allGroups = [
+//    Group(name: "Narnia Dimension",
+//          image: UIImage(named: "group-narnia-dimension")),
+//    Group(name: "Wasp Universe",
+//          image: UIImage(named: "group-wasp-universe")),
+//    Group(name: "Cronenberged Dimension",
+//          image: UIImage(named: "group-cronenberged-dimension")),
+//    Group(name: "Dimension C-132",
+//          image: UIImage(named: "group-dimension-c132")),
+//    Group(name: "Corn World",
+//          image: UIImage(named: "group-corn-world")),
+//    Group(name: "Froopyland",
+//          image: UIImage(named: "group-froopyland"))
+//]
+//
+//var friends = [Friend
 //    Friend(firstName: "Morty",
 //           lastName: "Smith",
 //           origin: .earth,
@@ -53,6 +53,6 @@ var friends = [Friend
 //           photos: [Photo(image: UIImage(named: "bird-photo-1")),
 //                    Photo(image: UIImage(named: "bird-photo-2")),
 //                    Photo(image: UIImage(named: "bird-photo-3"))])
-]()
+//]()
 
 var news = [News]()

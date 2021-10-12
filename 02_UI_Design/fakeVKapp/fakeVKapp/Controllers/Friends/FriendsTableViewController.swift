@@ -10,7 +10,7 @@ import UIKit
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
-    private var friends = [Friend]()
+    public var friends = [Friend]()
     private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
         get {
@@ -26,9 +26,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         friendsDictionary = updateFriendsDictionary(with: nil)
         self.hideKeyboardWhenTappedAround()
         
-        networkService.getFriends { [weak self] data in
+        networkService.getFriends { [weak self] friends in
             guard let self = self else { return }
-            self.friends = data
+            self.friends = friends
         }
         
     }

@@ -44,19 +44,19 @@ final class News: Equatable {
         self.viewCount = viewCount
     }
     
-    convenience init() {
-        self.init(
-            id: News.count,
-            authorID: randomProfileId(),
-            postDate: "Today",
-            text: "Some draft text, long enough to make sure everything fits in a cell",
-            photo: Photo(image: randomNewsImage()),
-            likesCount: Int.random(in: 0...50),
-            commentsCount: Int.random(in: 0...20),
-            sharesCount: Int.random(in: 0...10),
-            viewCount: Int.random(in: 50...500)
-        )
-    }
+//    convenience init() {
+//        self.init(
+//            id: News.count,
+//            //authorID: randomProfileId(),
+//            postDate: "Today",
+//            text: "Some draft text, long enough to make sure everything fits in a cell",
+//            photo: Photo(image: randomNewsImage()),
+//            likesCount: Int.random(in: 0...50),
+//            commentsCount: Int.random(in: 0...20),
+//            sharesCount: Int.random(in: 0...10),
+//            viewCount: Int.random(in: 50...500)
+//        )
+//    }
     
     static func == (lhs: News, rhs: News) -> Bool {
         return lhs.id == rhs.id

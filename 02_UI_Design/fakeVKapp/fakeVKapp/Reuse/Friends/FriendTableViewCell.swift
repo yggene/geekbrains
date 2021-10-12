@@ -24,8 +24,8 @@ class FriendTableViewCell: UITableViewCell {
         originLabel?.textColor = UIColor.systemGray
     }
     
-    override class func awakeFromNib() {
-        // add animation here
-    }
+//    override class func awakeFromNib() {
+//        // add animation here
+//    }
     
 }

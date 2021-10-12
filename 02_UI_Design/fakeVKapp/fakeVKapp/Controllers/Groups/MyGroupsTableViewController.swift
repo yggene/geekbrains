@@ -9,11 +9,23 @@ import UIKit
 
 class MyGroupsTableViewController: UITableViewController {
     
+    private let networkService = NetworkService()
+    private var myGroups = [Group]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        
+        networkService.getGroups { [weak self] myGroups in
+            guard let self = self else { return }
+            self.myGroups = myGroups
+        }
         
     }
     
@@ -54,23 +66,23 @@ class MyGroupsTableViewController: UITableViewController {
     
     // MARK: Actions
     
-    // add group on unwind
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        // check segue id
-        if segue.identifier == "addGroupSegue" {
-            // get destination segue
-            guard let allGroupsController = segue.source as?
-                    AllGroupsTableViewController else { return }
-            // get the index of the selected group cell
-            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                // get group
-                let selectedGroup = allGroups[indexPath.row]
-                // check if no such group in my list
-                if !myGroups.contains(selectedGroup) {
-                    myGroups.append(selectedGroup)
-                    tableView.reloadData()
-                }
-            }
-        }
-    }
+//    // add group on unwind
+//    @IBAction func addGroup(segue: UIStoryboardSegue) {
+//        // check segue id
+//        if segue.identifier == "addGroupSegue" {
+//            // get destination segue
+//            guard let allGroupsController = segue.source as?
+//                    AllGroupsTableViewController else { return }
+//            // get the index of the selected group cell
+//            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+//                // get group
+//                let selectedGroup = popularGroups[indexPath.row]
+//                // check if no such group in my list
+//                if !myGroups.contains(selectedGroup) {
+//                    myGroups.append(selectedGroup)
+//                    tableView.reloadData()
+//                }
+//            }
+//        }
+//    }
 }

@@ -9,7 +9,8 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     
-    private var allGroupsToShow = allGroups
+    private var popularGroups = [Group]()
+    private let networkService = NetworkService()
     
     // MARK: Lifecycle
     
@@ -17,16 +18,21 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         
-        allGroupsToShow = updateAllGroups(with: nil)
+        popularGroups = updateAllGroups(with: nil)
         
         self.hideKeyboardWhenTappedAround()
+        
+        networkService.getPopularGroups() { [weak self] popularGroups in
+            guard let self = self else { return }
+            self.popularGroups = popularGroups
+        }
         
     }
     
     // MARK: Table view data source
     
     private func updateAllGroups(with searchText: String?) -> [Group]{
-        var groupsCopy = allGroups
+        var groupsCopy = popularGroups
         if let text = searchText?.lowercased(), searchText != "" {
             groupsCopy = groupsCopy.filter{ $0.name.lowercased().contains(text) }
         }
@@ -35,13 +41,13 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        allGroupsToShow = updateAllGroups(with: searchText)
+        popularGroups = updateAllGroups(with: searchText)
         tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        allGroupsToShow.count
+        popularGroups.count
     }
     
     override func tableView(_ tableView: UITableView,
@@ -50,7 +56,7 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
                 withIdentifier: "allGroupsTableViewCell",
                 for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
         
-        let currentGroup = allGroupsToShow[indexPath.row]
+        let currentGroup = popularGroups[indexPath.row]
         cell.configure(with: currentGroup)
         
         return cell
