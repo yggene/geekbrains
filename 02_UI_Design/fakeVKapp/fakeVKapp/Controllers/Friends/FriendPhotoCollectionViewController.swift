@@ -25,7 +25,6 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             guard let self = self else { return }
             self.userPhotos = userPhotos
         }
-        
     }
     
     // MARK: UICollectionViewDataSource
@@ -44,8 +43,8 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
                 for: indexPath) as? FriendPhotoCollectionViewCell else {
                     return UICollectionViewCell() }
             
-            let photo = userPhotos[indexPath.row]
-            Nuke.loadImage(with: photo.photoURL, into: cell.photoImageView)
+            let photo = userPhotos[indexPath.item]
+            Nuke.loadImage(with: photo.sizes?.url, into: cell.photoImageView)
             // cell.photoImageView.image = photo.photoURL
             
             return cell
@@ -86,18 +85,19 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             }
         }
     
+    // MARK: FIX SEGUE!
     // segue for full photo view
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        if segue.identifier == "showPhoto" {
-//            guard let gallery = segue.destination as? FriendPhotoViewController else { return }
-//            
-//            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-//                gallery.allPhotos = [Photo(image: randomNewsImage()), Photo(image: randomNewsImage())] //friendProfile!.photos
-//                gallery.currentPhotoCounter = indexPath.row
-//            }
-//        }
-//    }
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
+    //        if segue.identifier == "showPhoto" {
+    //            guard let gallery = segue.destination as? FriendPhotoViewController else { return }
+    //            
+    //            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+    //                gallery.allPhotos = [Photo(image: randomNewsImage()), Photo(image: randomNewsImage())] //friendProfile!.photos
+    //                gallery.currentPhotoCounter = indexPath.row
+    //            }
+    //        }
+    //    }
     
     @IBAction func unwindToFriendsSegue(segue: UIStoryboardSegue){
         

@@ -18,25 +18,22 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         
-        popularGroups = updateAllGroups(with: nil)
-        
         self.hideKeyboardWhenTappedAround()
         
         networkService.getPopularGroups() { [weak self] popularGroups in
             guard let self = self else { return }
             self.popularGroups = popularGroups
+            self.tableView.reloadData()
         }
-        
     }
     
     // MARK: Table view data source
     
-    private func updateAllGroups(with searchText: String?) -> [Group]{
+    private func updateAllGroups(with searchText: String?) -> [Group] {
         var groupsCopy = popularGroups
         if let text = searchText?.lowercased(), searchText != "" {
             groupsCopy = groupsCopy.filter{ $0.name.lowercased().contains(text) }
         }
-        
         return groupsCopy
     }
     
@@ -53,8 +50,8 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "allGroupsTableViewCell",
-                for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
+            withIdentifier: "allGroupsTableViewCell",
+            for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
         
         let currentGroup = popularGroups[indexPath.row]
         cell.configure(with: currentGroup)

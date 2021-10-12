@@ -23,14 +23,14 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        friendsDictionary = updateFriendsDictionary(with: nil)
         self.hideKeyboardWhenTappedAround()
         
         networkService.getFriends { [weak self] friends in
             guard let self = self else { return }
             self.friends = friends
+            self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+            self.tableView.reloadData()
         }
-        
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
@@ -73,63 +73,62 @@ extension FriendsTableViewController {
     override func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        friendsDictionary[lastNamesFirstLetters[section]]?.count ?? 0
-    }
+            friendsDictionary[lastNamesFirstLetters[section]]?.count ?? 0
+        }
     
     // configuring cells
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
+            guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "friendCell",
                 for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
-        
-        let key = lastNamesFirstLetters[indexPath.section]
-        let selectedFriends = friendsDictionary[key]
-        guard let key = selectedFriends?[indexPath.row] else { return cell }
-        cell.configure(with: key)
-        
-        return cell
-    }
+            
+            let key = lastNamesFirstLetters[indexPath.section]
+            let selectedFriends = friendsDictionary[key]
+            guard let key = selectedFriends?[indexPath.row] else { return cell }
+            cell.configure(with: key)
+            
+            return cell
+        }
     
     override func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        performSegue(withIdentifier: "friendPhotoSegue",
-                     sender: nil)
-    }
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            performSegue(withIdentifier: "friendPhotoSegue",
+                         sender: nil)
+        }
     
     // configuring sections' headers
     override func tableView(
         _ tableView: UITableView,
         titleForHeaderInSection section: Int) -> String? {
-        return String(lastNamesFirstLetters[section].uppercased())
-    }
+            return String(lastNamesFirstLetters[section].uppercased())
+        }
     
     // sections' headers' height
     override func tableView(
         _ tableView: UITableView,
         heightForHeaderInSection section: Int) -> CGFloat {
-        15.0
-    }
+            15.0
+        }
     
     // sections' headers' style
     override func tableView(
         _ tableView: UITableView,
         willDisplayHeaderView view: UIView,
         forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.systemFont(ofSize: 14)
-    }
-    
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        }
 }
 
 extension FriendsTableViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(
         _ gestureRecognizer: UIGestureRecognizer,
         shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
+            return true
+        }
 }

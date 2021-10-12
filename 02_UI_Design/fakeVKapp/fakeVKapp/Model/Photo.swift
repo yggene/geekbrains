@@ -37,22 +37,10 @@ struct userPhotos: Decodable {
 final class Photo {
     var id: Int
     var ownerID: Int
-    var photo: String
-    var photoURL: URL? {
-        URL(string: photo)
-    }
     var sizes: Sizes?
-    
-    init(from decoder: Decoder) throws {
-        let responseContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try responseContainer.decode(Int.self, forKey: .id)
-        self.ownerID = try responseContainer.decode(Int.self, forKey: .ownerID)
-        self.photo = try responseContainer.decode(String.self, forKey: .photo)
-        self.sizes = try responseContainer.decodeIfPresent(Sizes.self, forKey: .sizes)
-    }
 }
 
-final class Sizes: Decodable {
+final class Sizes {
     var url: String
     var type: String
 }
@@ -61,7 +49,12 @@ extension Photo: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case ownerID = "owner_id"
-        case photo
         case sizes
+    }
+}
+
+extension Sizes: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case url, type
     }
 }

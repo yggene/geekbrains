@@ -11,7 +11,7 @@ final class NetworkService {
     
     private let session = URLSession.shared
     
-    // Compose the constant part of the API url
+    // MARK: Compose the constant part of the API url
     private var urlConstructor: URLComponents = {
         var constructor = URLComponents()
         constructor.scheme = "https"
@@ -27,6 +27,27 @@ final class NetworkService {
         ]
         return constructor
     }()
+    
+    // MARK: Create the request
+    func sendRequest(url: URL, completion: @escaping (Data) -> Void) {
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5.0
+        
+        session.dataTask(with: request) { responseData, urlResponse, error in
+            if let response = urlResponse as? HTTPURLResponse {
+                print(response.statusCode)
+            }
+            guard
+                error == nil,
+                let responseData = responseData
+            else { return }
+            
+            DispatchQueue.main.async {
+                completion(responseData)
+            }
+        }
+        .resume()
+    }
     
     // MARK: Get friends
     func getFriends(ofUser userID: Int = Session.instance.userID,
@@ -134,54 +155,14 @@ final class NetworkService {
         }
     }
     
-    // Compose the optional part and parameters for the API url
-    func composeRequest(
-        requestName: Requests,
-        ofUser userID: Int = Session.instance.userID,
-        groupSearchQuery: String = ""
-    ){
-        urlConstructor.path += requestName.rawValue
+    // MARK: [INCOMPLETE] Search groups
+    func searchGroups(groupSearchQuery: String,
+                      completion: @escaping ([Group]) -> Void) {
         
-        switch requestName {
-        case .getFriends:
-            break
-        case .getGroups:
-            break
-        case .getAllPhotos:
-            urlConstructor.queryItems?.append(
-                URLQueryItem(
-                    name: "owner_id",
-                    value: String(userID))
-            )
-        case .searchGroups:
-            urlConstructor.queryItems?.append(
-                URLQueryItem(
-                    name: "q",
-                    value: groupSearchQuery)
-            )
-
-        }
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "q",
+                value: groupSearchQuery)
+        )
     }
-    
-    // Create the request
-    func sendRequest(url: URL, completion: @escaping (Data) -> Void) {
-        var request = URLRequest(url: url)
-        request.timeoutInterval = 5.0
-        
-        session.dataTask(with: request) { responseData, urlResponse, error in
-            if let response = urlResponse as? HTTPURLResponse {
-                print(response.statusCode)
-            }
-            guard
-                error == nil,
-                let responseData = responseData
-            else { return }
-            
-            DispatchQueue.main.async {
-                completion(responseData)
-            }
-        }
-        .resume()
-    }
-    
 }

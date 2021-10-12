@@ -15,7 +15,6 @@ class AllGroupsTableViewCell: UITableViewCell {
     
     func configure(with group: Group) {
         Nuke.loadImage(with: group.photoURL, into: allGroupsImageView)
-        // allGroupsImageView.image = group.image
         allGroupsNameLabel.text = group.name
         
         // cell style
