@@ -24,7 +24,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         self.hideKeyboardWhenTappedAround()
+        fetchFriends()
         
+    }
+    
+    // MARK: Methods
+    
+    private func fetchFriends() {
         networkService.getFriends { [weak self] friends in
             guard let self = self else { return }
             self.friends = friends
@@ -60,9 +66,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
 }
 
+// MARK: Table view data source
+
 extension FriendsTableViewController {
-    
-    // MARK: Table view data source
     
     // number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {

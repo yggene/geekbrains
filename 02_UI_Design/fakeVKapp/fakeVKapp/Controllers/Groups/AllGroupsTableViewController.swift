@@ -10,6 +10,7 @@ import UIKit
 class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     
     private var popularGroups = [Group]()
+    private var groupsSearchResult = [Group]()
     private let networkService = NetworkService()
     
     // MARK: Lifecycle
@@ -17,12 +18,19 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        
         self.hideKeyboardWhenTappedAround()
         
+        fetchPopularGroupsInfo()
+        groupsSearchResult = popularGroups
+    }
+    
+    // MARK: Methods
+    
+    func fetchPopularGroupsInfo() {
         networkService.getPopularGroups() { [weak self] popularGroups in
             guard let self = self else { return }
             self.popularGroups = popularGroups
+            self.groupsSearchResult = popularGroups
             self.tableView.reloadData()
         }
     }
@@ -38,13 +46,13 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        popularGroups = updateAllGroups(with: searchText)
+        groupsSearchResult = updateAllGroups(with: searchText)
         tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        popularGroups.count
+        groupsSearchResult.count
     }
     
     override func tableView(_ tableView: UITableView,
@@ -53,7 +61,7 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
             withIdentifier: "allGroupsTableViewCell",
             for: indexPath) as? AllGroupsTableViewCell else { return UITableViewCell() }
         
-        let currentGroup = popularGroups[indexPath.row]
+        let currentGroup = groupsSearchResult[indexPath.row]
         cell.configure(with: currentGroup)
         
         return cell

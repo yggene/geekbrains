@@ -67,6 +67,6 @@ extension Group: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case name
-        case photo = "photo_50"
+        case photo = "photo_200"
     }
 }

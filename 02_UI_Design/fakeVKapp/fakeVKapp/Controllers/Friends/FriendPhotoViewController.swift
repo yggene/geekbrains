@@ -5,7 +5,7 @@
 //  Created by Evgeny Alekseev on 16.09.2021.
 //
 
-// MARK: FIX COntroller!
+// MARK: FIX Controller!
 //import UIKit
 //
 //class FriendPhotoViewController: UIViewController {

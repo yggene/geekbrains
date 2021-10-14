@@ -117,7 +117,7 @@ final class NetworkService {
         urlConstructor.queryItems?.append(
             URLQueryItem(
                 name: "fields",
-                value: "name,photo_50")
+                value: "name,photo_200")
         )
         
         guard let url = urlConstructor.url else { return }
