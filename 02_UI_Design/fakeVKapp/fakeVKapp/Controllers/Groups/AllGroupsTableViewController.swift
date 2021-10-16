@@ -21,7 +21,6 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
         self.hideKeyboardWhenTappedAround()
         
         fetchPopularGroupsInfo()
-        groupsSearchResult = popularGroups
     }
     
     // MARK: Methods

@@ -22,16 +22,14 @@ class NewsTableViewCell: UITableViewCell {
     
     func configure(with news: News) {
         
-        //guard let currentFriend = friends.filter({ $0.id == news.authorID }).first else { return }
-        
         //authorAvatarImageView.image = randomAvatar() //currentFriend.avatar.image
         //authorNameLabel.text = currentFriend.firstName + " " + currentFriend.lastName
-        //postDateLabel.text = news.postDate
+        postDateLabel.text = news.date.date()
         newsTextLabel.text = news.text
         //Nuke.loadImage(with: news.attachments.photo.url, into: newsImageView?)
-        self.likesControl.likesTotal = news.likes?.count ?? 0
-        self.commentsControl.totalComments = news.comments.count
-        self.sharesControl.sharesTotal = news.reposts.count
+        likesControl.likesTotal = news.likes.count
+        commentsControl.totalComments = news.comments.count
+        sharesControl.sharesTotal = news.reposts.count
         seenLabel.text = String(news.views.count)
         
         // cell style

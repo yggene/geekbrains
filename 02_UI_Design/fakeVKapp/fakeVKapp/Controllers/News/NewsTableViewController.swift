@@ -9,8 +9,12 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
-    var networkService = NetworkService()
-    var myNews = [News]()
+    private let networkService = NetworkService()
+    private var myNews = [News]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -25,7 +29,6 @@ class NewsTableViewController: UITableViewController {
         networkService.getNews { [weak self] myNews in
             guard let self = self else { return }
             self.myNews = myNews
-            self.tableView.reloadData()
         }
     }
 }

@@ -70,11 +70,11 @@ struct Newsfeed: Codable {
 
 // MARK: News
 final class News {
-    var date: Int
+    var date: Double
     var text: String
     //var attachments: [Attachments]
     var comments: Comments
-    var likes: Likes?
+    var likes: Likes
     var views: Views
     var reposts: Reposts
 }
