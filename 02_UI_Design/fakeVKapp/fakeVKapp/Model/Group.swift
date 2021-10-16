@@ -39,7 +39,7 @@ import UIKit
 //
 //}
 
-struct userGroups: Decodable {
+struct UserGroups: Decodable {
     var items: [Group]
 }
 

@@ -30,31 +30,38 @@ import UIKit
 //    }
 //}
 
-struct userPhotos: Decodable {
+struct UserPhotos: Codable {
     var items: [Photo]
 }
 
 final class Photo {
     var id: Int
     var ownerID: Int
-    var sizes: Sizes?
+    var sizes: [Size]
 }
 
-final class Sizes {
+final class Size {
     var url: String
     var type: String
 }
 
-extension Photo: Decodable {
+extension Photo: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case ownerID = "owner_id"
         case sizes
     }
+    
+    // MARK: SECURE OTHER TYPES!
+    var url: URL? {
+        guard let image = sizes.first(where: { $0.type == "x"} ) else {return nil}
+        return URL(string: image.url)
+    }
 }
 
-extension Sizes: Decodable {
+extension Size: Codable {
     enum CodingKeys: String, CodingKey {
         case url, type
     }
 }
+

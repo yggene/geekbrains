@@ -124,7 +124,7 @@ final class NetworkService {
         
         sendRequest(url: url) { responseData in
             do {
-                let userGroups = try JSONDecoder().decode(VKResponse<userGroups>.self, from: responseData)
+                let userGroups = try JSONDecoder().decode(VKResponse<UserGroups>.self, from: responseData)
                 completion(userGroups.response.items)
             } catch {
                 print(error)
@@ -147,7 +147,7 @@ final class NetworkService {
         
         sendRequest(url: url) { responseData in
             do {
-                let userPhotos = try JSONDecoder().decode(VKResponse<userPhotos>.self, from: responseData)
+                let userPhotos = try JSONDecoder().decode(VKResponse<UserPhotos>.self, from: responseData)
                 completion(userPhotos.response.items)
             } catch {
                 print(error)
