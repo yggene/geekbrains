@@ -142,6 +142,11 @@ final class NetworkService {
                 name: "owner_id",
                 value: String(userID))
         )
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "extended",
+                value: "1")
+        )
         
         guard let url = urlConstructor.url else { return }
         
@@ -149,6 +154,62 @@ final class NetworkService {
             do {
                 let userPhotos = try JSONDecoder().decode(VKResponse<UserPhotos>.self, from: responseData)
                 completion(userPhotos.response.items)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    // MARK: Get newsfeed
+    
+    func getNews(completion: @escaping ([News]) -> Void) {
+        urlConstructor.path += "newsfeed.get"
+        
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "user_id",
+                value: String(Session.instance.userID))
+        )
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "filters",
+                value: "post")
+        )
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "max_photos",
+                value: "1")
+        )
+        
+        guard let url = urlConstructor.url else { return }
+        
+        sendRequest(url: url) { responseData in
+            do {
+                let newsfeed = try JSONDecoder().decode(VKResponse<Newsfeed>.self, from: responseData)
+                completion(newsfeed.response.items)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    // MARK: Join group
+    func joinGroup(withID groupID: String,
+                   completion: @escaping (Int) -> Void) {
+        urlConstructor.path += "groups.join"
+        
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "group_id",
+                value: String(groupID))
+        )
+        
+        guard let url = urlConstructor.url else { return }
+        
+        sendRequest(url: url) { responseData in
+            do {
+                let result = try JSONDecoder().decode(VKResponse<Int>.self, from: responseData)
+                completion(result.response)
             } catch {
                 print(error)
             }

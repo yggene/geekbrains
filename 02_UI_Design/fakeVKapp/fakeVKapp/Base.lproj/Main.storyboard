@@ -497,8 +497,11 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="myx-Rw-axy" secondAttribute="height" multiplier="4:3" id="Ayu-f8-UGz"/>
-                                        <constraint firstAttribute="width" constant="40" id="mbj-5R-SQk"/>
+                                        <constraint firstAttribute="width" constant="40" id="POj-jE-9Zd"/>
                                     </constraints>
+                                    <connections>
+                                        <action selector="likesControl:" destination="rNq-aU-tEr" eventType="valueChanged" id="nFN-LU-mdn"/>
+                                    </connections>
                                 </view>
                             </subviews>
                             <constraints>
@@ -536,6 +539,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6W-Jc-ODK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="rNq-aU-tEr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3708" y="-1041.1330049261085"/>
         </scene>

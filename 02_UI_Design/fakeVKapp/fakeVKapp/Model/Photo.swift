@@ -38,6 +38,7 @@ final class Photo {
     var id: Int
     var ownerID: Int
     var sizes: [Size]
+    var likes: Likes
 }
 
 final class Size {
@@ -45,11 +46,17 @@ final class Size {
     var type: String
 }
 
+final class Likes {
+    var userLikes: Int
+    var count: Int
+}
+
 extension Photo: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case ownerID = "owner_id"
         case sizes
+        case likes
     }
     
     // MARK: SECURE OTHER TYPES!
@@ -65,3 +72,9 @@ extension Size: Codable {
     }
 }
 
+extension Likes: Codable {
+    enum CodingKeys: String, CodingKey {
+        case userLikes = "user_likes"
+        case count
+    }
+}

@@ -15,6 +15,8 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     
     var friendProfile: Friend?
     var userPhotos = [Photo]()
+    @IBAction func friendLikeButton(_ sender: Any) {
+    }
     
     var networkService = NetworkService()
     
@@ -85,8 +87,7 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             }
         }
     
-    // MARK: FIX SEGUE!
-    //     segue for full photo view
+    // segue for full photo view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "showPhoto" {

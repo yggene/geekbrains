@@ -91,7 +91,7 @@ final class Friend {
     
 }
 
-final class City: Decodable {
+class City: Decodable {
     var id: Int
     var title: String
 }
