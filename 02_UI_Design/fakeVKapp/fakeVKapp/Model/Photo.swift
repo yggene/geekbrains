@@ -5,7 +5,8 @@
 //  Created by Evgeny Alekseev on 09.09.2021.
 //
 
-import UIKit
+import Foundation
+import RealmSwift
 
 //final class Photo: Equatable {
 //
@@ -34,21 +35,26 @@ struct UserPhotos: Codable {
     var items: [Photo]
 }
 
-final class Photo {
-    var id: Int
-    var ownerID: Int
+final class Photo: Object {
+    @objc dynamic var id: Int
+    @objc dynamic var ownerID: Int
     var sizes: [Size]
-    var likes: Likes
+    @objc dynamic var likes: Likes?
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
 }
 
-final class Size {
-    var url: String
-    var type: String
+final class Size: Object {
+    @objc dynamic var url: String
+    @objc dynamic var type: String
 }
 
-final class Likes {
-    var userLikes: Int
-    var count: Int
+final class Likes: Object {
+    @objc dynamic var userLikes: Int
+    @objc dynamic var count: Int
 }
 
 extension Photo: Codable {

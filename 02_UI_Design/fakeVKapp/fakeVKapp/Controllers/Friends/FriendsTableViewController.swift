@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
     public var friends = [Friend]()
-    private var friendsDictionary = [Character:[Friend]]()
+    private var friendsDictionary = [Character:[Friend]]() {
+        didSet {
+            
+        }
+    }
     private var lastNamesFirstLetters: [Character] {
         get {
             friendsDictionary.keys.sorted()
@@ -23,26 +28,44 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        self.hideKeyboardWhenTappedAround()
         fetchFriends()
+        // self.tableView.reloadData()
+        // self.saveFriendsData(friends)
         
     }
     
     // MARK: Methods
     
+    // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] friends in
             guard let self = self else { return }
             self.friends = friends
             self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+            self.saveFriendsData(friends)
             self.tableView.reloadData()
+        }
+    }
+    
+    // save friends data to Realm object
+    func saveFriendsData(_ friends: [Friend]) {
+        do {
+            let realm = try Realm()
+            // realm.beginWrite()
+            try! realm.write {
+                realm.add(friends, update: .all)
+            }
+            try realm.commitWrite()
+        } catch {
+            print(error)
         }
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
         var friendsCopy = friends
         if let text = searchText?.lowercased(), searchText != "" {
-            friendsCopy = friendsCopy.filter{ $0.lastName.lowercased().contains(text) }
+            friendsCopy = friendsCopy.filter{
+                $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text) }
         }
         return Dictionary(grouping: friendsCopy) { $0.lastName.lowercased().first ?? "👽" }
     }

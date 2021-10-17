@@ -29,7 +29,8 @@ final class NetworkService {
     }()
     
     // MARK: Create the request
-    func sendRequest(url: URL, completion: @escaping (Data) -> Void) {
+    func sendRequest(url: URL,
+                     completion: @escaping (Data) -> Void) {
         var request = URLRequest(url: url)
         request.timeoutInterval = 5.0
         

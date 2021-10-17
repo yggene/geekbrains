@@ -5,11 +5,11 @@
 //  Created by Evgeny Alekseev on 12.10.2021.
 //
 
-struct VKResponse<T: Decodable> {
+struct VKResponse<T: Codable> {
     let response: T
 }
 
-extension VKResponse: Decodable {
+extension VKResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case response
     }

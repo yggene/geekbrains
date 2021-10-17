@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 //final class Friend: Equatable {
 //
@@ -66,46 +67,33 @@ import Foundation
 //    }
 //}
 
-struct Friends: Decodable {
+struct Friends: Codable {
     var items: [Friend]
 }
 
-final class Friend {
-    var id: Int
-    var firstName: String
-    var lastName: String
-    var avatar: String
+final class Friend: Object {
+    @objc dynamic var id: Int
+    @objc dynamic var firstName: String
+    @objc dynamic var lastName: String
+    @objc dynamic var avatar: String
+    @objc dynamic var city: City?
+    
     var avatarURL: URL? {
         URL(string: avatar)
     }
-    var city: City?
     
-    init(from decoder: Decoder) throws {
-        let responseContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try responseContainer.decode(Int.self, forKey: .id)
-        self.firstName = try responseContainer.decode(String.self, forKey: .firstName)
-        self.lastName = try responseContainer.decode(String.self, forKey: .lastName)
-        self.avatar = try responseContainer.decode(String.self, forKey: .avatar)
-        self.city = try responseContainer.decodeIfPresent(City.self, forKey: .city)
+    override static func primaryKey() -> String? {
+        return "id"
     }
     
 }
 
-class City: Decodable {
-    var id: Int
-    var title: String
-}
-
-extension Friend: Decodable {
+extension Friend: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
         case lastName = "last_name"
         case avatar = "photo_200_orig"
         case city
-    }
-    
-    enum CityKeys: String, CodingKey {
-        case id, title
     }
 }

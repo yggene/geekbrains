@@ -844,9 +844,9 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rP-tc-Sut" userLabel="Seen count label">
-                                            <rect key="frame" x="317.66666666666669" y="480" width="17.333333333333314" height="17"/>
+                                            <rect key="frame" x="285" y="480" width="50" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="zOv-7W-o8y"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="zOv-7W-o8y"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -881,6 +881,7 @@
                                         <constraint firstItem="sVU-Hz-X8V" firstAttribute="top" secondItem="axX-Km-OpR" secondAttribute="bottom" constant="13" id="YfL-Py-OCj"/>
                                         <constraint firstItem="qJw-aX-0Xv" firstAttribute="centerY" secondItem="gj8-me-7mn" secondAttribute="centerY" id="bPg-Yr-J21"/>
                                         <constraint firstAttribute="trailing" secondItem="oeB-9L-sDw" secondAttribute="trailing" id="d7B-Ei-XpX"/>
+                                        <constraint firstItem="2rP-tc-Sut" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qJw-aX-0Xv" secondAttribute="trailing" constant="8" symbolic="YES" id="fIS-uY-cj6"/>
                                         <constraint firstAttribute="trailing" secondItem="Ke7-Y0-hJv" secondAttribute="trailing" constant="15" id="fx9-E7-69B"/>
                                         <constraint firstItem="hzx-Mi-Aag" firstAttribute="top" secondItem="tsh-dt-TpA" secondAttribute="top" constant="10" id="gmi-h9-YXz"/>
                                         <constraint firstItem="CtO-7E-32I" firstAttribute="top" secondItem="CnA-ZQ-zQn" secondAttribute="bottom" constant="10.000000000000007" id="hKU-h3-ena"/>

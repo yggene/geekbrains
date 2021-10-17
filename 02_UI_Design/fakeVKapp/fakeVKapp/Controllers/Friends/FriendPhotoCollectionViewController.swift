@@ -7,6 +7,7 @@
 
 import UIKit
 import Nuke
+import RealmSwift
 
 class FriendPhotoCollectionViewController: UICollectionViewController,
                                            UICollectionViewDelegateFlowLayout {
@@ -23,10 +24,30 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.fetchFriendsPhotos()
+
+    }
+    
+    // MARK: Methods
+    
+    private func fetchFriendsPhotos() {
         networkService.getPhotos(ofUser: friendProfile!.id) { [weak self] userPhotos in
             guard let self = self else { return }
             self.userPhotos = userPhotos
+            self.saveUserPhotoData(userPhotos)
             self.collectionView.reloadData()
+        }
+    }
+    
+    private func saveUserPhotoData(_ photos: [Photo]) {
+        do {
+            let realm = try Realm()
+            try! realm.write() {
+                realm.add(photos, update: .all)
+            }
+            try realm.commitWrite()
+        } catch {
+            print(error)
         }
     }
     

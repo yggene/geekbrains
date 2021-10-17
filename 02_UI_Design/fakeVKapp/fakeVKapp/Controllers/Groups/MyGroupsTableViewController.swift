@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsTableViewController: UITableViewController {
     
@@ -30,6 +31,19 @@ class MyGroupsTableViewController: UITableViewController {
         networkService.getGroups { [weak self] myGroups in
             guard let self = self else { return }
             self.myGroups = myGroups
+            self.saveGroupsData(myGroups)
+        }
+    }
+    
+    func saveGroupsData(_ groups: [Group]) {
+        do {
+            let realm = try Realm()
+            try! realm.write() {
+                realm.add(groups, update: .all)
+            }
+            try realm.commitWrite()
+        } catch {
+            print(error)
         }
     }
     
