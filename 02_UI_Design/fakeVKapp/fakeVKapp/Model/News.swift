@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 //final class News: Equatable {
 //
@@ -72,11 +73,21 @@ struct Newsfeed: Codable {
 final class News {
     var date: Double
     var text: String
-    //var attachments: [Attachments]
+    var attachments: [Attachment]?
     var comments: Comments
     var likes: Likes
-    var views: Views
+    var views: Views?
     var reposts: Reposts
+    var markedAsAds: Int?
+    
+    var attachmentPhotoUrl: URL? {
+        guard
+            let image = attachments?.first(where: { $0.type == "photo"} ),
+            let size = image.photo?.sizes.first(where: { $0.type == "x"} )
+        else { return nil }
+        return URL(string: size.url)
+        }
+    
 }
 
 extension News: Codable {
@@ -85,24 +96,25 @@ extension News: Codable {
         case text
         case comments
         case likes
-        //case attachments
+        case attachments
         case views
         case reposts
+        case markedAsAds = "marked_as_ads"
     }
 }
 
 // MARK: Attachments
-//final class Attachments {
-//    var type: String
-//    var photo: Photo?
-//}
-//
-//extension Attachments: Codable {
-//    enum CodingKeys: String, CodingKey {
-//        case type
-//        case photo
-//    }
-//}
+final class Attachment {
+    var type: String
+    var photo: Photo?
+}
+
+extension Attachment: Codable {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case photo
+    }
+}
 
 // MARK: Comments
 final class Comments {

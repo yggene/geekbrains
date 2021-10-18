@@ -29,8 +29,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         fetchFriends()
-        // self.tableView.reloadData()
-        // self.saveFriendsData(friends)
         
     }
     
@@ -48,14 +46,19 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // save friends data to Realm object
-    func saveFriendsData(_ friends: [Friend]) {
+    private func saveFriendsData(_ friends: [Friend]) {
         do {
             let realm = try Realm()
-            // realm.beginWrite()
             try! realm.write {
                 realm.add(friends, update: .all)
             }
-            try realm.commitWrite()
+            print("""
+                  \n*****
+                  Realm fileURL:
+                    \(realm.configuration.fileURL as Optional)
+                  *****\n
+                  """
+            )
         } catch {
             print(error)
         }

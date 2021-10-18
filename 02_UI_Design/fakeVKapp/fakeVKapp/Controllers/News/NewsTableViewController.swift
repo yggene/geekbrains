@@ -28,7 +28,7 @@ class NewsTableViewController: UITableViewController {
     private func fetchNews() {
         networkService.getNews { [weak self] myNews in
             guard let self = self else { return }
-            self.myNews = myNews
+            self.myNews = myNews.filter({ $0.markedAsAds == 0 })
         }
     }
 }

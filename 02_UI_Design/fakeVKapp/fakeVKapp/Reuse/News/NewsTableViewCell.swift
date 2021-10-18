@@ -14,7 +14,7 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet var authorNameLabel: UILabel!
     @IBOutlet var postDateLabel: UILabel!
     @IBOutlet var newsTextLabel: UILabel!
-    @IBOutlet var newsImageView: UIImageView?
+    @IBOutlet var newsImageView: TrueScalePhotoImageView!
     @IBOutlet var likesControl: NewsLikeControl!
     @IBOutlet var commentsControl: NewsCommentControl!
     @IBOutlet var sharesControl: NewsShareControl!
@@ -26,11 +26,11 @@ class NewsTableViewCell: UITableViewCell {
         //authorNameLabel.text = currentFriend.firstName + " " + currentFriend.lastName
         postDateLabel.text = news.date.date()
         newsTextLabel.text = news.text
-        //Nuke.loadImage(with: news.attachments.photo.url, into: newsImageView?)
+        Nuke.loadImage(with: news.attachmentPhotoUrl, into: newsImageView)
         likesControl.likesTotal = news.likes.count
         commentsControl.totalComments = news.comments.count
         sharesControl.sharesTotal = news.reposts.count
-        seenLabel.text = String(news.views.count)
+        seenLabel.text = String(news.views?.count ?? 0)
         
         // cell style
         postDateLabel.textColor = UIColor.systemGray

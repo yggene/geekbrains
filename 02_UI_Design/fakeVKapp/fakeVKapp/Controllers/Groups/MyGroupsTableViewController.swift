@@ -35,13 +35,12 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    func saveGroupsData(_ groups: [Group]) {
+    private func saveGroupsData(_ groups: [Group]) {
         do {
             let realm = try Realm()
             try! realm.write() {
                 realm.add(groups, update: .all)
             }
-            try realm.commitWrite()
         } catch {
             print(error)
         }

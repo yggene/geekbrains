@@ -45,7 +45,6 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             try! realm.write() {
                 realm.add(photos, update: .all)
             }
-            try realm.commitWrite()
         } catch {
             print(error)
         }

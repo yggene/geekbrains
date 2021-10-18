@@ -71,24 +71,25 @@ struct Friends: Codable {
     var items: [Friend]
 }
 
-final class Friend: Object {
-    @objc dynamic var id: Int
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
-    @objc dynamic var avatar: String
-    @objc dynamic var city: City?
+class Friend: Object, Codable {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var avatar: String = ""
+    @objc dynamic var city: City? = nil
     
     var avatarURL: URL? {
         URL(string: avatar)
     }
     
     override static func primaryKey() -> String? {
-        return "id"
+        "id"
     }
     
-}
-
-extension Friend: Codable {
+    override static func indexedProperties() -> [String] {
+        ["firstName", "lastName"]
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"

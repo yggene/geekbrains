@@ -789,7 +789,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="newsTextLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtO-7E-32I">
-                                            <rect key="frame" x="10" y="61.000000000000007" width="355" height="18.333333333333336"/>
+                                            <rect key="frame" x="10" y="61.000000000000007" width="355" height="20.333333333333336"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="355" id="B7e-Pk-rnc"/>
                                             </constraints>
@@ -797,12 +797,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oeB-9L-sDw" userLabel="newsImageView">
-                                            <rect key="frame" x="0.0" y="89.333333333333314" width="375" height="375"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="375" id="g34-sk-R5a"/>
-                                                <constraint firstAttribute="width" secondItem="oeB-9L-sDw" secondAttribute="height" id="pJa-ZH-txl"/>
-                                            </constraints>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oeB-9L-sDw" userLabel="newsImageView" customClass="TrueScalePhotoImageView" customModule="fakeVKapp" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="91.333333333333314" width="375" height="373"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axX-Km-OpR" userLabel="Like button" customClass="NewsLikeControl" customModule="fakeVKapp" customModuleProvider="target">
                                             <rect key="frame" x="16" y="479.33333333333331" width="25" height="18.666666666666686"/>

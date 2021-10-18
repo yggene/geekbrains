@@ -47,6 +47,7 @@
 		1ADACF4B26ED9DB1005E1FE7 /* NewsShareControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF4A26ED9DB1005E1FE7 /* NewsShareControl.swift */; };
 		1ADACF5126EDA960005E1FE7 /* NewsLikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF5026EDA960005E1FE7 /* NewsLikeControl.swift */; };
 		1ADACF5726EDB46C005E1FE7 /* NewsCommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF5626EDB46C005E1FE7 /* NewsCommentControl.swift */; };
+		1AE0D152271DB6A000184CEC /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE0D151271DB6A000184CEC /* RealmService.swift */; };
 		1AF66A78271C170F0067488F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1AF66A77271C170F0067488F /* Realm */; };
 		1AF66A7A271C170F0067488F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1AF66A79271C170F0067488F /* RealmSwift */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,7 @@
 		1ADACF4A26ED9DB1005E1FE7 /* NewsShareControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsShareControl.swift; sourceTree = "<group>"; };
 		1ADACF5026EDA960005E1FE7 /* NewsLikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsLikeControl.swift; sourceTree = "<group>"; };
 		1ADACF5626EDB46C005E1FE7 /* NewsCommentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCommentControl.swift; sourceTree = "<group>"; };
+		1AE0D151271DB6A000184CEC /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 				1A926BB926E50E6B00D8B371 /* randoms.swift */,
 				1A926BB726E2EFAB00D8B371 /* db.swift */,
 				1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */,
+				1AE0D151271DB6A000184CEC /* RealmService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				1ABC351826D6D7EF0086B441 /* Group.swift in Sources */,
 				1A9D0ABF26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift in Sources */,
 				1ADACF4226ED6CD1005E1FE7 /* NewsTableViewController.swift in Sources */,
+				1AE0D152271DB6A000184CEC /* RealmService.swift in Sources */,
 				1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */,
 				1A74C34B26F38F00002BAD2A /* FriendPhotoViewController.swift in Sources */,
 				1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */,

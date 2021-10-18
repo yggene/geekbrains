@@ -15,7 +15,6 @@ final class City: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
-    
 }
 
 extension City: Codable {

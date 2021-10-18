@@ -70,7 +70,9 @@ final class NetworkService {
         
         sendRequest(url: url) { responseData in
             do {
-                let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: responseData)
+                let friends = try JSONDecoder().decode(
+                    VKResponse<Friends>.self,
+                    from: responseData)
                 completion(friends.response.items)
             } catch {
                 print(error)
