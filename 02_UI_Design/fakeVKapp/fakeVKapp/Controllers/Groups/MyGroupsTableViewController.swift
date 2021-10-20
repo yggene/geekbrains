@@ -81,25 +81,33 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Actions - FIX SEGUE!
+    // MARK: Actions
     
-//        // add group on unwind
-//        @IBAction func addGroup(segue: UIStoryboardSegue) {
-//            // check segue id
-//            if segue.identifier == "addGroupSegue" {
-//                // get destination segue
-//                guard let allGroupsController = segue.source as?
-//                        AllGroupsTableViewController else { return }
-//                // get the index of the selected group cell
-//                if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-//                    // get group
-//                    let selectedGroup = popularGroups[indexPath.row]
-//                    // check if no such group in my list
-//                    if !myGroups.contains(selectedGroup) {
-//                        myGroups.append(selectedGroup)
-//                        tableView.reloadData()
-//                    }
-//                }
-//            }
-//        }
+    // add group on unwind
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        // check segue id
+        if segue.identifier == "addGroupSegue" {
+            // get destination segue
+            guard let allGroupsController = segue.source as?
+                    AllGroupsTableViewController else { return }
+            // get the index of the selected group cell
+            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+                // get group
+                let selectedGroup = allGroupsController.popularGroups[indexPath.row]
+                // check if no such group in my list
+                if !myGroups.contains(selectedGroup) {
+                    let networkService = NetworkService()
+                    networkService.joinGroup(withID: selectedGroup.id, completion: { result in
+                        switch result {
+                        case .success:
+                            print("Joined!")
+                            self.myGroups.append(selectedGroup)
+                        case .failure:
+                            print("Already in the group")
+                        }
+                    })
+                }
+            }
+        }
+    }
 }

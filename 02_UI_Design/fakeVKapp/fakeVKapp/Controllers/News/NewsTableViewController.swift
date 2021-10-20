@@ -19,7 +19,6 @@ class NewsTableViewController: UITableViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         tableView.separatorStyle = .none
         fetchNews()

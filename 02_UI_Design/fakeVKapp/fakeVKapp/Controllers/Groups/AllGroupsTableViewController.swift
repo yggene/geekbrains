@@ -9,7 +9,7 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     
-    private var popularGroups = [Group]()
+    public var popularGroups = [Group]()
     private var groupsSearchResult = [Group]()
     private let networkService = NetworkService()
     

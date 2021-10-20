@@ -11,19 +11,14 @@ import RealmSwift
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
-    public var friends = [Friend]()
-    private var friendsDictionary = [Character:[Friend]]() {
-        didSet {
-            
-        }
-    }
+    private let networkService = NetworkService()
+    private var friends = [Friend]()
+    private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
         get {
             friendsDictionary.keys.sorted()
         }
     }
-    
-    private let networkService = NetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,29 +31,35 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // get friends data on API call
     private func fetchFriends() {
-        networkService.getFriends { [weak self] friends in
+        networkService.getFriends { [weak self] result in
             guard let self = self else { return }
-            self.friends = friends
-            self.friendsDictionary = self.updateFriendsDictionary(with: nil)
-            self.saveFriendsData(friends)
-            self.tableView.reloadData()
+            switch result {
+            case .success(let friends):
+                self.friends = friends
+                self.saveFriendsData(friends)
+                self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+                self.tableView.reloadData()
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Decode problem. Check the JSON data")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .alreadyInTheGroup:
+                    break
+                }
+            }
         }
     }
     
     // save friends data to Realm object
     private func saveFriendsData(_ friends: [Friend]) {
         do {
-            let realm = try Realm()
-            try! realm.write {
-                realm.add(friends, update: .all)
-            }
-            print("""
-                  \n*****
-                  Realm fileURL:
-                    \(realm.configuration.fileURL as Optional)
-                  *****\n
-                  """
-            )
+            try RealmService.save(items: friends)
         } catch {
             print(error)
         }
