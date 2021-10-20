@@ -55,4 +55,4 @@ import UIKit
 //                    Photo(image: UIImage(named: "bird-photo-3"))])
 //]()
 
-var news = [News]()
+//var news = [News]()

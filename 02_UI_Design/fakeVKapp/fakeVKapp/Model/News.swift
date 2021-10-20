@@ -30,7 +30,6 @@ final class News {
         else { return nil }
         return URL(string: size.url)
     }
-    
 }
 
 extension News: Codable {
