@@ -130,7 +130,7 @@ final class NetworkService {
             }
         }.resume()
     }
-
+    
     
     // MARK: Get user groups
     func getGroups(ofUser userID: Int = Session.instance.userID,
@@ -320,17 +320,19 @@ final class NetworkService {
                 completion(.failure(.failedRequest))
             } else if let data = data {
                 // Success request
-                do {
-                    // Decode to a response Int
-                    let result = try JSONDecoder().decode(VKResponse<Int?>.self, from: data)
-                    
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    do {
+                        // Decode to a response Int
+                        let result = try JSONDecoder().decode(VKResponse<Int?>.self, from: data)
                         completion(.success(result.response))
+                        
+                    } catch {
+                        /* It's OK to get nil here
+                         VK api groups.join method returns 1 on successful join,
+                         or nil if user is already in the group,
+                         or specific error code*/
+                        completion(.success(nil))
                     }
-                    
-                } catch {
-                    // It's OK to get nil here
-                    completion(.success(nil))
                 }
             } else {
                 completion(.failure(.unknownError))

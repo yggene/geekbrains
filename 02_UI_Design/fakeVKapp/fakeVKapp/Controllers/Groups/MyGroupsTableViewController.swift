@@ -26,7 +26,7 @@ class MyGroupsTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         fetchMyGroupsInfo()
-//        loadGroupsFromRealm()
+        //        loadGroupsFromRealm()
         
     }
     
@@ -34,6 +34,7 @@ class MyGroupsTableViewController: UITableViewController {
     
     private func loadGroupsFromRealm() {
         do {
+            // load groups from Realm object
             let groupsFromRealm = try RealmService.load(typeOf: Group.self)
             self.myGroups = Array(groupsFromRealm)
         } catch {
@@ -47,7 +48,7 @@ class MyGroupsTableViewController: UITableViewController {
             switch result {
             case .success/*(let myGroups)*/:
                 self.loadGroupsFromRealm()
-//                self.myGroups = myGroups
+                //                self.myGroups = myGroups
                 self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
@@ -66,47 +67,32 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Alerts
+    // MARK: Alert
     
-    private func showAlert(with: Int) {
+    private func showAlert(with: Int?) {
+        let alertController = UIAlertController(
+            title: "",
+            message: "",
+            preferredStyle: .alert)
         switch with {
-        case 0:
-            let alertController = UIAlertController(
-                title: "Fail",
-                message: "You're already in this group",
-                preferredStyle: .alert)
-            let alertItem = UIAlertAction(
-                title: "OK",
-                style: .default)
-            alertController.addAction(alertItem)
-            present(alertController,
-                    animated: true,
-                    completion: nil)
+        case nil:
+            alertController.title = "Fail"
+            alertController.message = "You're already in this group"
         case 1:
-            let alertController = UIAlertController(
-                title: "Success",
-                message: "You've joined the group",
-                preferredStyle: .alert)
-            let alertItem = UIAlertAction(
-                title: "OK",
-                style: .default)
-            alertController.addAction(alertItem)
-            present(alertController,
-                    animated: true,
-                    completion: nil)
+            alertController.title = "Success"
+            alertController.message = "You've joined the group"
         default:
-            let alertController = UIAlertController(
-                title: "Error",
-                message: "Something's went wrong",
-                preferredStyle: .alert)
-            let alertItem = UIAlertAction(
-                title: "OK",
-                style: .default)
-            alertController.addAction(alertItem)
-            present(alertController,
-                    animated: true,
-                    completion: nil)
+            alertController.title = "Error"
+            alertController.message = "Something's went wrong"
         }
+        
+        let alertItem = UIAlertAction(
+            title: "OK",
+            style: .default)
+        alertController.addAction(alertItem)
+        present(alertController,
+                animated: true,
+                completion: nil)
     }
     
     // MARK: Table view data source
@@ -162,18 +148,18 @@ class MyGroupsTableViewController: UITableViewController {
                     let networkService = NetworkService()
                     networkService.joinGroup(withID: selectedGroup.id, completion: { result in
                         switch result {
-                        case .success(let resp):
-                            switch resp {
+                        case .success(let response):
+                            switch response {
                             case nil:
                                 print("Already in the group")
-                                self.showAlert(with: 0)
+                                self.showAlert(with: response)
                             case 1:
+                                self.myGroups.append(selectedGroup)
                                 print("Joined!")
-                                self.showAlert(with: 1)
+                                self.showAlert(with: response)
                             default:
-                                print("Unknown error. Code: \(String(describing: resp))")
+                                print("Unknown error. Code: \(String(describing: response))")
                             }
-                            self.myGroups.append(selectedGroup)
                         case .failure(let requestError):
                             switch requestError {
                             case .invalidUrl:
@@ -187,7 +173,7 @@ class MyGroupsTableViewController: UITableViewController {
                             case .realmSaveFailure:
                                 print("Error: Could not save to Realm")
                             }
-                            self.showAlert(with: 2)
+                            self.showAlert(with: 0)
                         }
                     })
                 }
