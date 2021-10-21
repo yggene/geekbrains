@@ -10,6 +10,8 @@ import RealmSwift
 
 class MyGroupsTableViewController: UITableViewController {
     
+    // MARK: Variables
+    
     private let networkService = NetworkService()
     private var myGroups = [Group]() {
         didSet {
@@ -21,28 +23,89 @@ class MyGroupsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchMyGroupsInfo()
         tableView.separatorStyle = .none
+        
+        fetchMyGroupsInfo()
+//        loadGroupsFromRealm()
+        
     }
     
     // MARK: Actions
     
-    private func fetchMyGroupsInfo() {
-        networkService.getGroups { [weak self] myGroups in
-            guard let self = self else { return }
-            self.myGroups = myGroups
-            self.saveGroupsData(myGroups)
+    private func loadGroupsFromRealm() {
+        do {
+            let groupsFromRealm = try RealmService.load(typeOf: Group.self)
+            self.myGroups = Array(groupsFromRealm)
+        } catch {
+            print(error)
         }
     }
     
-    private func saveGroupsData(_ groups: [Group]) {
-        do {
-            let realm = try Realm()
-            try! realm.write() {
-                realm.add(groups, update: .all)
+    private func fetchMyGroupsInfo() {
+        networkService.getGroups { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success/*(let myGroups)*/:
+                self.loadGroupsFromRealm()
+//                self.myGroups = myGroups
+                self.tableView.reloadData()
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Request failed")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
+                }
             }
-        } catch {
-            print(error)
+        }
+    }
+    
+    // MARK: Alerts
+    
+    private func showAlert(with: Int) {
+        switch with {
+        case 0:
+            let alertController = UIAlertController(
+                title: "Fail",
+                message: "You're already in this group",
+                preferredStyle: .alert)
+            let alertItem = UIAlertAction(
+                title: "OK",
+                style: .default)
+            alertController.addAction(alertItem)
+            present(alertController,
+                    animated: true,
+                    completion: nil)
+        case 1:
+            let alertController = UIAlertController(
+                title: "Success",
+                message: "You've joined the group",
+                preferredStyle: .alert)
+            let alertItem = UIAlertAction(
+                title: "OK",
+                style: .default)
+            alertController.addAction(alertItem)
+            present(alertController,
+                    animated: true,
+                    completion: nil)
+        default:
+            let alertController = UIAlertController(
+                title: "Error",
+                message: "Something's went wrong",
+                preferredStyle: .alert)
+            let alertItem = UIAlertAction(
+                title: "OK",
+                style: .default)
+            alertController.addAction(alertItem)
+            present(alertController,
+                    animated: true,
+                    completion: nil)
         }
     }
     
@@ -81,7 +144,7 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Actions
+    // MARK: Segue
     
     // add group on unwind
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -99,11 +162,32 @@ class MyGroupsTableViewController: UITableViewController {
                     let networkService = NetworkService()
                     networkService.joinGroup(withID: selectedGroup.id, completion: { result in
                         switch result {
-                        case .success:
-                            print("Joined!")
+                        case .success(let resp):
+                            switch resp {
+                            case nil:
+                                print("Already in the group")
+                                self.showAlert(with: 0)
+                            case 1:
+                                print("Joined!")
+                                self.showAlert(with: 1)
+                            default:
+                                print("Unknown error. Code: \(String(describing: resp))")
+                            }
                             self.myGroups.append(selectedGroup)
-                        case .failure:
-                            print("Already in the group")
+                        case .failure(let requestError):
+                            switch requestError {
+                            case .invalidUrl:
+                                print("Error: Invalid URL detected")
+                            case .errorDecode:
+                                break
+                            case .failedRequest:
+                                print("Error: Request failed")
+                            case .unknownError:
+                                print("Error: Unknown")
+                            case .realmSaveFailure:
+                                print("Error: Could not save to Realm")
+                            }
+                            self.showAlert(with: 2)
                         }
                     })
                 }

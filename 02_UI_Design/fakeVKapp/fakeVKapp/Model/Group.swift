@@ -49,16 +49,12 @@ struct popularGroups: Codable {
 }
 
 final class Group: Object {
-    @objc dynamic var id: Int
-    @objc dynamic var name: String
-    @objc dynamic var photo: String
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var name: String
+    @Persisted var photo: String
     
     var photoURL: URL? {
         URL(string: photo)
-    }
-    
-    override static func primaryKey() -> String? {
-        return "id"
     }
 }
 

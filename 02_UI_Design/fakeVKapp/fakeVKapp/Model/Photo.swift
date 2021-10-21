@@ -12,23 +12,21 @@ struct UserPhotos: Codable {
     var items: [Photo]
 }
 
-final class Photo: Object {
-    @objc dynamic var id: Int = 0
-    @objc dynamic var ownerID: Int = 0
-    var sizes = List<Size>()
-    var likes: Likes? = nil
-
+class Photo: Object, Codable {
+    @Persisted var id: Int = 0
+    @Persisted var ownerID: Int = 0
+    @Persisted var sizes = List<Size>()
+    @Persisted var likes: Likes? = nil
+    
     var url: URL? {
-            guard let image = sizes.first(where: { $0.type == "x"} ) else { return nil }
-            return URL(string: image.url)
-        }
-
-    override static func primaryKey() -> String? {
-        return "id"
+        guard let image = sizes.first(where: { $0.type == "x"} ) else { return nil }
+        return URL(string: image.url)
     }
-}
-
-extension Photo: Codable {
+    
+    override static func primaryKey() -> String? {
+        "id"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case ownerID = "owner_id"
@@ -37,8 +35,8 @@ extension Photo: Codable {
 }
 
 final class Size: Object {
-    @objc dynamic var type: String = ""
-    @objc dynamic var url: String = ""
+    @Persisted var type: String = ""
+    @Persisted var url: String = ""
     let owner = LinkingObjects(fromType: Photo.self, property: "sizes")
     
 }
@@ -50,8 +48,9 @@ extension Size: Codable {
 }
 
 final class Likes: Object {
-    @objc dynamic var userLikes: Int = 0
-    @objc dynamic var count: Int = 0
+    @Persisted var userLikes: Int = 0
+    @Persisted var count: Int = 0
+    let owner = LinkingObjects(fromType: Photo.self, property: "likes")
 }
 
 extension Likes: Codable {

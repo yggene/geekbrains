@@ -26,11 +26,28 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Methods
     
     func fetchPopularGroupsInfo() {
-        networkService.getPopularGroups() { [weak self] popularGroups in
+        
+        networkService.getPopularGroups { [weak self] result in
             guard let self = self else { return }
-            self.popularGroups = popularGroups
-            self.groupsSearchResult = popularGroups
-            self.tableView.reloadData()
+            switch result {
+            case .success(let popularGroups):
+                self.popularGroups = popularGroups
+                self.groupsSearchResult = popularGroups
+                self.tableView.reloadData()
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Request failed")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
+                }
+            }
         }
     }
     

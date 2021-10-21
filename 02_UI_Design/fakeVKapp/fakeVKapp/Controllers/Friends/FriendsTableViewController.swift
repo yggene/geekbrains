@@ -23,21 +23,34 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        
+        //loadFriendsFromRealm()
         fetchFriends()
         
     }
     
     // MARK: Methods
     
+    // get friends from Realm
+    private func loadFriendsFromRealm() {
+        do {
+            let friendsFromRealm = try RealmService.load(typeOf: Friend.self)
+            self.friends = Array(friendsFromRealm)
+            self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+        } catch {
+            print(error)
+        }
+    }
+    
     // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let friends):
-                self.friends = friends
-                self.saveFriendsData(friends)
-                self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+            case .success/*(let friends)*/:
+                self.loadFriendsFromRealm()
+//                self.friends = friends
+//                self.friendsDictionary = self.updateFriendsDictionary(with: nil)
                 self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
@@ -46,22 +59,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
                 case .errorDecode:
                     print("Error: Decode problem. Check the JSON data")
                 case .failedRequest:
-                    print("Error: Decode problem. Check the JSON data")
+                    print("Error: Request failed")
                 case .unknownError:
                     print("Error: Unknown")
-                case .alreadyInTheGroup:
-                    break
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
                 }
             }
-        }
-    }
-    
-    // save friends data to Realm object
-    private func saveFriendsData(_ friends: [Friend]) {
-        do {
-            try RealmService.save(items: friends)
-        } catch {
-            print(error)
         }
     }
     

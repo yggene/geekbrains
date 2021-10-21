@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import RealmSwift
 
 enum RequestErrors: String, Error {
-    case invalidUrl = "Error: Invalid URL detected"
-    case errorDecode = "Error: Decode problem. Check the JSON data"
-    case failedRequest = "Request failed"
-    case unknownError = "Error: Unknown"
-    case alreadyInTheGroup = "Already in the group"
+    case invalidUrl
+    case errorDecode
+    case failedRequest
+    case unknownError
+    case realmSaveFailure
 }
 
 final class NetworkService {
@@ -35,29 +36,6 @@ final class NetworkService {
         ]
         return constructor
     }()
-    
-    // MARK: Create the request
-    func sendRequest(url: URL,
-                     completion: @escaping (Data) -> Void) {
-        var request = URLRequest(url: url)
-        request.timeoutInterval = 5.0
-        
-        session.dataTask(with: request) { responseData, urlResponse, error in
-            if let response = urlResponse as? HTTPURLResponse {
-                print(response.statusCode)
-            }
-            
-            guard
-                error == nil,
-                let responseData = responseData
-            else { return }
-            
-            DispatchQueue.main.async {
-                completion(responseData)
-            }
-        }
-        .resume()
-    }
     
     // MARK: Get friends
     func getFriends(ofUser userID: Int = Session.instance.userID,
@@ -87,19 +65,18 @@ final class NetworkService {
             if error != nil {
                 completion(.failure(.failedRequest))
             } else if let data = data {
-                // Success request
+                // Successful request
                 do {
                     // Decode to an array of friends
                     let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
                     
-                    // save friends to Realm object
-//                    try RealmService.save(items: completion(.success(friends)))
-//                    let realm = try Realm()
-//                    try! realm.write {
-//                        realm.add(friends, update: .all)
-//                    }
-                    
                     DispatchQueue.main.async {
+                        // save friends to Realm object
+                        do {
+                            try RealmService.save(items: friends.response.items)
+                        } catch {
+                            completion(.failure(.realmSaveFailure))
+                        }
                         completion(.success(friends.response.items))
                     }
                     
@@ -114,7 +91,7 @@ final class NetworkService {
     }
     
     // MARK: Get popular groups
-    func getPopularGroups(completion: @escaping ([Group]) -> Void) {
+    func getPopularGroups(completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
         urlConstructor.path += "groups.getCatalog"
         
         urlConstructor.queryItems?.append(
@@ -123,21 +100,41 @@ final class NetworkService {
                 value: "0")
         )
         
-        guard let url = urlConstructor.url else { return }
+        // check if url is correct
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
         
-        sendRequest(url: url) { responseData in
-            do {
-                let popularGroups = try JSONDecoder().decode(VKResponse<popularGroups>.self, from: responseData)
-                completion(popularGroups.response.items)
-            } catch {
-                print(error)
+        session.dataTask(with: url) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                print("Status code: \(response.statusCode)")
             }
-        }
+            
+            // check if error happens
+            if error != nil {
+                completion(.failure(.failedRequest))
+            } else if let data = data {
+                // Successful request
+                do {
+                    // Decode to an array of popular groups
+                    let popularGroups = try JSONDecoder().decode(VKResponse<popularGroups>.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(popularGroups.response.items))
+                    }
+                    
+                } catch {
+                    // Send error when decoding
+                    completion(.failure(.errorDecode))
+                }
+            } else {
+                completion(.failure(.unknownError))
+            }
+        }.resume()
     }
+
     
     // MARK: Get user groups
     func getGroups(ofUser userID: Int = Session.instance.userID,
-                   completion: @escaping ([Group]) -> Void) {
+                   completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
         urlConstructor.path += "groups.get"
         
         urlConstructor.queryItems?.append(
@@ -156,21 +153,46 @@ final class NetworkService {
                 value: "name,photo_200")
         )
         
-        guard let url = urlConstructor.url else { return }
+        // check if url is correct
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
         
-        sendRequest(url: url) { responseData in
-            do {
-                let userGroups = try JSONDecoder().decode(VKResponse<UserGroups>.self, from: responseData)
-                completion(userGroups.response.items)
-            } catch {
-                print(error)
+        session.dataTask(with: url) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                print("Status code: \(response.statusCode)")
             }
-        }
+            
+            // check if error happens
+            if error != nil {
+                completion(.failure(.failedRequest))
+            } else if let data = data {
+                // Successful request
+                do {
+                    // Decode to an array of users' groups
+                    let userGroups = try JSONDecoder().decode(VKResponse<UserGroups>.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        // save groups to Realm object
+                        do {
+                            try RealmService.save(items: userGroups.response.items)
+                        } catch {
+                            completion(.failure(.realmSaveFailure))
+                        }
+                        completion(.success(userGroups.response.items))
+                    }
+                    
+                } catch {
+                    // Send error when decoding
+                    completion(.failure(.errorDecode))
+                }
+            } else {
+                completion(.failure(.unknownError))
+            }
+        }.resume()
     }
     
     // MARK: Get all photos
     func getPhotos(ofUser userID: Int = Session.instance.userID,
-                   completion: @escaping ([Photo]) -> Void) {
+                   completion: @escaping (Result<[Photo], RequestErrors>) -> Void) {
         urlConstructor.path += "photos.getAll"
         
         urlConstructor.queryItems?.append(
@@ -184,21 +206,47 @@ final class NetworkService {
                 value: "1")
         )
         
-        guard let url = urlConstructor.url else { return }
+        // check if url is correct
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
         
-        sendRequest(url: url) { responseData in
-            do {
-                let userPhotos = try JSONDecoder().decode(VKResponse<UserPhotos>.self, from: responseData)
-                completion(userPhotos.response.items)
-            } catch {
-                print(error)
+        session.dataTask(with: url) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                print("Status code: \(response.statusCode)")
             }
-        }
+            
+            // check if error happens
+            if error != nil {
+                completion(.failure(.failedRequest))
+            } else if let data = data {
+                // Successful request
+                do {
+                    // Decode to an array of friends' photos
+                    let userPhotos = try JSONDecoder().decode(VKResponse<UserPhotos>.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        // save friends' photos to Realm object
+                        do {
+                            try RealmService.save(items: userPhotos.response.items)
+                        } catch {
+                            completion(.failure(.realmSaveFailure))
+                        }
+                        completion(.success(userPhotos.response.items))
+                    }
+                    
+                } catch {
+                    // Send error when decoding
+                    completion(.failure(.errorDecode))
+                }
+            } else {
+                completion(.failure(.unknownError))
+            }
+        }.resume()
     }
+    
     
     // MARK: Get newsfeed
     
-    func getNews(completion: @escaping ([News]) -> Void) {
+    func getNews(completion: @escaping (Result<[News], RequestErrors>) -> Void) {
         urlConstructor.path += "newsfeed.get"
         
         urlConstructor.queryItems?.append(
@@ -217,21 +265,40 @@ final class NetworkService {
                 value: "1")
         )
         
-        guard let url = urlConstructor.url else { return }
+        // check if url is correct
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
         
-        sendRequest(url: url) { responseData in
-            do {
-                let newsfeed = try JSONDecoder().decode(VKResponse<Newsfeed>.self, from: responseData)
-                completion(newsfeed.response.items)
-            } catch {
-                print(error)
+        session.dataTask(with: url) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                print("Status code: \(response.statusCode)")
             }
-        }
+            
+            // check if error happens
+            if error != nil {
+                completion(.failure(.failedRequest))
+            } else if let data = data {
+                // Successful request
+                do {
+                    // Decode to an array of news
+                    let newsFeed = try JSONDecoder().decode(VKResponse<Newsfeed>.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(newsFeed.response.items))
+                    }
+                    
+                } catch {
+                    // Send error when decoding
+                    completion(.failure(.errorDecode))
+                }
+            } else {
+                completion(.failure(.unknownError))
+            }
+        }.resume()
     }
     
     // MARK: Join group
     func joinGroup(withID groupID: Int,
-                   completion: @escaping (Result<Int, Error>) -> Void) {
+                   completion: @escaping (Result<Int?, RequestErrors>) -> Void) {
         urlConstructor.path += "groups.join"
         
         urlConstructor.queryItems?.append(
@@ -250,28 +317,28 @@ final class NetworkService {
             
             // check if error happens
             if error != nil {
-                completion(.failure(RequestErrors.failedRequest))
+                completion(.failure(.failedRequest))
             } else if let data = data {
                 // Success request
                 do {
                     // Decode to a response Int
-                    let result = try JSONDecoder().decode(VKResponse<Int>.self, from: data)
+                    let result = try JSONDecoder().decode(VKResponse<Int?>.self, from: data)
                     
                     DispatchQueue.main.async {
                         completion(.success(result.response))
                     }
                     
                 } catch {
-                    // Send error when decoding
-                    completion(.failure(RequestErrors.errorDecode))
+                    // It's OK to get nil here
+                    completion(.success(nil))
                 }
             } else {
-                completion(.failure(RequestErrors.unknownError))
+                completion(.failure(.unknownError))
             }
         }.resume()
     }
     
-    // MARK: [INCOMPLETE] Search groups
+    // MARK: [TODO] Search groups
     func searchGroups(groupSearchQuery: String,
                       completion: @escaping ([Group]) -> Void) {
         
@@ -281,4 +348,6 @@ final class NetworkService {
                 value: groupSearchQuery)
         )
     }
+    
+    // MARK: [TODO] Leave Group
 }

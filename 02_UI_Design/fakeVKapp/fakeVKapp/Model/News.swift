@@ -1,12 +1,11 @@
 //
-//  Friend.swift
+//  News.swift
 //  fakeVKapp
 //
 //  Created by Evgeny Alekseev on 11.09.2021.
 //
 
 import UIKit
-import SwiftUI
 
 struct Newsfeed: Codable {
     var items: [News]
@@ -16,11 +15,11 @@ struct Newsfeed: Codable {
 final class News {
     var date: Double
     var text: String
-    var attachments: [Attachment]?
-    var comments: Comments
-    var likes: Likes
+    var attachments: [Attachments]?
+    var comments: Comments?
+    var likes: Likes?
     var views: Views?
-    var reposts: Reposts
+    var reposts: Reposts?
     var markedAsAds: Int?
     
     var attachmentPhotoUrl: URL? {
@@ -36,22 +35,22 @@ extension News: Codable {
     enum CodingKeys: String, CodingKey {
         case date
         case text
+        case attachments
         case comments
         case likes
-        case attachments
         case views
         case reposts
-        case markedAsAds = "marked_as_ads"
+        case markedAsAds
     }
 }
 
 // MARK: Attachments
-final class Attachment {
+final class Attachments {
     var type: String
     var photo: Photo?
 }
 
-extension Attachment: Codable {
+extension Attachments: Codable {
     enum CodingKeys: String, CodingKey {
         case type
         case photo

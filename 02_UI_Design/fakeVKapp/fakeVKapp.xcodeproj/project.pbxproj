@@ -29,11 +29,8 @@
 		1A74C34B26F38F00002BAD2A /* FriendPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A74C34A26F38F00002BAD2A /* FriendPhotoViewController.swift */; };
 		1A7A09EA26D2A1240065C852 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A09E926D2A1240065C852 /* FriendsTableViewController.swift */; };
 		1A7F5FCF26DC462F00B50E37 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7F5FCE26DC462F00B50E37 /* FriendTableViewCell.swift */; };
-		1A926BB826E2EFAB00D8B371 /* db.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BB726E2EFAB00D8B371 /* db.swift */; };
-		1A926BBA26E50E6B00D8B371 /* randoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BB926E50E6B00D8B371 /* randoms.swift */; };
 		1A926BBD26E5249B00D8B371 /* FriendLikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BBC26E5249B00D8B371 /* FriendLikeControl.swift */; };
 		1A93C04926EAA1C700386D50 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A93C04826EAA1C700386D50 /* Photo.swift */; };
-		1A93C04C26EACBCF00386D50 /* OriginEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A93C04B26EACBCF00386D50 /* OriginEnum.swift */; };
 		1A9D0AB926DAE83800EDD7FD /* AllGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D0AB726DAE83800EDD7FD /* AllGroupsTableViewCell.swift */; };
 		1A9D0ABF26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D0ABD26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift */; };
 		1AA48539270904F5008E6673 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA48538270904F5008E6673 /* Session.swift */; };
@@ -76,11 +73,8 @@
 		1A74C34A26F38F00002BAD2A /* FriendPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoViewController.swift; sourceTree = "<group>"; };
 		1A7A09E926D2A1240065C852 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		1A7F5FCE26DC462F00B50E37 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
-		1A926BB726E2EFAB00D8B371 /* db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = db.swift; sourceTree = "<group>"; };
-		1A926BB926E50E6B00D8B371 /* randoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randoms.swift; sourceTree = "<group>"; };
 		1A926BBC26E5249B00D8B371 /* FriendLikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendLikeControl.swift; sourceTree = "<group>"; };
 		1A93C04826EAA1C700386D50 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		1A93C04B26EACBCF00386D50 /* OriginEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginEnum.swift; sourceTree = "<group>"; };
 		1A9D0AB726DAE83800EDD7FD /* AllGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		1A9D0ABD26DAFB4A00EDD7FD /* MyGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		1AA48538270904F5008E6673 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -177,7 +171,6 @@
 				1A93C04D26EAD9F300386D50 /* Service */,
 				1A7A09E726D2A0900065C852 /* Controllers */,
 				1A926BBB26E5244700D8B371 /* Controls */,
-				1A93C04A26EACBB300386D50 /* Enums */,
 				1A23241526D579BD00B2E43C /* Model */,
 				1ABC351626D6D76B0086B441 /* Reuse */,
 				1A35C66926C5B9860054456D /* Main.storyboard */,
@@ -202,12 +195,12 @@
 		1A7A09E726D2A0900065C852 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */,
+				1A35C66726C5B9860054456D /* LoginViewController.swift */,
+				1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */,
 				1ADACF4626ED8ED6005E1FE7 /* Groups */,
 				1ADACF4526ED8ECB005E1FE7 /* Friends */,
 				1A1AF35A26F276A2001E1CE8 /* News */,
-				1A35C66726C5B9860054456D /* LoginViewController.swift */,
-				1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */,
-				1A17D3E2270B9F4900E3BD02 /* VKLoginController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,19 +214,9 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		1A93C04A26EACBB300386D50 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				1A93C04B26EACBCF00386D50 /* OriginEnum.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
 		1A93C04D26EAD9F300386D50 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				1A926BB926E50E6B00D8B371 /* randoms.swift */,
-				1A926BB726E2EFAB00D8B371 /* db.swift */,
 				1A17D3E4270BA9DC00E3BD02 /* NetworkService.swift */,
 				1AE0D151271DB6A000184CEC /* RealmService.swift */,
 			);
@@ -398,14 +381,11 @@
 				1A926BBD26E5249B00D8B371 /* FriendLikeControl.swift in Sources */,
 				1AA48539270904F5008E6673 /* Session.swift in Sources */,
 				1A6DE2DD2714F5D40089C967 /* VKResponse.swift in Sources */,
-				1A93C04C26EACBCF00386D50 /* OriginEnum.swift in Sources */,
 				1A55C8E4271B6E99009161DC /* Double + Ext.swift in Sources */,
 				1A17D3E5270BA9DC00E3BD02 /* NetworkService.swift in Sources */,
 				1A74C34926F36B33002BAD2A /* HeaderCollectionReusableView.swift in Sources */,
-				1A926BB826E2EFAB00D8B371 /* db.swift in Sources */,
 				1A93C04926EAA1C700386D50 /* Photo.swift in Sources */,
 				1A35C66626C5B9860054456D /* SceneDelegate.swift in Sources */,
-				1A926BBA26E50E6B00D8B371 /* randoms.swift in Sources */,
 				1A23241726D5816700B2E43C /* Friend.swift in Sources */,
 				1A7F5FCF26DC462F00B50E37 /* FriendTableViewCell.swift in Sources */,
 				1ADACF3E26ED2EB0005E1FE7 /* News.swift in Sources */,
