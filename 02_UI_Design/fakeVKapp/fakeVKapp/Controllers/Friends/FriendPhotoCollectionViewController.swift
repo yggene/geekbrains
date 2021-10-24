@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class FriendPhotoCollectionViewController: UICollectionViewController,
                                            UICollectionViewDelegateFlowLayout {
@@ -13,17 +14,27 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     // MARK: Variables
     
     var friendProfile: Friend?
+    var userPhotos = [Photo]()
+    @IBAction func friendLikeButton(_ sender: Any) {
+    }
+    
+    var networkService = NetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        networkService.getPhotos(ofUser: friendProfile!.id) { [weak self] userPhotos in
+            guard let self = self else { return }
+            self.userPhotos = userPhotos
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        friendProfile?.photos.count ?? 0
+        userPhotos.count
     }
     
     // cell config
@@ -35,8 +46,8 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
                 for: indexPath) as? FriendPhotoCollectionViewCell else {
                     return UICollectionViewCell() }
             
-            let photo = friendProfile?.photos[indexPath.row]
-            cell.photoImageView.image = photo?.image
+            let photo = userPhotos[indexPath.item]
+            Nuke.loadImage(with: photo.url, into: cell.photoImageView)
             
             return cell
         }
@@ -83,7 +94,7 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
             guard let gallery = segue.destination as? FriendPhotoViewController else { return }
             
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                gallery.allPhotos = friendProfile!.photos
+                gallery.allPhotos = userPhotos
                 gallery.currentPhotoCounter = indexPath.row
             }
         }

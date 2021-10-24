@@ -10,7 +10,7 @@ import UIKit
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
-    
+    public var friends = [Friend]()
     private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
         get {
@@ -23,20 +23,20 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        
         self.hideKeyboardWhenTappedAround()
+        fetchFriends()
         
-        // populate friends list
-        for _ in 1...20 {
-            friends.append(Friend())
+    }
+    
+    // MARK: Methods
+    
+    private func fetchFriends() {
+        networkService.getFriends { [weak self] friends in
+            guard let self = self else { return }
+            self.friends = friends
+            self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+            self.tableView.reloadData()
         }
-        
-        // filter friends list according to search
-        friendsDictionary = updateFriendsDictionary(with: nil)
-        
-        networkService.composeRequest(requestName: .getFriends)
-        networkService.sendRequest()
-        
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
@@ -44,7 +44,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         if let text = searchText?.lowercased(), searchText != "" {
             friendsCopy = friendsCopy.filter{ $0.lastName.lowercased().contains(text) }
         }
-        
         return Dictionary(grouping: friendsCopy) { $0.lastName.lowercased().first ?? "👽" }
     }
     
@@ -67,9 +66,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
 }
 
+// MARK: Table view data source
+
 extension FriendsTableViewController {
-    
-    // MARK: Table view data source
     
     // number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,63 +79,62 @@ extension FriendsTableViewController {
     override func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        friendsDictionary[lastNamesFirstLetters[section]]?.count ?? 0
-    }
+            friendsDictionary[lastNamesFirstLetters[section]]?.count ?? 0
+        }
     
     // configuring cells
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
+            guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "friendCell",
                 for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
-        
-        let key = lastNamesFirstLetters[indexPath.section]
-        let selectedFriends = friendsDictionary[key]
-        guard let key = selectedFriends?[indexPath.row] else { return cell }
-        cell.configure(with: key)
-        
-        return cell
-    }
+            
+            let key = lastNamesFirstLetters[indexPath.section]
+            let selectedFriends = friendsDictionary[key]
+            guard let key = selectedFriends?[indexPath.row] else { return cell }
+            cell.configure(with: key)
+            
+            return cell
+        }
     
     override func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        performSegue(withIdentifier: "friendPhotoSegue",
-                     sender: nil)
-    }
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            performSegue(withIdentifier: "friendPhotoSegue",
+                         sender: nil)
+        }
     
     // configuring sections' headers
     override func tableView(
         _ tableView: UITableView,
         titleForHeaderInSection section: Int) -> String? {
-        return String(lastNamesFirstLetters[section].uppercased())
-    }
+            return String(lastNamesFirstLetters[section].uppercased())
+        }
     
     // sections' headers' height
     override func tableView(
         _ tableView: UITableView,
         heightForHeaderInSection section: Int) -> CGFloat {
-        15.0
-    }
+            15.0
+        }
     
     // sections' headers' style
     override func tableView(
         _ tableView: UITableView,
         willDisplayHeaderView view: UIView,
         forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.systemFont(ofSize: 14)
-    }
-    
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        }
 }
 
 extension FriendsTableViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(
         _ gestureRecognizer: UIGestureRecognizer,
         shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
+            return true
+        }
 }

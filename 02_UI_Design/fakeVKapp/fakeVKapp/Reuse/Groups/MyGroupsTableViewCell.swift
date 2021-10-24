@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class MyGroupsTableViewCell: UITableViewCell {
     
@@ -13,7 +14,7 @@ class MyGroupsTableViewCell: UITableViewCell {
     @IBOutlet var myGroupsLabel: UILabel!
     
     func configure(with group: Group) {
-        myGroupsImageView.image = group.image
+        Nuke.loadImage(with: group.photoURL, into: myGroupsImageView)
         myGroupsLabel.text = group.name
         
         // cell style

@@ -9,17 +9,27 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
+    private let networkService = NetworkService()
+    private var myNews = [News]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        
-        for _ in 1...15 {
-            news.append(News())
+        fetchNews()
+    }
+    
+    private func fetchNews() {
+        networkService.getNews { [weak self] myNews in
+            guard let self = self else { return }
+            self.myNews = myNews
         }
-        
     }
 }
 
@@ -28,14 +38,14 @@ extension NewsTableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        news.count
+        myNews.count
     }
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsTableViewCell else { return UITableViewCell() }
         
-        let currentNews = news[indexPath.row]
+        let currentNews = myNews[indexPath.row]
         cell.configure(with: currentNews)
         
         return cell
@@ -48,7 +58,7 @@ extension NewsTableViewController {
     override func tableView(
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+            return UITableView.automaticDimension
+        }
     
 }

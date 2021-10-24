@@ -47,13 +47,13 @@ class NewsLikeControl: UIButton {
     private func animation() {
         UIView.animate(withDuration: 0.1,
                        animations: {
-                        self.transform = self.transform.scaledBy(x: 1.1, y: 1.1)
-                       },
+            self.transform = self.transform.scaledBy(x: 1.1, y: 1.1)
+        },
                        completion: { _ in
-                        UIView.animate(withDuration: 0.1, animations: {
-                            self.transform = CGAffineTransform.identity
-                        })
-                       })
+            UIView.animate(withDuration: 0.1, animations: {
+                self.transform = CGAffineTransform.identity
+            })
+        })
     }
     
     // MARK: Actions

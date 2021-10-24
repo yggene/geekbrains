@@ -26,10 +26,6 @@ public func randomAvatar() -> UIImage? {
     return UIImage(named: imageName)
 }
 
-public func randomProfileId() -> Int {
-    return Int.random(in: 1...friends.count)
-}
-
 public func randomNewsImage() -> UIImage? {
     let imageName = String(Int.random(in: 100...114))
     return UIImage(named: imageName)

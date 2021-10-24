@@ -1,11 +1,13 @@
 //
-//  FriendPhotoViewController.swift
-//  fakeVKapp
+//FriendPhotoViewController.swift
+//fakeVKapp
 //
-//  Created by Evgeny Alekseev on 16.09.2021.
+//Created by Evgeny Alekseev on 16.09.2021.
+//
 //
 
 import UIKit
+import Nuke
 
 class FriendPhotoViewController: UIViewController {
     
@@ -17,7 +19,7 @@ class FriendPhotoViewController: UIViewController {
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan))
         view.addGestureRecognizer(recognizer)
         
-        currentPhoto.image = allPhotos[currentPhotoCounter]?.image
+        Nuke.loadImage(with: allPhotos[currentPhotoCounter]?.url, into: currentPhoto)
         
     }
     
@@ -71,7 +73,7 @@ class FriendPhotoViewController: UIViewController {
         default: break
         }
         
-        currentPhoto.image = allPhotos[currentPhotoCounter]?.image
+        Nuke.loadImage(with: allPhotos[currentPhotoCounter]?.url, into: currentPhoto)
         
     }
     

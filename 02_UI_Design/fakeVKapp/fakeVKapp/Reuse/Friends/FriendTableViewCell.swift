@@ -6,25 +6,27 @@
 //
 
 import UIKit
+import Nuke
 
 class FriendTableViewCell: UITableViewCell {
     
     @IBOutlet var avatarImageView: AvatarImage!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var originLabel: UILabel!
+
     
     func configure(with friend: Friend) {
-        avatarImageView?.image = friend.avatar.image
+        Nuke.loadImage(with: friend.avatarURL, into: avatarImageView)
         nameLabel?.text = friend.firstName + " " + friend.lastName
-        originLabel?.text = friend.origin.rawValue
+        originLabel?.text = friend.city?.title ?? "🌎"
         
         // cell style
         accessoryType = .disclosureIndicator
         originLabel?.textColor = UIColor.systemGray
     }
     
-    override class func awakeFromNib() {
-        // add animation here
-    }
+    //    override class func awakeFromNib() {
+    //        // add animation here
+    //    }
     
 }

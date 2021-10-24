@@ -9,12 +9,28 @@ import UIKit
 
 class MyGroupsTableViewController: UITableViewController {
     
+    private let networkService = NetworkService()
+    private var myGroups = [Group]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchMyGroupsInfo()
         tableView.separatorStyle = .none
-        
+    }
+    
+    // MARK: Actions
+    
+    private func fetchMyGroupsInfo() {
+        networkService.getGroups { [weak self] myGroups in
+            guard let self = self else { return }
+            self.myGroups = myGroups
+        }
     }
     
     // MARK: Table view data source
@@ -27,8 +43,8 @@ class MyGroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "myGroupsCell",
-                for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
+            withIdentifier: "myGroupsCell",
+            for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
         
         let currentGroup = myGroups[indexPath.row]
         cell.configure(with: currentGroup)
@@ -52,25 +68,25 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Actions
+    // MARK: Actions - FIX SEGUE!
     
-    // add group on unwind
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        // check segue id
-        if segue.identifier == "addGroupSegue" {
-            // get destination segue
-            guard let allGroupsController = segue.source as?
-                    AllGroupsTableViewController else { return }
-            // get the index of the selected group cell
-            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                // get group
-                let selectedGroup = allGroups[indexPath.row]
-                // check if no such group in my list
-                if !myGroups.contains(selectedGroup) {
-                    myGroups.append(selectedGroup)
-                    tableView.reloadData()
-                }
-            }
-        }
-    }
+//        // add group on unwind
+//        @IBAction func addGroup(segue: UIStoryboardSegue) {
+//            // check segue id
+//            if segue.identifier == "addGroupSegue" {
+//                // get destination segue
+//                guard let allGroupsController = segue.source as?
+//                        AllGroupsTableViewController else { return }
+//                // get the index of the selected group cell
+//                if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+//                    // get group
+//                    let selectedGroup = popularGroups[indexPath.row]
+//                    // check if no such group in my list
+//                    if !myGroups.contains(selectedGroup) {
+//                        myGroups.append(selectedGroup)
+//                        tableView.reloadData()
+//                    }
+//                }
+//            }
+//        }
 }
