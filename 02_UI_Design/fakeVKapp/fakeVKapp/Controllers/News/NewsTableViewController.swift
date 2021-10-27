@@ -10,11 +10,7 @@ import UIKit
 class NewsTableViewController: UITableViewController {
     
     private let networkService = NetworkService()
-    private var myNews = [News]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var myNews = [News]()
     
     // MARK: - Lifecycle
     
@@ -22,7 +18,6 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         fetchNews()
-        tableView.reloadData()
     }
     
     private func fetchNews() {
@@ -30,7 +25,7 @@ class NewsTableViewController: UITableViewController {
             guard let self = self else { return }
             switch result {
             case .success(let myNews):
-                self.myNews = myNews//.filter({ $0.markedAsAds == 0 })
+                self.myNews = myNews
                 self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
@@ -47,7 +42,6 @@ class NewsTableViewController: UITableViewController {
                 }
             }
         }
-        self.tableView.reloadData()
     }
 }
 
@@ -78,5 +72,4 @@ extension NewsTableViewController {
         heightForRowAt indexPath: IndexPath) -> CGFloat {
             return UITableView.automaticDimension
         }
-    
 }

@@ -22,6 +22,7 @@ class NewsTableViewCell: UITableViewCell {
     
     func configure(with news: News) {
         
+        // cell info
         //authorAvatarImageView.image = randomAvatar() //currentFriend.avatar.image
         //authorNameLabel.text = currentFriend.firstName + " " + currentFriend.lastName
         postDateLabel.text = news.date.date()
@@ -41,4 +42,5 @@ class NewsTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         
     }
+    
 }

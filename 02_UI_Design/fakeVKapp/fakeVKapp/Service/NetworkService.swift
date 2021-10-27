@@ -257,7 +257,7 @@ final class NetworkService {
         urlConstructor.queryItems?.append(
             URLQueryItem(
                 name: "filters",
-                value: "post")
+                value: "post, photo, ")
         )
         urlConstructor.queryItems?.append(
             URLQueryItem(

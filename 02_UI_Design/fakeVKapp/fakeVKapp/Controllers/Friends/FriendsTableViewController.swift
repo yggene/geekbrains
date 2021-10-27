@@ -12,6 +12,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
     private let networkService = NetworkService()
+    private var friendsNotification: NotificationToken?
     private var friends = [Friend]()
     private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
@@ -20,12 +21,13 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    // MARK: LIfecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         
-        //loadFriendsFromRealm()
-        fetchFriends()
+        loadFriendsFromRealm()
         
     }
     
@@ -33,6 +35,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // get friends from Realm
     private func loadFriendsFromRealm() {
+        fetchFriends()
         do {
             let friendsFromRealm = try RealmService.load(typeOf: Friend.self)
             self.friends = Array(friendsFromRealm)
@@ -40,18 +43,18 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         } catch {
             print(error)
         }
+        tableView.reloadData()
     }
     
     // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
-            guard let self = self else { return }
+            guard self != nil else { return }
             switch result {
-            case .success/*(let friends)*/:
-                self.loadFriendsFromRealm()
-//                self.friends = friends
-//                self.friendsDictionary = self.updateFriendsDictionary(with: nil)
-                self.tableView.reloadData()
+            case .success:
+                print("Friends fetch successful!")
+                //self.loadFriendsFromRealm()
+                //self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
