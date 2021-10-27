@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
-    public var friends = [Friend]()
+    private let networkService = NetworkService()
+    private var friends = [Friend]()
     private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
         get {
@@ -18,31 +20,60 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    private let networkService = NetworkService()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        self.hideKeyboardWhenTappedAround()
+        
+        //loadFriendsFromRealm()
         fetchFriends()
         
     }
     
     // MARK: Methods
     
-    private func fetchFriends() {
-        networkService.getFriends { [weak self] friends in
-            guard let self = self else { return }
-            self.friends = friends
+    // get friends from Realm
+    private func loadFriendsFromRealm() {
+        do {
+            let friendsFromRealm = try RealmService.load(typeOf: Friend.self)
+            self.friends = Array(friendsFromRealm)
             self.friendsDictionary = self.updateFriendsDictionary(with: nil)
-            self.tableView.reloadData()
+        } catch {
+            print(error)
+        }
+    }
+    
+    // get friends data on API call
+    private func fetchFriends() {
+        networkService.getFriends { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success/*(let friends)*/:
+                self.loadFriendsFromRealm()
+//                self.friends = friends
+//                self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+                self.tableView.reloadData()
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Request failed")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
+                }
+            }
         }
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
         var friendsCopy = friends
         if let text = searchText?.lowercased(), searchText != "" {
-            friendsCopy = friendsCopy.filter{ $0.lastName.lowercased().contains(text) }
+            friendsCopy = friendsCopy.filter{
+                $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text) }
         }
         return Dictionary(grouping: friendsCopy) { $0.lastName.lowercased().first ?? "👽" }
     }

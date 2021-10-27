@@ -7,6 +7,7 @@
 
 import UIKit
 import Nuke
+import RealmSwift
 
 class FriendPhotoCollectionViewController: UICollectionViewController,
                                            UICollectionViewDelegateFlowLayout {
@@ -23,10 +24,45 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkService.getPhotos(ofUser: friendProfile!.id) { [weak self] userPhotos in
+        fetchFriendsPhotos()
+//        loadPhotosFromRealm(with: friendProfile!.id)
+
+    }
+    
+    // MARK: Methods
+    
+    private func loadPhotosFromRealm(with userID: Int) {
+        do {
+            let photosFromRealm = try RealmService.load(typeOf: Photo.self).filter("ownerID == %@", userID)
+            self.userPhotos = Array(photosFromRealm)
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func fetchFriendsPhotos() {
+        
+        networkService.getPhotos(ofUser: friendProfile!.id) { [weak self] result in
             guard let self = self else { return }
-            self.userPhotos = userPhotos
-            self.collectionView.reloadData()
+            switch result {
+            case .success/*(let userPhotos)*/:
+                self.loadPhotosFromRealm(with: self.friendProfile!.id)
+//                self.userPhotos = userPhotos
+                self.collectionView.reloadData()
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Request failed")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
+                }
+            }
         }
     }
     

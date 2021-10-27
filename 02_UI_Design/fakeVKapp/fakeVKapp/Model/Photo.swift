@@ -5,71 +5,52 @@
 //  Created by Evgeny Alekseev on 09.09.2021.
 //
 
-import UIKit
-
-//final class Photo: Equatable {
-//
-//    static var photoCount = 0
-//
-//    let id: Int
-//    let image: UIImage?
-//    var isLiked: Bool
-//    var likesCount: Int = 0
-//
-//    init(
-//        image: UIImage?
-//    ){
-//        Photo.photoCount += 1
-//        self.id = Photo.photoCount
-//        self.image = image
-//        self.isLiked = false
-//    }
-//
-//    static func == (lhs: Photo, rhs: Photo) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//}
+import Foundation
+import RealmSwift
 
 struct UserPhotos: Codable {
     var items: [Photo]
 }
 
-final class Photo {
-    var id: Int
-    var ownerID: Int
-    var sizes: [Size]
-    var likes: Likes
-}
-
-final class Size {
-    var url: String
-    var type: String
-}
-
-final class Likes {
-    var userLikes: Int
-    var count: Int
-}
-
-extension Photo: Codable {
+class Photo: Object, Codable {
+    @Persisted var id: Int = 0
+    @Persisted var ownerID: Int = 0
+    @Persisted var sizes = List<Size>()
+    @Persisted var likes: Likes? = nil
+    
+    var url: URL? {
+        guard let image = sizes.first(where: { $0.type == "x"} ) else { return nil }
+        return URL(string: image.url)
+    }
+    
+    override static func primaryKey() -> String? {
+        "id"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case ownerID = "owner_id"
-        case sizes
-        case likes
+        case sizes, likes
     }
+}
+
+final class Size: Object {
+    @Persisted var type: String = ""
+    @Persisted var url: String = ""
+    let owner = LinkingObjects(fromType: Photo.self, property: "sizes")
     
-    // MARK: SECURE OTHER TYPES!
-    var url: URL? {
-        guard let image = sizes.first(where: { $0.type == "x"} ) else {return nil}
-        return URL(string: image.url)
-    }
 }
 
 extension Size: Codable {
     enum CodingKeys: String, CodingKey {
-        case url, type
+        case type, url
     }
+}
+
+final class Likes: Object {
+    @Persisted var userLikes: Int = 0
+    @Persisted var count: Int = 0
+    let owner = LinkingObjects(fromType: Photo.self, property: "likes")
 }
 
 extension Likes: Codable {

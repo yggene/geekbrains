@@ -19,17 +19,35 @@ class NewsTableViewController: UITableViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         tableView.separatorStyle = .none
         fetchNews()
+        tableView.reloadData()
     }
     
     private func fetchNews() {
-        networkService.getNews { [weak self] myNews in
+        networkService.getNews { [weak self] result in
             guard let self = self else { return }
-            self.myNews = myNews
+            switch result {
+            case .success(let myNews):
+                self.myNews = myNews//.filter({ $0.markedAsAds == 0 })
+                self.tableView.reloadData()
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Request failed")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
+                }
+            }
         }
+        self.tableView.reloadData()
     }
 }
 
