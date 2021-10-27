@@ -4,6 +4,6 @@
 2. Incomplete animation in friends' photo gallery
 
 ### To do
-1. Realm Notifications (Lesson 7)
-2. Firebase (Lesson 8)
+1. Lesson 7: Realm Notifications
+2. Lesson 8: Firebase
 
