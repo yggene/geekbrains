@@ -1,4 +1,4 @@
 # ISSUES
-
-1. Deleted remote data not deleting from Realm // In progress
+## In progress
+1. Deleted remote data not deleting from Realm
 
