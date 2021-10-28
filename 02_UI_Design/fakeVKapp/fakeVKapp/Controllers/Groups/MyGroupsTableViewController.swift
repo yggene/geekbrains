@@ -46,7 +46,8 @@ class MyGroupsTableViewController: UITableViewController {
         networkService.getGroups { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success/*(let myGroups)*/:
+            case .success:
+                print("Groups fetch success!")
                 self.loadGroupsFromRealm()
                 //                self.myGroups = myGroups
                 self.tableView.reloadData()

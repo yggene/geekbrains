@@ -45,7 +45,8 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
         networkService.getPhotos(ofUser: friendProfile!.id) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success/*(let userPhotos)*/:
+            case .success:
+                print("Photos fetch success!")
                 self.loadPhotosFromRealm(with: self.friendProfile!.id)
 //                self.userPhotos = userPhotos
                 self.collectionView.reloadData()
