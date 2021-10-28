@@ -11,8 +11,10 @@ import RealmSwift
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Variables
+    
     private let networkService = NetworkService()
-    private var friends = [Friend]()
+    private var friends: Results<Friend>?
+    private var friendsNotification: NotificationToken?
     private var friendsDictionary = [Character:[Friend]]()
     private var lastNamesFirstLetters: [Character] {
         get {
@@ -20,38 +22,61 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        
-        //loadFriendsFromRealm()
-        fetchFriends()
-        
+        loadFriendsFromRealm()
+        tableView.reloadData()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        friendsNotification?.invalidate()
+    }
+
     
     // MARK: Methods
     
     // get friends from Realm
     private func loadFriendsFromRealm() {
-        do {
-            let friendsFromRealm = try RealmService.load(typeOf: Friend.self)
-            self.friends = Array(friendsFromRealm)
-            self.friendsDictionary = self.updateFriendsDictionary(with: nil)
-        } catch {
-            print(error)
+        
+        fetchFriends()
+        
+        self.friends = try? RealmService.load(typeOf: Friend.self)
+        self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+        
+        self.friendsNotification = friends?.observe { [weak self] realmChange in
+            switch realmChange {
+            case .initial(let objects):
+                if objects.count > 0 {
+                    self?.friends = objects
+                    self?.tableView.reloadData()
+                }
+            case let .update(objects, deletions, insertions, modifications):
+                self?.friends = objects
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .none)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .none)
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                           with: .none)
+                self?.tableView.endUpdates()
+            case .error(let error):
+                print(error)
+            }
         }
     }
-    
+        
     // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
-            guard let self = self else { return }
+            guard self != nil else { return }
             switch result {
-            case .success/*(let friends)*/:
-                self.loadFriendsFromRealm()
-//                self.friends = friends
-//                self.friendsDictionary = self.updateFriendsDictionary(with: nil)
-                self.tableView.reloadData()
+            case .success:
+                print("Fetch friends successful!")
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
@@ -70,7 +95,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
-        var friendsCopy = friends
+        var friendsCopy = Array(friends!)
         if let text = searchText?.lowercased(), searchText != "" {
             friendsCopy = friendsCopy.filter{
                 $0.firstName.lowercased().contains(text) || $0.lastName.lowercased().contains(text) }

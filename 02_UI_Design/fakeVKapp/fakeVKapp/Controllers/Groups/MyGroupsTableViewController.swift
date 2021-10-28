@@ -13,43 +13,66 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: Variables
     
     private let networkService = NetworkService()
-    private var myGroups = [Group]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var myGroups = [Group]()
+    private var myGroupsNotification: NotificationToken?
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        
-        fetchMyGroupsInfo()
-        //        loadGroupsFromRealm()
-        
+        loadGroupsFromRealm()
+        tableView.reloadData()
     }
     
-    // MARK: Actions
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        myGroupsNotification?.invalidate()
+    }
     
+    
+    // MARK: Methods
+    
+    // get groups from Realm
     private func loadGroupsFromRealm() {
-        do {
-            // load groups from Realm object
-            let groupsFromRealm = try RealmService.load(typeOf: Group.self)
-            self.myGroups = Array(groupsFromRealm)
-        } catch {
-            print(error)
+        
+        fetchMyGroupsInfo()
+        
+        let tempGroups = try? RealmService.load(typeOf: Group.self)
+        
+        self.myGroupsNotification = tempGroups?.observe { [weak self] realmChange in
+            switch realmChange {
+            case .initial(let objects):
+                if objects.count > 0 {
+                    self?.myGroups = Array(objects)
+                    self?.tableView.reloadData()
+                }
+            case let .update(objects, deletions, insertions, modifications):
+                self?.myGroups = Array(objects)
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .none)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .none)
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                           with: .none)
+                self?.tableView.endUpdates()
+            case .error(let error):
+                print(error)
+            }
         }
     }
     
+    // get groups data on API call
     private func fetchMyGroupsInfo() {
         networkService.getGroups { [weak self] result in
-            guard let self = self else { return }
+            guard self != nil else { return }
             switch result {
-            case .success/*(let myGroups)*/:
-                self.loadGroupsFromRealm()
-                //                self.myGroups = myGroups
-                self.tableView.reloadData()
+            case .success:
+                print("Groups fetch success!")
+                //                self.loadGroupsFromRealm()
+                //                //                self.myGroups = myGroups
+                //                self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
@@ -106,7 +129,8 @@ class MyGroupsTableViewController: UITableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "myGroupsCell",
-            for: indexPath) as? MyGroupsTableViewCell else { return UITableViewCell() }
+            for: indexPath) as? MyGroupsTableViewCell
+        else { return UITableViewCell() }
         
         let currentGroup = myGroups[indexPath.row]
         cell.configure(with: currentGroup)
