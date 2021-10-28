@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordLabel: UILabel!
     @IBOutlet var passwordInputField: UITextField!
     @IBOutlet var myScrollView: UIScrollView!
+    private var handler: AuthStateDidChangeListenerHandle?
     
     // MARK: Actions
     
@@ -60,6 +61,7 @@ class LoginViewController: UIViewController {
                 self?.showAlert(title: "Error", message: error.localizedDescription)
             } else {
                 let navController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController")
+                self?.present(navController, animated: true)
             }
         }
         
@@ -91,5 +93,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
+        
+        handler = Auth.auth().addStateDidChangeListener({ [weak self] auth, user in
+            if user != nil {
+                let navController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController")
+                self?.present(navController, animated: true)
+            }
+        })
+        
     }
 }
