@@ -31,6 +31,12 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.reloadData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        friendsNotification?.invalidate()
+    }
+
+    
     // MARK: Methods
     
     // get friends from Realm
@@ -48,19 +54,22 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
                     self?.friends = objects
                     self?.tableView.reloadData()
                 }
-            case let .update(objects, _, _, _):
+            case let .update(objects, deletions, insertions, modifications):
                 self?.friends = objects
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .none)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .none)
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                           with: .none)
+                self?.tableView.endUpdates()
             case .error(let error):
                 print(error)
             }
         }
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        friendsNotification?.invalidate()
-    }
-    
+        
     // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
