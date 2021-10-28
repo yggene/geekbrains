@@ -6,6 +6,6 @@
 5. Forced unwrap in FriendsTableViewController: updateFriendsDictionary()
 6. Several "Attempt to present ... which is already presenting" errors
 
-# Tasks
-1. Lesson 7: Realm Notifications
+# To do
+1. Realm Notifications -- add notifications to FriendsPhotoCollectionView
 2. Lesson 8: Firebase
