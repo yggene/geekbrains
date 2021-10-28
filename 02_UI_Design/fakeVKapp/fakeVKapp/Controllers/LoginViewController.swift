@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -25,13 +26,11 @@ class LoginViewController: UIViewController {
             print("Welcome, \(loginInputField.text!)!")
         } else {
             print("Incorrect username and/or password")
-            showAlert()
+            showAlert(title: "Error", message: "Check login/pass")
         }
     }
     
-    @IBAction func watchAnimationsButtonPressed(_ sender: Any) {
-        
-    }
+    @IBAction func watchAnimationsButtonPressed(_ sender: Any) {}
     
     
     override func shouldPerformSegue(withIdentifier identifier: String,
@@ -44,21 +43,37 @@ class LoginViewController: UIViewController {
     }
     
     func isValidUser() -> Bool {
-        loginInputField.text == "" && passwordInputField.text == ""
+        //loginInputField.text == "" && passwordInputField.text == ""
+        guard let username = loginInputField.text,
+              let password = passwordInputField.text,
+              !username.isEmpty,
+              !password.isEmpty
+        else {
+            showAlert(title: "Incorrect data", message: "Check login/pass")
+            return false
+        }
+        
+        Auth.auth().signIn(
+            withEmail: username,
+            password: password) { [weak self] authResult, authError in
+            if let error = authError {
+                self?.showAlert(title: "Error", message: error.localizedDescription)
+            } else {
+                let navController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController")
+            }
+        }
+        
+        return true
     }
     
-    private func showAlert() {
+    private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(
-            title: "Error",
-            message: "Incorrect username or password",
+            title: title,
+            message: message,
             preferredStyle: .alert)
         let alertItem = UIAlertAction(
             title: "OK",
             style: .default)
-        { _ in
-            self.loginInputField.text = ""
-            self.passwordInputField.text = ""
-        }
         alertController.addAction(alertItem)
         present(alertController,
                 animated: true,
@@ -69,10 +84,7 @@ class LoginViewController: UIViewController {
         self.myScrollView?.endEditing(true)
     }
     
-    @IBAction func unwindToLogin(segue: UIStoryboardSegue){
-            
-        }
-    
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue){}
     
     // MARK: Lifecycle
     
