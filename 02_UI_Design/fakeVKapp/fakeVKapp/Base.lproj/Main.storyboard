@@ -552,7 +552,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rzl-cn-qjF" customClass="TrueScalePhotoImageView" customModule="fakeVKapp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="174.66666666666663" width="375" height="375"/>
+                                <rect key="frame" x="25" y="199.66666666666663" width="325" height="325"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rzl-cn-qjF" secondAttribute="height" multiplier="1:1" id="ppP-wr-05b"/>
                                 </constraints>
@@ -572,7 +572,7 @@
                         <viewLayoutGuide key="safeArea" id="7a1-qX-Hgr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="rzl-cn-qjF" firstAttribute="width" secondItem="vtn-rW-iKd" secondAttribute="width" id="4kK-C5-qUZ"/>
+                            <constraint firstItem="rzl-cn-qjF" firstAttribute="width" secondItem="vtn-rW-iKd" secondAttribute="width" constant="-50" id="4kK-C5-qUZ"/>
                             <constraint firstItem="rzl-cn-qjF" firstAttribute="centerX" secondItem="7a1-qX-Hgr" secondAttribute="centerX" id="TiV-4Y-mmx"/>
                             <constraint firstItem="rzl-cn-qjF" firstAttribute="centerY" secondItem="7a1-qX-Hgr" secondAttribute="centerY" id="gJh-pI-TKo"/>
                             <constraint firstItem="7a1-qX-Hgr" firstAttribute="trailing" secondItem="NlK-pz-k7C" secondAttribute="trailing" constant="10" id="hqm-dF-FYX"/>
@@ -581,7 +581,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="3Rt-tP-nXx"/>
                     <connections>
-                        <outlet property="currentPhoto" destination="rzl-cn-qjF" id="VL9-Vb-nuh"/>
+                        <outlet property="currentPhoto" destination="rzl-cn-qjF" id="4JZ-ZH-KWD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVV-fw-5bH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

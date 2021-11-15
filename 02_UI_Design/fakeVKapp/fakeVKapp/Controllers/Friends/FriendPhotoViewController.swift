@@ -26,6 +26,7 @@ class FriendPhotoViewController: UIViewController {
     // MARK: Variables
     
     @IBOutlet var currentPhoto: TrueScalePhotoImageView!
+    
     var allPhotos: [Photo?] = []
     var currentPhotoCounter = 0
     var interactiveAnimator: UIViewPropertyAnimator!
@@ -76,5 +77,4 @@ class FriendPhotoViewController: UIViewController {
         Nuke.loadImage(with: allPhotos[currentPhotoCounter]?.url, into: currentPhoto)
         
     }
-    
 }
