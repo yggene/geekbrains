@@ -38,6 +38,7 @@
 		1ABC351826D6D7EF0086B441 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABC351726D6D7EF0086B441 /* Group.swift */; };
 		1ABC352626D70AE10086B441 /* FriendPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABC352526D70AE10086B441 /* FriendPhotoCollectionViewCell.swift */; };
 		1ABC352826D70C580086B441 /* FriendPhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABC352726D70C580086B441 /* FriendPhotoCollectionViewController.swift */; };
+		1ACD58C72745BC0400648A31 /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACD58C62745BC0400648A31 /* UIColor + Ext.swift */; };
 		1ADACF3E26ED2EB0005E1FE7 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF3D26ED2EB0005E1FE7 /* News.swift */; };
 		1ADACF4026ED5DE1005E1FE7 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF3F26ED5DE1005E1FE7 /* NewsTableViewCell.swift */; };
 		1ADACF4226ED6CD1005E1FE7 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADACF4126ED6CD1005E1FE7 /* NewsTableViewController.swift */; };
@@ -84,6 +85,7 @@
 		1ABC351726D6D7EF0086B441 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		1ABC352526D70AE10086B441 /* FriendPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ABC352726D70C580086B441 /* FriendPhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewController.swift; sourceTree = "<group>"; };
+		1ACD58C62745BC0400648A31 /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
 		1ADACF3D26ED2EB0005E1FE7 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		1ADACF3F26ED5DE1005E1FE7 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		1ADACF4126ED6CD1005E1FE7 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */,
 				1A55C8E3271B6E99009161DC /* Double + Ext.swift */,
+				1ACD58C62745BC0400648A31 /* UIColor + Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				1A55C8E6271B7F33009161DC /* City.swift in Sources */,
 				1A7A09EA26D2A1240065C852 /* FriendsTableViewController.swift in Sources */,
 				1A6CE40926E0B9EB0030EE50 /* AvatarImageView.swift in Sources */,
+				1ACD58C72745BC0400648A31 /* UIColor + Ext.swift in Sources */,
 				1ABC352626D70AE10086B441 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				1A52A6A826D8A35800C5A912 /* MyGroupsTableViewController.swift in Sources */,
 				1ADACF4426ED88E5005E1FE7 /* TrueScalePhotoImageView.swift in Sources */,

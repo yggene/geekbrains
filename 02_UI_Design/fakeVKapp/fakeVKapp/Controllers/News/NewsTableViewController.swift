@@ -33,7 +33,7 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        50.0
+        60.0
     }
     
     // MARK: Variables

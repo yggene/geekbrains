@@ -10,21 +10,31 @@ import SwiftUI
 
 class NewsFooterView: UITableViewHeaderFooterView {
     
-    private var likeView = UIView()
-    private var likeIcon = UIImageView()
-    private var likeCount = UILabel()
+    // MARK: Constants
     
-    private var commentView = UIView()
-    private var commentIcon = UIImageView()
-    private var commentCount = UILabel()
+    private let likeView = UIView()
+    private let likeIcon = UIImageView()
+    private let likeCount = UILabel()
     
-    private var shareView = UIView()
-    private var shareIcon = UIImageView()
-    private var shareCount = UILabel()
+    private let commentView = UIView()
+    private let commentIcon = UIImageView()
+    private let commentCount = UILabel()
     
-    private var seenView = UIView()
-    private var seenIcon = UIImageView()
-    private var seenCount = UILabel()
+    private let shareView = UIView()
+    private let shareIcon = UIImageView()
+    private let shareCount = UILabel()
+    
+    private let seenView = UIView()
+    private let seenIcon = UIImageView()
+    private let seenCount = UILabel()
+    
+    private let footerTextHeight = 20.0
+    private let footerTextFont = UIFont.systemFont(ofSize: 14.0)
+    private let buttonBGColor = UIColor(rgb: 0xF4F5F6)
+    private let footerViewCornerRadius = 13.0
+    private let footerViewHeight = 30.0
+    
+    // MARK: Init
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -33,6 +43,8 @@ class NewsFooterView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    // MARK: Configure method
     
     func configure(with news: News) {
         
@@ -73,87 +85,88 @@ class NewsFooterView: UITableViewHeaderFooterView {
             
             likeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0),
             likeView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            likeView.widthAnchor.constraint(equalToConstant: 60.0),
+            likeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
             likeView.heightAnchor.constraint(equalToConstant: 30.0),
             
-            likeIcon.leadingAnchor.constraint(equalTo: likeView.leadingAnchor, constant: 0.0),
-            likeIcon.topAnchor.constraint(equalTo: likeView.topAnchor),
+            likeIcon.leadingAnchor.constraint(equalTo: likeView.leadingAnchor, constant: 10.0),
+            likeIcon.widthAnchor.constraint(equalToConstant: 23.0),
             likeIcon.heightAnchor.constraint(equalToConstant: 20.0),
-            likeIcon.widthAnchor.constraint(equalToConstant: 20.0),
+            likeIcon.centerYAnchor.constraint(equalTo: likeView.centerYAnchor),
             
             likeCount.leadingAnchor.constraint(equalTo: likeIcon.trailingAnchor, constant: 5.0),
-            likeCount.topAnchor.constraint(equalTo: likeView.topAnchor),
+            likeCount.trailingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: -10.0),
+            likeCount.centerYAnchor.constraint(equalTo: likeView.centerYAnchor),
 
-            commentView.leadingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: 10.0),
+            commentView.leadingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: 15.0),
             commentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            commentView.widthAnchor.constraint(equalToConstant: 60.0),
+            commentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
             commentView.heightAnchor.constraint(equalToConstant: 30.0),
             
-            commentIcon.leadingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: 0.0),
-            commentIcon.topAnchor.constraint(equalTo: commentView.topAnchor),
+            commentIcon.leadingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: 10.0),
+            commentIcon.widthAnchor.constraint(equalToConstant: 23.0),
             commentIcon.heightAnchor.constraint(equalToConstant: 20.0),
-            commentIcon.widthAnchor.constraint(equalToConstant: 20.0),
-            
-            commentCount.leadingAnchor.constraint(equalTo: commentIcon.trailingAnchor, constant: 5.0),
-            commentCount.topAnchor.constraint(equalTo: commentView.topAnchor),
+            commentIcon.centerYAnchor.constraint(equalTo: commentView.centerYAnchor),
 
-            shareView.leadingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: 10.0),
+            commentCount.leadingAnchor.constraint(equalTo: commentIcon.trailingAnchor, constant: 5.0),
+            commentCount.trailingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: -10.0),
+            commentCount.centerYAnchor.constraint(equalTo: commentView.centerYAnchor),
+
+            shareView.leadingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: 15.0),
             shareView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            shareView.widthAnchor.constraint(equalToConstant: 60.0),
+            shareView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
             shareView.heightAnchor.constraint(equalToConstant: 30.0),
             
-            shareIcon.leadingAnchor.constraint(equalTo: shareView.leadingAnchor, constant: 0.0),
-            shareIcon.topAnchor.constraint(equalTo: shareView.topAnchor),
+            shareIcon.leadingAnchor.constraint(equalTo: shareView.leadingAnchor, constant: 10.0),
+            shareIcon.widthAnchor.constraint(equalToConstant: 23.0),
             shareIcon.heightAnchor.constraint(equalToConstant: 20.0),
-            shareIcon.widthAnchor.constraint(equalToConstant: 20.0),
+            shareIcon.centerYAnchor.constraint(equalTo: shareView.centerYAnchor),
             
             shareCount.leadingAnchor.constraint(equalTo: shareIcon.trailingAnchor, constant: 5.0),
-            shareCount.topAnchor.constraint(equalTo: shareView.topAnchor),
+            shareCount.trailingAnchor.constraint(equalTo: shareView.trailingAnchor, constant: -10.0),
+            shareCount.centerYAnchor.constraint(equalTo: shareView.centerYAnchor),
 
             seenView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20.0),
-            seenView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            seenView.widthAnchor.constraint(equalToConstant: 50.0),
-            seenView.heightAnchor.constraint(equalTo: shareView.widthAnchor, multiplier: 1.0/2.0),
+            seenView.centerYAnchor.constraint(equalTo: likeView.centerYAnchor),
+            seenView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
+            seenView.heightAnchor.constraint(equalTo: shareView.widthAnchor, multiplier: 30.0),
             
-            seenIcon.trailingAnchor.constraint(equalTo: seenCount.leadingAnchor, constant: -10.0),
-            seenIcon.topAnchor.constraint(equalTo: seenView.topAnchor),
-            seenIcon.heightAnchor.constraint(equalToConstant: 20.0),
+            seenIcon.trailingAnchor.constraint(equalTo: seenCount.leadingAnchor, constant: -5.0),
             seenIcon.widthAnchor.constraint(equalToConstant: 20.0),
+            seenIcon.heightAnchor.constraint(equalToConstant: 17.0),
+            seenIcon.centerYAnchor.constraint(equalTo: seenView.centerYAnchor),
             
             seenCount.trailingAnchor.constraint(equalTo: seenView.trailingAnchor, constant: -5.0),
-            seenCount.topAnchor.constraint(equalTo: seenView.topAnchor),
+            seenCount.centerYAnchor.constraint(equalTo: seenView.centerYAnchor),
             
         ])
         
-        contentView.backgroundColor = .lightGray
-        
-        likeView.backgroundColor = .cyan
-        likeView.layer.cornerRadius = 10
+        likeView.backgroundColor = buttonBGColor
+        likeView.layer.cornerRadius = footerViewCornerRadius
         likeView.layer.masksToBounds = true
         
-        commentView.backgroundColor = .cyan
-        commentView.layer.cornerRadius = 10
+        commentView.backgroundColor = buttonBGColor
+        commentView.layer.cornerRadius = footerViewCornerRadius
         commentView.layer.masksToBounds = true
         
-        shareView.backgroundColor = .cyan
-        shareView.layer.cornerRadius = 10
+        shareView.backgroundColor = buttonBGColor
+        shareView.layer.cornerRadius = footerViewCornerRadius
         shareView.layer.masksToBounds = true
         
         likeIcon.image = UIImage(systemName: "heart")
         likeCount.text = String(news.likes?.count ?? 0)
-        likeCount.font = UIFont.systemFont(ofSize: 15.0)
+        likeCount.font = footerTextFont
         
         commentIcon.image = UIImage(systemName: "bubble.left")
         commentCount.text = String(news.comments?.count ?? 0)
-        commentCount.font = UIFont.systemFont(ofSize: 15.0)
+        commentCount.font = footerTextFont
         
         shareIcon.image = UIImage(systemName: "arrowshape.turn.up.right")
         shareCount.text = String(news.reposts?.count ?? 0)
-        shareCount.font = UIFont.systemFont(ofSize: 15.0)
+        shareCount.font = footerTextFont
         
         seenIcon.image = UIImage(systemName: "eye")
         seenCount.text = String(news.views?.count ?? 0)
-        seenCount.font = UIFont.systemFont(ofSize: 15.0)
+        seenCount.font = footerTextFont
         
     }
     
