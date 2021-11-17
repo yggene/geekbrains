@@ -72,27 +72,26 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         
     // get friends data on API call
     private func fetchFriends() {
-        networkService.getFriends()
-//        { [weak self] result in
-//            guard self != nil else { return }
-//            switch result {
-//            case .success:
-//                print("Fetch friends successful!")
-//            case .failure(let requestError):
-//                switch requestError {
-//                case .invalidUrl:
-//                    print("Error: Invalid URL detected")
-//                case .errorDecode:
-//                    print("Error: Decode problem. Check the JSON data")
-//                case .failedRequest:
-//                    print("Error: Request failed")
-//                case .unknownError:
-//                    print("Error: Unknown")
-//                case .realmSaveFailure:
-//                    print("Error: Could not save to Realm")
-//                }
-//            }
-//        }
+        networkService.getFriends { [weak self] result in
+            guard self != nil else { return }
+            switch result {
+            case .success:
+                print("Fetch friends successful!")
+            case .failure(let requestError):
+                switch requestError {
+                case .invalidUrl:
+                    print("Error: Invalid URL detected")
+                case .errorDecode:
+                    print("Error: Decode problem. Check the JSON data")
+                case .failedRequest:
+                    print("Error: Request failed")
+                case .unknownError:
+                    print("Error: Unknown")
+                case .realmSaveFailure:
+                    print("Error: Could not save to Realm")
+                }
+            }
+        }
     }
     
     private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{

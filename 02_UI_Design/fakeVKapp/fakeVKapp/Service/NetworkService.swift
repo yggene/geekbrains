@@ -38,59 +38,57 @@ final class NetworkService {
     }()
     
     // MARK: Get friends
-    func getFriends(ofUser userID: Int = Session.instance.userID) {
-            // compose an url
-            urlConstructor.path += "friends.get"
-            urlConstructor.queryItems?.append(
-                URLQueryItem(
-                    name: "user_id",
-                    value: String(userID))
-            )
-            urlConstructor.queryItems?.append(
-                URLQueryItem(
-                    name: "fields",
-                    value: "city,photo_200_orig")
-            )
-            
-            // check if url is correct
-            guard let url = urlConstructor.url else {
-                print("Error: " + RequestErrors.invalidUrl.rawValue)
-                return
+    func getFriends(ofUser userID: Int = Session.instance.userID,
+                    completion: @escaping (Result<[Friend], RequestErrors>) -> Void) {
+        // compose an url
+        urlConstructor.path += "friends.get"
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "user_id",
+                value: String(userID))
+        )
+        urlConstructor.queryItems?.append(
+            URLQueryItem(
+                name: "fields",
+                value: "city,photo_200_orig")
+        )
+        
+        // check if url is correct
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
+        
+        session.dataTask(with: url) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                print("Status code: \(response.statusCode)")
             }
             
-            session.dataTask(with: url) { data, response, error in
-                if let response = response as? HTTPURLResponse {
-                    print("Status code: \(response.statusCode)")
-                }
-                
-                // check if error happens
-                if error != nil {
-                    print("Error: " + RequestErrors.failedRequest.rawValue)
-                } else if let data = data {
-                    // Successful request
-                    do {
-                        // Decode to an array of friends
-                        let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
-                        
-                        DispatchQueue.main.async {
-                            // save friends to Realm object
-                            do {
-                                try RealmService.save(items: friends.response.items)
-                            } catch {
-                                print("Error: " + RequestErrors.realmSaveFailure.rawValue)
-                            }
-                            print("Success: Friends saved to Realm")
+            // check if error happens
+            if error != nil {
+                completion(.failure(.failedRequest))
+            } else if let data = data {
+                // Successful request
+                do {
+                    // Decode to an array of friends
+                    let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        // save friends to Realm object
+                        do {
+                            try RealmService.save(items: friends.response.items)
+                        } catch {
+                            completion(.failure(.realmSaveFailure))
                         }
-                        
-                    } catch {
-                        // Send error when decoding
-                        print("Error: " + RequestErrors.errorDecode.rawValue)
+                        completion(.success(friends.response.items))
                     }
-                } else {
-                    print("Error: " + RequestErrors.unknownError.rawValue)
+                    
+                } catch {
+                    // Send error when decoding
+                    completion(.failure(.errorDecode))
                 }
-            }.resume()
-        }
+            } else {
+                completion(.failure(.unknownError))
+            }
+        }.resume()
+    }
     
     // MARK: Get popular groups
     func getPopularGroups(completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
@@ -135,7 +133,8 @@ final class NetworkService {
     
     
     // MARK: Get user groups
-    func getGroups(ofUser userID: Int = Session.instance.userID) {
+    func getGroups(ofUser userID: Int = Session.instance.userID,
+                   completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
         urlConstructor.path += "groups.get"
         
         urlConstructor.queryItems?.append(
@@ -155,10 +154,7 @@ final class NetworkService {
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else {
-            print("Error: " + RequestErrors.invalidUrl.rawValue)
-            return
-        }
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -167,7 +163,7 @@ final class NetworkService {
             
             // check if error happens
             if error != nil {
-                print("Error: " + RequestErrors.failedRequest.rawValue)
+                completion(.failure(.failedRequest))
             } else if let data = data {
                 // Successful request
                 do {
@@ -179,23 +175,24 @@ final class NetworkService {
                         do {
                             try RealmService.save(items: userGroups.response.items)
                         } catch {
-                            print("Error: " + RequestErrors.realmSaveFailure.rawValue)
+                            completion(.failure(.realmSaveFailure))
                         }
-                        print("Success: User groups saved to realm!")
+                        completion(.success(userGroups.response.items))
                     }
                     
                 } catch {
                     // Send error when decoding
-                    print("Error: " + RequestErrors.errorDecode.rawValue)
+                    completion(.failure(.errorDecode))
                 }
             } else {
-                print("Error: " + RequestErrors.unknownError.rawValue)
+                completion(.failure(.unknownError))
             }
         }.resume()
     }
     
     // MARK: Get all photos
-    func getPhotos(ofUser userID: Int = Session.instance.userID) {
+    func getPhotos(ofUser userID: Int = Session.instance.userID,
+                   completion: @escaping (Result<[Photo], RequestErrors>) -> Void) {
         urlConstructor.path += "photos.getAll"
         
         urlConstructor.queryItems?.append(
@@ -210,10 +207,7 @@ final class NetworkService {
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else {
-            print("Error: " + RequestErrors.invalidUrl.rawValue)
-            return
-        }
+        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -222,7 +216,7 @@ final class NetworkService {
             
             // check if error happens
             if error != nil {
-                print("Error: " + RequestErrors.failedRequest.rawValue)
+                completion(.failure(.failedRequest))
             } else if let data = data {
                 // Successful request
                 do {
@@ -234,17 +228,17 @@ final class NetworkService {
                         do {
                             try RealmService.save(items: userPhotos.response.items)
                         } catch {
-                            print("Error " + RequestErrors.realmSaveFailure.rawValue)
+                            completion(.failure(.realmSaveFailure))
                         }
-                        print("Success: got all the photos")
+                        completion(.success(userPhotos.response.items))
                     }
                     
                 } catch {
                     // Send error when decoding
-                    print("Error: " + RequestErrors.errorDecode.rawValue)
+                    completion(.failure(.errorDecode))
                 }
             } else {
-                print("Error: " + RequestErrors.unknownError.rawValue)
+                completion(.failure(.unknownError))
             }
         }.resume()
     }
