@@ -9,3 +9,4 @@
 9. TODO: Detach Like/Comment/Share views from news' footer to separate UIButtons
 10. News tab only shows text and a single photo for every news item
 11. TODO: Leave groups on swipe
+12. TODO: Dark mode support for News tab
