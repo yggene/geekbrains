@@ -7,3 +7,4 @@
 6. Several "Attempt to present ... which is already presenting" errors
 7. Missing notifications in FriendsPhotoCollectionView
 8. TODO: Detach Like/Comment/Share views from news' footer to separate UIButtons
+9. News tab only shows text and a single photo
