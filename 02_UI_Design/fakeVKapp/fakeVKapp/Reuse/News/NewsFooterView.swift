@@ -73,8 +73,8 @@ class NewsFooterView: UITableViewHeaderFooterView {
             
             likeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0),
             likeView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            likeView.widthAnchor.constraint(equalToConstant: 50.0),
-            likeView.heightAnchor.constraint(equalToConstant: 20.0),
+            likeView.widthAnchor.constraint(equalToConstant: 60.0),
+            likeView.heightAnchor.constraint(equalToConstant: 30.0),
             
             likeIcon.leadingAnchor.constraint(equalTo: likeView.leadingAnchor, constant: 0.0),
             likeIcon.topAnchor.constraint(equalTo: likeView.topAnchor),
@@ -86,7 +86,7 @@ class NewsFooterView: UITableViewHeaderFooterView {
 
             commentView.leadingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: 10.0),
             commentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            commentView.widthAnchor.constraint(equalToConstant: 50.0),
+            commentView.widthAnchor.constraint(equalToConstant: 60.0),
             commentView.heightAnchor.constraint(equalToConstant: 30.0),
             
             commentIcon.leadingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: 0.0),
@@ -99,7 +99,7 @@ class NewsFooterView: UITableViewHeaderFooterView {
 
             shareView.leadingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: 10.0),
             shareView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
-            shareView.widthAnchor.constraint(equalToConstant: 50.0),
+            shareView.widthAnchor.constraint(equalToConstant: 60.0),
             shareView.heightAnchor.constraint(equalToConstant: 30.0),
             
             shareIcon.leadingAnchor.constraint(equalTo: shareView.leadingAnchor, constant: 0.0),
@@ -115,17 +115,29 @@ class NewsFooterView: UITableViewHeaderFooterView {
             seenView.widthAnchor.constraint(equalToConstant: 50.0),
             seenView.heightAnchor.constraint(equalTo: shareView.widthAnchor, multiplier: 1.0/2.0),
             
-            seenIcon.trailingAnchor.constraint(equalTo: seenView.trailingAnchor, constant: -10.0),
+            seenIcon.trailingAnchor.constraint(equalTo: seenCount.leadingAnchor, constant: -10.0),
             seenIcon.topAnchor.constraint(equalTo: seenView.topAnchor),
             seenIcon.heightAnchor.constraint(equalToConstant: 20.0),
             seenIcon.widthAnchor.constraint(equalToConstant: 20.0),
             
-            seenCount.trailingAnchor.constraint(equalTo: seenIcon.leadingAnchor, constant: -5.0),
+            seenCount.trailingAnchor.constraint(equalTo: seenView.trailingAnchor, constant: -5.0),
             seenCount.topAnchor.constraint(equalTo: seenView.topAnchor),
             
         ])
         
         contentView.backgroundColor = .lightGray
+        
+        likeView.backgroundColor = .cyan
+        likeView.layer.cornerRadius = 10
+        likeView.layer.masksToBounds = true
+        
+        commentView.backgroundColor = .cyan
+        commentView.layer.cornerRadius = 10
+        commentView.layer.masksToBounds = true
+        
+        shareView.backgroundColor = .cyan
+        shareView.layer.cornerRadius = 10
+        shareView.layer.masksToBounds = true
         
         likeIcon.image = UIImage(systemName: "heart")
         likeCount.text = String(news.likes?.count ?? 0)

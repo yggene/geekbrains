@@ -8,7 +8,7 @@
 import UIKit
 
 class NewsHeaderView: UITableViewHeaderFooterView {
-
+    
     private var avatar = AvatarImage()
     private var nameLabel = UILabel()
     private var dateLabel = UILabel()
@@ -48,8 +48,9 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         
         contentView.backgroundColor = .cyan
         
+        avatar.image = UIImage(named: "3")
         nameLabel.text = "Name label"
-        dateLabel.text = "Text Label"
+        dateLabel.text = new.date.date()
         
     }
 

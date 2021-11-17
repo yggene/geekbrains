@@ -177,11 +177,11 @@
 				1A926BBB26E5244700D8B371 /* Controls */,
 				1A23241526D579BD00B2E43C /* Model */,
 				1ABC351626D6D76B0086B441 /* Reuse */,
+				1A74C34C26F3E005002BAD2A /* View */,
 				1A35C66926C5B9860054456D /* Main.storyboard */,
 				1A35C66E26C5B9860054456D /* LaunchScreen.storyboard */,
 				1A35C66C26C5B9860054456D /* Assets.xcassets */,
 				1A35C67126C5B9860054456D /* Info.plist */,
-				1A74C34C26F3E005002BAD2A /* View */,
 			);
 			path = fakeVKapp;
 			sourceTree = "<group>";
