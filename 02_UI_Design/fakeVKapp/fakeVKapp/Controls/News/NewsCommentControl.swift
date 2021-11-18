@@ -8,7 +8,7 @@
 import UIKit
 
 class NewsCommentControl: UIButton {
-
+    
     // MARK: Private properties
     
     private var commentIcon = UIImageView()
@@ -18,8 +18,8 @@ class NewsCommentControl: UIButton {
     // MARK: Private methods
     
     override init(frame: CGRect) {
-            super.init(frame: frame)
-        }
+        super.init(frame: frame)
+    }
     
     private func setupView() {
         addSubview(commentIcon)
@@ -27,7 +27,7 @@ class NewsCommentControl: UIButton {
         
         commentIcon.translatesAutoresizingMaskIntoConstraints = false
         commentCounter.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         commentIcon.image = UIImage(systemName: "bubble.left")
         commentIcon.tintColor = .systemGray
         commentIcon.frame = bounds
@@ -53,13 +53,13 @@ class NewsCommentControl: UIButton {
     private func animation() {
         UIView.animate(withDuration: 0.1,
                        animations: {
-                        self.transform = self.transform.scaledBy(x: 1.1, y: 1.1)
-                       },
+            self.transform = self.transform.scaledBy(x: 1.1, y: 1.1)
+        },
                        completion: { _ in
-                        UIView.animate(withDuration: 0.1, animations: {
-                            self.transform = CGAffineTransform.identity
-                        })
-                       })
+            UIView.animate(withDuration: 0.1, animations: {
+                self.transform = CGAffineTransform.identity
+            })
+        })
     }
     
     // MARK: Actions
@@ -75,5 +75,5 @@ class NewsCommentControl: UIButton {
         super.init(coder: coder)
         self.setupView()
     }
-
+    
 }

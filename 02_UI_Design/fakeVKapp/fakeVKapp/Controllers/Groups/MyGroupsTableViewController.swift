@@ -70,9 +70,6 @@ class MyGroupsTableViewController: UITableViewController {
             switch result {
             case .success:
                 print("Groups fetch success!")
-                //                self.loadGroupsFromRealm()
-                //                //                self.myGroups = myGroups
-                //                self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
@@ -159,49 +156,50 @@ class MyGroupsTableViewController: UITableViewController {
     // add group on unwind
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         // check segue id
-        if segue.identifier == "addGroupSegue" {
-            // get destination segue
-            guard let allGroupsController = segue.source as?
-                    AllGroupsTableViewController else { return }
-            // get the index of the selected group cell
-            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                // get group
-                let selectedGroup = allGroupsController.popularGroups[indexPath.row]
-                // check if no such group in my list
-                if !myGroups.contains(selectedGroup) {
-                    let networkService = NetworkService()
-                    networkService.joinGroup(withID: selectedGroup.id, completion: { result in
-                        switch result {
-                        case .success(let response):
-                            switch response {
-                            case nil:
-                                print("Already in the group")
-                                self.showAlert(with: response)
-                            case 1:
-                                self.myGroups.append(selectedGroup)
-                                print("Joined!")
-                                self.showAlert(with: response)
-                            default:
-                                print("Unknown error. Code: \(String(describing: response))")
-                            }
-                        case .failure(let requestError):
-                            switch requestError {
-                            case .invalidUrl:
-                                print("Error: Invalid URL detected")
-                            case .errorDecode:
-                                break
-                            case .failedRequest:
-                                print("Error: Request failed")
-                            case .unknownError:
-                                print("Error: Unknown")
-                            case .realmSaveFailure:
-                                print("Error: Could not save to Realm")
-                            }
-                            self.showAlert(with: 0)
+        guard segue.identifier == "addGroupSegue" else { return }
+        // get destination segue
+        guard let allGroupsController = segue.source as?
+                AllGroupsTableViewController else { return }
+        // get the index of the selected group cell
+        if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+            // get group
+            let selectedGroup = allGroupsController.popularGroups[indexPath.row]
+            // check if no such group in my list
+            if !myGroups.contains(selectedGroup) {
+                let networkService = NetworkService()
+                networkService.joinGroup(withID: selectedGroup.id, completion: { result in
+                    switch result {
+                    case .success(let response):
+                        switch response {
+                        case nil:
+                            print("Already in the group")
+                            self.showAlert(with: response)
+                        case 1:
+                            self.myGroups.append(selectedGroup)
+                            print("Joined!")
+                            self.showAlert(with: response)
+                            self.tableView.reloadData()
+                        default:
+                            print("Unknown error. Code: \(String(describing: response))")
                         }
-                    })
-                }
+                    case .failure(let requestError):
+                        switch requestError {
+                        case .invalidUrl:
+                            print("Error: Invalid URL detected")
+                        case .errorDecode:
+                            break
+                        case .failedRequest:
+                            print("Error: Request failed")
+                        case .unknownError:
+                            print("Error: Unknown")
+                        case .realmSaveFailure:
+                            print("Error: Could not save to Realm")
+                        }
+                        self.showAlert(with: 0)
+                    }
+                })
             }
         }
     }
 }
+

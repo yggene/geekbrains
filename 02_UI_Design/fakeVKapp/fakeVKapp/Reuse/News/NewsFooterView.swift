@@ -12,15 +12,15 @@ class NewsFooterView: UITableViewHeaderFooterView {
     
     // MARK: Constants
     
-    private let likeView = UIView()
+    private let likeView = UIButton()
     private let likeIcon = UIImageView()
     private let likeCount = UILabel()
     
-    private let commentView = UIView()
+    private let commentView = UIButton()
     private let commentIcon = UIImageView()
     private let commentCount = UILabel()
     
-    private let shareView = UIView()
+    private let shareView = UIButton()
     private let shareIcon = UIImageView()
     private let shareCount = UILabel()
     
@@ -28,11 +28,9 @@ class NewsFooterView: UITableViewHeaderFooterView {
     private let seenIcon = UIImageView()
     private let seenCount = UILabel()
     
-    private let footerTextHeight = 20.0
     private let footerTextFont = UIFont.systemFont(ofSize: 14.0)
     private let buttonBGColor = UIColor(rgb: 0xF4F5F6)
     private let footerViewCornerRadius = 13.0
-    private let footerViewHeight = 30.0
     
     // MARK: Init
     
@@ -97,7 +95,7 @@ class NewsFooterView: UITableViewHeaderFooterView {
             likeCount.trailingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: -10.0),
             likeCount.centerYAnchor.constraint(equalTo: likeView.centerYAnchor),
 
-            commentView.leadingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: 15.0),
+            commentView.leadingAnchor.constraint(equalTo: likeView.trailingAnchor, constant: 10.0),
             commentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
             commentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
             commentView.heightAnchor.constraint(equalToConstant: 30.0),
@@ -111,7 +109,7 @@ class NewsFooterView: UITableViewHeaderFooterView {
             commentCount.trailingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: -10.0),
             commentCount.centerYAnchor.constraint(equalTo: commentView.centerYAnchor),
 
-            shareView.leadingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: 15.0),
+            shareView.leadingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: 10.0),
             shareView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
             shareView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
             shareView.heightAnchor.constraint(equalToConstant: 30.0),
@@ -152,7 +150,7 @@ class NewsFooterView: UITableViewHeaderFooterView {
         shareView.layer.cornerRadius = footerViewCornerRadius
         shareView.layer.masksToBounds = true
         
-        likeIcon.image = UIImage(systemName: "heart")
+        likeIcon.image = news.likes?.userLikes == 0 ? UIImage(systemName: "heart") : UIImage(systemName: "heart.fill")
         likeCount.text = String(news.likes?.count ?? 0)
         likeCount.font = footerTextFont
         
