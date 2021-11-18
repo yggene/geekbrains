@@ -13,6 +13,7 @@ struct Newsfeed: Codable {
 
 // MARK: News
 final class News {
+    var sourceId: Int
     var date: Double
     var text: String
     var attachments: [Attachments]?
@@ -33,6 +34,7 @@ final class News {
 
 extension News: Codable {
     enum CodingKeys: String, CodingKey {
+        case sourceId = "source_id"
         case date
         case text
         case attachments

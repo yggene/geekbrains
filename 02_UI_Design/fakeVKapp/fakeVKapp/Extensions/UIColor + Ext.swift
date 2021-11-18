@@ -3,6 +3,7 @@
 //  fakeVKapp
 //
 //  Created by Evgeny Alekseev on 18.11.2021.
+//  Taken from https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values/24263296
 //
 
 import UIKit

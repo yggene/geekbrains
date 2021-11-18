@@ -67,7 +67,6 @@ class NewsTableViewController: UITableViewController {
             switch result {
             case .success(let myNews):
                 self.myNews = myNews//.filter({ $0.markedAsAds == 0 })
-                //self.tableView.reloadData()
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
