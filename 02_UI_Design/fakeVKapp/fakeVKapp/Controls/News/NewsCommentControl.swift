@@ -17,9 +17,16 @@ class NewsCommentControl: UIButton {
     
     // MARK: Private methods
     
+    override init(frame: CGRect) {
+            super.init(frame: frame)
+        }
+    
     private func setupView() {
         addSubview(commentIcon)
         addSubview(commentCounter)
+        
+        commentIcon.translatesAutoresizingMaskIntoConstraints = false
+        commentCounter.translatesAutoresizingMaskIntoConstraints = false
     
         commentIcon.image = UIImage(systemName: "bubble.left")
         commentIcon.tintColor = .systemGray
