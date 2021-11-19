@@ -9,33 +9,6 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
-    // MARK: Dummy for header/footer
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerView") as? NewsHeaderView else { return UIView() }
-        
-        view.configure(with: myNews[section])
-        
-        return view
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        60.0
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footerView") as? NewsFooterView else { return UIView() }
-        
-        view.configure(with: myNews[section])
-        
-        return view
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        60.0
-    }
-    
     // MARK: Variables
     
     private let networkService = NetworkService()
@@ -117,5 +90,32 @@ extension NewsTableViewController {
         heightForRowAt indexPath: IndexPath) -> CGFloat {
             return UITableView.automaticDimension
         }
+    
+    // MARK: Header & Footer config
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerView") as? NewsHeaderView else { return UIView() }
+        
+        view.configure(with: myNews[section])
+        
+        return view
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        60.0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footerView") as? NewsFooterView else { return UIView() }
+        
+        view.configure(with: myNews[section])
+        
+        return view
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        60.0
+    }
     
 }
