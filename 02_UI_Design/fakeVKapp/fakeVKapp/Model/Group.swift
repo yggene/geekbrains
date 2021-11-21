@@ -16,6 +16,10 @@ struct popularGroups: Codable {
     var items: [Group]
 }
 
+struct VKGroup: Codable {
+    var items: [Group]
+}
+
 final class Group: Object {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String

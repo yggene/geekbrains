@@ -30,6 +30,7 @@ class NewsTableViewController: UITableViewController {
                            forHeaderFooterViewReuseIdentifier: "headerView")
         
         tableView.separatorStyle = .none
+        
         fetchNews()
 
     }
@@ -97,6 +98,15 @@ extension NewsTableViewController {
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerView") as? NewsHeaderView else { return UIView() }
         
         view.configure(with: myNews[section])
+        
+        if myNews[section].sourceId > 0 {
+           // get user onfo
+        } else {
+            // get group info
+        }
+        
+        
+        
         
         return view
     }

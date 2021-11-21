@@ -27,25 +27,20 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        loadFriendsFromRealm()
-        tableView.reloadData()
+        fetchFriends()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         friendsNotification?.invalidate()
     }
-
     
     // MARK: Methods
     
-    // get friends from Realm
     private func loadFriendsFromRealm() {
         
-        fetchFriends()
-        
-        self.friends = try? RealmService.load(typeOf: Friend.self)
-        self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+        friends = try? RealmService.load(typeOf: Friend.self)
+        friendsDictionary = self.updateFriendsDictionary(with: nil)
         
         self.friendsNotification = friends?.observe { [weak self] realmChange in
             switch realmChange {
@@ -69,13 +64,14 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
-        
+    
     // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
             guard self != nil else { return }
             switch result {
             case .success:
+                self?.loadFriendsFromRealm()
                 print("Fetch friends successful!")
             case .failure(let requestError):
                 switch requestError {

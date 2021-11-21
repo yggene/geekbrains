@@ -21,8 +21,8 @@ class MyGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        fetchMyGroupsInfo()
         loadGroupsFromRealm()
-        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -138,7 +138,6 @@ class MyGroupsTableViewController: UITableViewController {
     // selecting cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     // deleting groups from profile

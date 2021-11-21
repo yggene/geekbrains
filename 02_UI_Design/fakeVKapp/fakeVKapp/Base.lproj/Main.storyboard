@@ -364,18 +364,18 @@
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="2Pn-bb-g0F" firstAttribute="centerY" secondItem="JcI-DT-ciF" secondAttribute="centerY" id="45H-pE-pmP"/>
+                                                <constraint firstItem="2Pn-bb-g0F" firstAttribute="leading" secondItem="JcI-DT-ciF" secondAttribute="leading" constant="-16" id="P6i-ZO-FdW"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="8lz-hI-WpL" firstAttribute="top" secondItem="dIL-6p-1ma" secondAttribute="topMargin" constant="4" id="3dP-wb-NKU"/>
-                                        <constraint firstItem="2Pn-bb-g0F" firstAttribute="centerY" secondItem="dIL-6p-1ma" secondAttribute="centerY" id="7Wm-CG-se3"/>
                                         <constraint firstItem="YOj-Pn-K0a" firstAttribute="top" secondItem="8lz-hI-WpL" secondAttribute="bottom" constant="2" id="ASJ-ri-Qsm"/>
-                                        <constraint firstItem="JcI-DT-ciF" firstAttribute="top" secondItem="dIL-6p-1ma" secondAttribute="topMargin" constant="2" id="H30-wt-KUm"/>
-                                        <constraint firstItem="JcI-DT-ciF" firstAttribute="leading" secondItem="dIL-6p-1ma" secondAttribute="leadingMargin" constant="10" id="W70-nk-4aY"/>
-                                        <constraint firstItem="2Pn-bb-g0F" firstAttribute="leading" secondItem="dIL-6p-1ma" secondAttribute="leading" constant="10" id="hbn-gw-M3Q"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YOj-Pn-K0a" secondAttribute="trailing" constant="20" symbolic="YES" id="iIC-uH-2eP"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8lz-hI-WpL" secondAttribute="trailing" constant="20" symbolic="YES" id="jtj-ea-QCY"/>
-                                        <constraint firstItem="JcI-DT-ciF" firstAttribute="centerY" secondItem="dIL-6p-1ma" secondAttribute="centerY" id="nG3-sx-exK"/>
+                                        <constraint firstItem="JcI-DT-ciF" firstAttribute="centerY" secondItem="dIL-6p-1ma" secondAttribute="centerY" id="E6n-B3-aMK"/>
+                                        <constraint firstItem="8lz-hI-WpL" firstAttribute="top" secondItem="dIL-6p-1ma" secondAttribute="topMargin" constant="4" id="W8A-jC-LKN"/>
+                                        <constraint firstItem="JcI-DT-ciF" firstAttribute="top" secondItem="dIL-6p-1ma" secondAttribute="topMargin" constant="2" id="ZfO-yi-eDf"/>
+                                        <constraint firstItem="JcI-DT-ciF" firstAttribute="leading" secondItem="dIL-6p-1ma" secondAttribute="leadingMargin" constant="10" id="eJv-8X-A2c"/>
                                         <constraint firstItem="8lz-hI-WpL" firstAttribute="leading" secondItem="YOj-Pn-K0a" secondAttribute="leading" id="nPV-MN-ar3"/>
                                         <constraint firstItem="8lz-hI-WpL" firstAttribute="leading" secondItem="2Pn-bb-g0F" secondAttribute="trailing" constant="10" id="wYh-0e-ug0"/>
                                         <constraint firstItem="8lz-hI-WpL" firstAttribute="leading" secondItem="JcI-DT-ciF" secondAttribute="trailing" constant="6" id="woh-6Z-cSA"/>
@@ -395,6 +395,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Friends" id="4B4-EL-mr3"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="VM4-eF-RQI">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDU-nZ-3D1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

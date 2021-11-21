@@ -9,8 +9,8 @@ import UIKit
 
 class NewsHeaderView: UITableViewHeaderFooterView {
     
-    private var avatar = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 46.0, height: 46.0))
-    private var nameLabel = UILabel()
+    var avatar = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 46.0, height: 46.0))
+    var nameLabel = UILabel()
     private var dateLabel = UILabel()
     
     override init(reuseIdentifier: String?) {
