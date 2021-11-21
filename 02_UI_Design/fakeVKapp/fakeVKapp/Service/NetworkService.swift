@@ -61,10 +61,10 @@ final class NetworkService {
             } else if let data = data {
                 do {
                     // Decode to an array of friends
-                    let friend = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
+                    let friend = try JSONDecoder().decode(VKResponse<[Friend]>.self, from: data)
                     
                     DispatchQueue.main.async {
-                        completion(.success(friend.response.items))
+                        completion(.success(friend.response))
                     }
                 } catch {
                     // Send error when decoding
@@ -98,10 +98,10 @@ final class NetworkService {
             } else if let data = data {
                 do {
                     // Decode to an array of friends
-                    let group = try JSONDecoder().decode(VKResponse<VKGroup>.self, from: data)
+                    let group = try JSONDecoder().decode(VKResponse<[Group]>.self, from: data)
                     
                     DispatchQueue.main.async {
-                        completion(.success(group.response.items))
+                        completion(.success(group.response))
                     }
                 } catch {
                     // Send error when decoding
