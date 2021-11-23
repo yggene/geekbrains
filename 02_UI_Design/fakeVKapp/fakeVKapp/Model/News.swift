@@ -9,6 +9,14 @@ import UIKit
 
 struct Newsfeed: Codable {
     var items: [News]
+    var profiles: [User]
+    var groups: [Community]
+    
+    enum CodingKeys: String, CodingKey {
+        case items
+        case profiles
+        case groups
+    }
 }
 
 // MARK: News

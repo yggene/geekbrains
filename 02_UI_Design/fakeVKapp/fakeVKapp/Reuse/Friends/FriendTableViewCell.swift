@@ -15,7 +15,7 @@ class FriendTableViewCell: UITableViewCell {
     @IBOutlet var originLabel: UILabel!
 
     
-    func configure(with friend: Friend) {
+    func configure(with friend: User) {
         Nuke.loadImage(with: friend.avatarURL, into: avatarImageView)
         nameLabel?.text = friend.firstName + " " + friend.lastName
         originLabel?.text = friend.city?.title ?? "🌎"
@@ -24,9 +24,4 @@ class FriendTableViewCell: UITableViewCell {
         accessoryType = .disclosureIndicator
         originLabel?.textColor = UIColor.systemGray
     }
-    
-    //    override class func awakeFromNib() {
-    //        // add animation here
-    //    }
-    
 }

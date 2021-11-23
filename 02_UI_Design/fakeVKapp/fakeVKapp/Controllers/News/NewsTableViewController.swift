@@ -13,13 +13,13 @@ class NewsTableViewController: UITableViewController {
     // MARK: Variables
     
     private let networkService = NetworkService()
-    private var selectedUser = Friend()
-    private var selectedGroup = Group()
     private var myNews = [News]() {
         didSet {
             tableView.reloadData()
         }
     }
+    private var newsProfiles = [User]()
+    private var newsCommunities = [Community]()
     
     // MARK: - Lifecycle
     
@@ -43,7 +43,9 @@ class NewsTableViewController: UITableViewController {
             guard let self = self else { return }
             switch result {
             case .success(let myNews):
-                self.myNews = myNews//.filter({ $0.markedAsAds == 0 })
+                self.myNews = myNews.items //.filter({ $0.markedAsAds == 0 })
+                self.newsProfiles = myNews.profiles
+                self.newsCommunities = myNews.groups
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
@@ -61,53 +63,6 @@ class NewsTableViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
-    
-    private func getUserInfo(withID id: Int) {
-        networkService.getUserInfo(withID: id) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let selectedUser):
-                self.selectedUser = selectedUser[0]
-            case .failure(let requestError):
-                switch requestError {
-                case .invalidUrl:
-                    print("Error: Invalid URL detected")
-                case .errorDecode:
-                    print("Error: Decode problem. Check the JSON data")
-                case .failedRequest:
-                    print("Error: Request failed")
-                case .unknownError:
-                    print("Error: Unknown")
-                case .realmSaveFailure:
-                    print("Error: Could not save to Realm")
-                }
-            }
-        }
-    }
-    
-    private func getGroupInfo(withID id: Int) {
-        networkService.getGroupInfo(withID: id) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let selectedGroup):
-                self.selectedGroup = selectedGroup[0]
-            case .failure(let requestError):
-                switch requestError {
-                case .invalidUrl:
-                    print("Error: Invalid URL detected")
-                case .errorDecode:
-                    print("Error: Decode problem. Check the JSON data")
-                case .failedRequest:
-                    print("Error: Request failed")
-                case .unknownError:
-                    print("Error: Unknown")
-                case .realmSaveFailure:
-                    print("Error: Could not save to Realm")
-                }
-            }
-        }
-    }
-    
 }
 
 extension NewsTableViewController {
@@ -150,13 +105,12 @@ extension NewsTableViewController {
         view.configure(with: myNews[section])
         
         if myNews[section].sourceId > 0 {
-            getUserInfo(withID: myNews[section].sourceId)
-            Nuke.loadImage(with: selectedUser.avatarURL, into: view.avatar)
-            view.nameLabel.text = selectedUser.firstName + " " + selectedUser.lastName
+            Nuke.loadImage(with: newsProfiles.first(where: { $0.id == myNews[section].sourceId })?.avatarURL, into: view.avatar)
+            view.nameLabel.text = newsProfiles.first(where: { $0.id == myNews[section].sourceId })!.firstName + " " +
+            newsProfiles.first(where: { $0.id == myNews[section].sourceId })!.lastName
         } else {
-            getGroupInfo(withID: myNews[section].sourceId)
-            Nuke.loadImage(with: selectedGroup.photoURL, into: view.avatar)
-            view.nameLabel.text = selectedGroup.name
+            Nuke.loadImage(with: newsCommunities.first(where: { $0.id == -myNews[section].sourceId })?.photoURL, into: view.avatar)
+            view.nameLabel.text = newsCommunities.first(where: { $0.id == -myNews[section].sourceId })?.name
         }
         
         return view

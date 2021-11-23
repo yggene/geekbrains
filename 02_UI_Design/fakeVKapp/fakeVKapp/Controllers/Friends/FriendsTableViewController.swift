@@ -13,9 +13,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Variables
     
     private let networkService = NetworkService()
-    private var friends: Results<Friend>?
+    private var friends: Results<User>?
     private var friendsNotification: NotificationToken?
-    private var friendsDictionary = [Character:[Friend]]()
+    private var friendsDictionary = [Character:[User]]()
     private var lastNamesFirstLetters: [Character] {
         get {
             friendsDictionary.keys.sorted()
@@ -39,7 +39,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     private func loadFriendsFromRealm() {
         
-        friends = try? RealmService.load(typeOf: Friend.self)
+        friends = try? RealmService.load(typeOf: User.self)
         friendsDictionary = self.updateFriendsDictionary(with: nil)
         
         self.friendsNotification = friends?.observe { [weak self] realmChange in
@@ -90,7 +90,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
+    private func updateFriendsDictionary(with searchText: String?) -> [Character:[User]]{
         var friendsCopy = Array(friends!)
         if let text = searchText?.lowercased(), searchText != "" {
             friendsCopy = friendsCopy.filter{

@@ -14,7 +14,7 @@ class FriendPhotoCollectionViewController: UICollectionViewController,
     
     // MARK: Variables
     
-    var friendProfile: Friend?
+    var friendProfile: User?
     var userPhotos = [Photo]()
     @IBAction func friendLikeButton(_ sender: Any) {
     }

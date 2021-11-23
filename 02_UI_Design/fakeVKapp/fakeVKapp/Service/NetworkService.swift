@@ -37,85 +37,9 @@ final class NetworkService {
         return constructor
     }()
     
-    // MARK: Get user info
-    func getUserInfo(withID userID: Int,
-                     completion: @escaping (Result<[Friend], RequestErrors>) -> Void) {
-        var requestURL = urlConstructor
-        requestURL.path += "users.get"
-        requestURL.queryItems?.append(
-            URLQueryItem(name: "user.ids", value: String(userID))
-        )
-        requestURL.queryItems?.append(
-            URLQueryItem(name: "fields", value: "photo_200_orig")
-        )
-        
-        guard let url = requestURL.url else { return completion(.failure(.invalidUrl)) }
-        
-        session.dataTask(with: url) { data, response, error in
-            if let response = response as? HTTPURLResponse {
-                print("Status code: \(response.statusCode)")
-            }
-            
-            if error != nil {
-                completion(.failure(.failedRequest))
-            } else if let data = data {
-                do {
-                    // Decode to an array of friends
-                    let friend = try JSONDecoder().decode(VKResponse<[Friend]>.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        completion(.success(friend.response))
-                    }
-                } catch {
-                    // Send error when decoding
-                    completion(.failure(.errorDecode))
-                }
-            } else {
-                completion(.failure(.unknownError))
-            }
-        }.resume()
-    }
-    
-    // MARK: Get group info
-    
-    func getGroupInfo(withID groupID: Int,
-                     completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
-        var requestURL = urlConstructor
-        requestURL.path += "groups.getById"
-        requestURL.queryItems?.append(
-            URLQueryItem(name: "user.ids", value: String(-groupID))
-        )
-        
-        guard let url = requestURL.url else { return completion(.failure(.invalidUrl)) }
-        
-        session.dataTask(with: url) { data, response, error in
-            if let response = response as? HTTPURLResponse {
-                print("Status code: \(response.statusCode)")
-            }
-            
-            if error != nil {
-                completion(.failure(.failedRequest))
-            } else if let data = data {
-                do {
-                    // Decode to an array of friends
-                    let group = try JSONDecoder().decode(VKResponse<[Group]>.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        completion(.success(group.response))
-                    }
-                } catch {
-                    // Send error when decoding
-                    completion(.failure(.errorDecode))
-                }
-            } else {
-                completion(.failure(.unknownError))
-            }
-        }.resume()
-    }
-    
     // MARK: Get friends
     func getFriends(ofUser userID: Int = Session.instance.userID,
-                    completion: @escaping (Result<[Friend], RequestErrors>) -> Void) {
+                    completion: @escaping (Result<[User], RequestErrors>) -> Void) {
         // compose an url
         var requestURL = urlConstructor
         requestURL.path += "friends.get"
@@ -127,7 +51,7 @@ final class NetworkService {
         requestURL.queryItems?.append(
             URLQueryItem(
                 name: "fields",
-                value: "city,photo_200_orig")
+                value: "city,photo_100")
         )
         
         // check if url is correct
@@ -145,7 +69,7 @@ final class NetworkService {
                 // Successful request
                 do {
                     // Decode to an array of friends
-                    let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
+                    let friends = try JSONDecoder().decode(VKResponse<Users>.self, from: data)
                     
                     DispatchQueue.main.async {
                         // save friends to Realm object
@@ -168,7 +92,7 @@ final class NetworkService {
     }
     
     // MARK: Get popular groups
-    func getPopularGroups(completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
+    func getPopularGroups(completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.path += "groups.getCatalog"
         requestUrl.queryItems?.append(
@@ -211,7 +135,7 @@ final class NetworkService {
     
     // MARK: Get user groups
     func getGroups(ofUser userID: Int = Session.instance.userID,
-                   completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
+                   completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.path += "groups.get"
         
@@ -325,7 +249,7 @@ final class NetworkService {
     
     // MARK: Get newsfeed
     
-    func getNews(completion: @escaping (Result<[News], RequestErrors>) -> Void) {
+    func getNews(completion: @escaping (Result<Newsfeed, RequestErrors>) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.path += "newsfeed.get"
         
@@ -337,7 +261,7 @@ final class NetworkService {
         requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "filters",
-                value: "post, photo")
+                value: "post,photo")
         )
         requestUrl.queryItems?.append(
             URLQueryItem(
@@ -359,11 +283,11 @@ final class NetworkService {
             } else if let data = data {
                 // Successful request
                 do {
-                    // Decode to an array of news
+                    // Decode to a Newsfeed object containing three arrays: Items, Profiles, Groups
                     let newsFeed = try JSONDecoder().decode(VKResponse<Newsfeed>.self, from: data)
                     
                     DispatchQueue.main.async {
-                        completion(.success(newsFeed.response.items))
+                        completion(.success(newsFeed.response))
                     }
                     
                 } catch {
@@ -423,7 +347,7 @@ final class NetworkService {
     
     // MARK: [TODO] Search groups
     func searchGroups(groupSearchQuery: String,
-                      completion: @escaping ([Group]) -> Void) {
+                      completion: @escaping ([Community]) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.queryItems?.append(
             URLQueryItem(

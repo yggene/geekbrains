@@ -13,7 +13,7 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: Variables
     
     private let networkService = NetworkService()
-    private var myGroups = [Group]()
+    private var myGroups = [Community]()
     private var myGroupsNotification: NotificationToken?
     
     // MARK: Lifecycle
@@ -38,7 +38,7 @@ class MyGroupsTableViewController: UITableViewController {
         
         fetchMyGroupsInfo()
         
-        let tempGroups = try? RealmService.load(typeOf: Group.self)
+        let tempGroups = try? RealmService.load(typeOf: Community.self)
         
         self.myGroupsNotification = tempGroups?.observe { [weak self] realmChange in
             switch realmChange {

@@ -9,8 +9,8 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     
-    public var popularGroups = [Group]()
-    private var groupsSearchResult = [Group]()
+    public var popularGroups = [Community]()
+    private var groupsSearchResult = [Community]()
     private let networkService = NetworkService()
     
     // MARK: Lifecycle
@@ -53,7 +53,7 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Table view data source
     
-    private func updateAllGroups(with searchText: String?) -> [Group] {
+    private func updateAllGroups(with searchText: String?) -> [Community] {
         var groupsCopy = popularGroups
         if let text = searchText?.lowercased(), searchText != "" {
             groupsCopy = groupsCopy.filter{ $0.name.lowercased().contains(text) }

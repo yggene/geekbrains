@@ -8,11 +8,11 @@
 import Foundation
 import RealmSwift
 
-struct Friends: Codable {
-    var items: [Friend]
+struct Users: Codable {
+    var items: [User]
 }
 
-class Friend: Object, Codable {
+class User: Object, Codable {
     @Persisted(primaryKey: true) var id: Int = 0
     @Persisted(indexed: true) var firstName: String = ""
     @Persisted(indexed: true) var lastName: String = ""
@@ -27,7 +27,7 @@ class Friend: Object, Codable {
         case id
         case firstName = "first_name"
         case lastName = "last_name"
-        case avatar = "photo_200_orig"
+        case avatar = "photo_100"
         case city
     }
 }
