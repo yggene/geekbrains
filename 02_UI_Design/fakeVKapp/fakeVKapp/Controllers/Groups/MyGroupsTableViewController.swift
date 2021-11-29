@@ -13,7 +13,7 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: Variables
     
     private let networkService = NetworkService()
-    private var myGroups = [Group]()
+    private var myGroups = [Community]()
     private var myGroupsNotification: NotificationToken?
     
     // MARK: Lifecycle
@@ -21,8 +21,8 @@ class MyGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        fetchMyGroupsInfo()
         loadGroupsFromRealm()
-        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -38,7 +38,7 @@ class MyGroupsTableViewController: UITableViewController {
         
         fetchMyGroupsInfo()
         
-        let tempGroups = try? RealmService.load(typeOf: Group.self)
+        let tempGroups = try? RealmService.load(typeOf: Community.self)
         
         self.myGroupsNotification = tempGroups?.observe { [weak self] realmChange in
             switch realmChange {
@@ -138,7 +138,6 @@ class MyGroupsTableViewController: UITableViewController {
     // selecting cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     // deleting groups from profile

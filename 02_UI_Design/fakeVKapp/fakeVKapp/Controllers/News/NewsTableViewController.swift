@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class NewsTableViewController: UITableViewController {
     
@@ -17,6 +18,8 @@ class NewsTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
+    private var newsProfiles = [User]()
+    private var newsCommunities = [Community]()
     
     // MARK: - Lifecycle
     
@@ -30,8 +33,9 @@ class NewsTableViewController: UITableViewController {
                            forHeaderFooterViewReuseIdentifier: "headerView")
         
         tableView.separatorStyle = .none
+        
         fetchNews()
-
+        
     }
     
     private func fetchNews() {
@@ -39,7 +43,9 @@ class NewsTableViewController: UITableViewController {
             guard let self = self else { return }
             switch result {
             case .success(let myNews):
-                self.myNews = myNews//.filter({ $0.markedAsAds == 0 })
+                self.myNews = myNews.items //.filter({ $0.markedAsAds == 0 })
+                self.newsProfiles = myNews.profiles
+                self.newsCommunities = myNews.groups
             case .failure(let requestError):
                 switch requestError {
                 case .invalidUrl:
@@ -98,9 +104,18 @@ extension NewsTableViewController {
         
         view.configure(with: myNews[section])
         
+        if myNews[section].sourceId > 0 {
+            Nuke.loadImage(with: newsProfiles.first(where: { $0.id == myNews[section].sourceId })?.avatarURL, into: view.avatar)
+            view.nameLabel.text = newsProfiles.first(where: { $0.id == myNews[section].sourceId })!.firstName + " " +
+            newsProfiles.first(where: { $0.id == myNews[section].sourceId })!.lastName
+        } else {
+            Nuke.loadImage(with: newsCommunities.first(where: { $0.id == -myNews[section].sourceId })?.photoURL, into: view.avatar)
+            view.nameLabel.text = newsCommunities.first(where: { $0.id == -myNews[section].sourceId })?.name
+        }
+        
         return view
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         60.0
     }

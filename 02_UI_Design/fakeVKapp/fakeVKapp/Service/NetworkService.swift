@@ -39,22 +39,23 @@ final class NetworkService {
     
     // MARK: Get friends
     func getFriends(ofUser userID: Int = Session.instance.userID,
-                    completion: @escaping (Result<[Friend], RequestErrors>) -> Void) {
+                    completion: @escaping (Result<[User], RequestErrors>) -> Void) {
         // compose an url
-        urlConstructor.path += "friends.get"
-        urlConstructor.queryItems?.append(
+        var requestURL = urlConstructor
+        requestURL.path += "friends.get"
+        requestURL.queryItems?.append(
             URLQueryItem(
                 name: "user_id",
                 value: String(userID))
         )
-        urlConstructor.queryItems?.append(
+        requestURL.queryItems?.append(
             URLQueryItem(
                 name: "fields",
-                value: "city,photo_200_orig")
+                value: "city,photo_100")
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
+        guard let url = requestURL.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -68,7 +69,7 @@ final class NetworkService {
                 // Successful request
                 do {
                     // Decode to an array of friends
-                    let friends = try JSONDecoder().decode(VKResponse<Friends>.self, from: data)
+                    let friends = try JSONDecoder().decode(VKResponse<Users>.self, from: data)
                     
                     DispatchQueue.main.async {
                         // save friends to Realm object
@@ -91,17 +92,17 @@ final class NetworkService {
     }
     
     // MARK: Get popular groups
-    func getPopularGroups(completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
-        urlConstructor.path += "groups.getCatalog"
-        
-        urlConstructor.queryItems?.append(
+    func getPopularGroups(completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
+        var requestUrl = urlConstructor
+        requestUrl.path += "groups.getCatalog"
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "category_id",
                 value: "0")
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
+        guard let url = requestUrl.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -134,27 +135,28 @@ final class NetworkService {
     
     // MARK: Get user groups
     func getGroups(ofUser userID: Int = Session.instance.userID,
-                   completion: @escaping (Result<[Group], RequestErrors>) -> Void) {
-        urlConstructor.path += "groups.get"
+                   completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
+        var requestUrl = urlConstructor
+        requestUrl.path += "groups.get"
         
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "user_id",
                 value: String(userID))
         )
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "extended",
                 value: "1")
         )
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "fields",
                 value: "name,photo_200")
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
+        guard let url = requestUrl.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -193,21 +195,22 @@ final class NetworkService {
     // MARK: Get all photos
     func getPhotos(ofUser userID: Int = Session.instance.userID,
                    completion: @escaping (Result<[Photo], RequestErrors>) -> Void) {
-        urlConstructor.path += "photos.getAll"
+        var requestUrl = urlConstructor
+        requestUrl.path += "photos.getAll"
         
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "owner_id",
                 value: String(userID))
         )
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "extended",
                 value: "1")
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
+        guard let url = requestUrl.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -246,27 +249,28 @@ final class NetworkService {
     
     // MARK: Get newsfeed
     
-    func getNews(completion: @escaping (Result<[News], RequestErrors>) -> Void) {
-        urlConstructor.path += "newsfeed.get"
+    func getNews(completion: @escaping (Result<Newsfeed, RequestErrors>) -> Void) {
+        var requestUrl = urlConstructor
+        requestUrl.path += "newsfeed.get"
         
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "user_id",
                 value: String(Session.instance.userID))
         )
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "filters",
-                value: "post, photo")
+                value: "post,photo")
         )
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "max_photos",
                 value: "1")
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else { return completion(.failure(.invalidUrl)) }
+        guard let url = requestUrl.url else { return completion(.failure(.invalidUrl)) }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -279,11 +283,11 @@ final class NetworkService {
             } else if let data = data {
                 // Successful request
                 do {
-                    // Decode to an array of news
+                    // Decode to a Newsfeed object containing three arrays: Items, Profiles, Groups
                     let newsFeed = try JSONDecoder().decode(VKResponse<Newsfeed>.self, from: data)
                     
                     DispatchQueue.main.async {
-                        completion(.success(newsFeed.response.items))
+                        completion(.success(newsFeed.response))
                     }
                     
                 } catch {
@@ -299,16 +303,17 @@ final class NetworkService {
     // MARK: Join group
     func joinGroup(withID groupID: Int,
                    completion: @escaping (Result<Int?, RequestErrors>) -> Void) {
-        urlConstructor.path += "groups.join"
+        var requestUrl = urlConstructor
+        requestUrl.path += "groups.join"
         
-        urlConstructor.queryItems?.append(
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "group_id",
                 value: String(groupID))
         )
         
         // check if url is correct
-        guard let url = urlConstructor.url else { return }
+        guard let url = requestUrl.url else { return }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response as? HTTPURLResponse {
@@ -342,9 +347,9 @@ final class NetworkService {
     
     // MARK: [TODO] Search groups
     func searchGroups(groupSearchQuery: String,
-                      completion: @escaping ([Group]) -> Void) {
-        
-        urlConstructor.queryItems?.append(
+                      completion: @escaping ([Community]) -> Void) {
+        var requestUrl = urlConstructor
+        requestUrl.queryItems?.append(
             URLQueryItem(
                 name: "q",
                 value: groupSearchQuery)

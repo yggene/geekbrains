@@ -9,14 +9,14 @@ import Foundation
 import RealmSwift
 
 struct UserGroups: Codable {
-    var items: [Group]
+    var items: [Community]
 }
 
 struct popularGroups: Codable {
-    var items: [Group]
+    var items: [Community]
 }
 
-final class Group: Object {
+final class Community: Object {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String
     @Persisted var photo: String
@@ -26,7 +26,7 @@ final class Group: Object {
     }
 }
 
-extension Group: Codable {
+extension Community: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case name

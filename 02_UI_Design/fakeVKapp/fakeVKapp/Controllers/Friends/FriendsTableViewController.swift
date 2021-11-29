@@ -13,9 +13,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Variables
     
     private let networkService = NetworkService()
-    private var friends: Results<Friend>?
+    private var friends: Results<User>?
     private var friendsNotification: NotificationToken?
-    private var friendsDictionary = [Character:[Friend]]()
+    private var friendsDictionary = [Character:[User]]()
     private var lastNamesFirstLetters: [Character] {
         get {
             friendsDictionary.keys.sorted()
@@ -27,25 +27,20 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        loadFriendsFromRealm()
-        tableView.reloadData()
+        fetchFriends()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         friendsNotification?.invalidate()
     }
-
     
     // MARK: Methods
     
-    // get friends from Realm
     private func loadFriendsFromRealm() {
         
-        fetchFriends()
-        
-        self.friends = try? RealmService.load(typeOf: Friend.self)
-        self.friendsDictionary = self.updateFriendsDictionary(with: nil)
+        friends = try? RealmService.load(typeOf: User.self)
+        friendsDictionary = self.updateFriendsDictionary(with: nil)
         
         self.friendsNotification = friends?.observe { [weak self] realmChange in
             switch realmChange {
@@ -69,13 +64,14 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
-        
+    
     // get friends data on API call
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
             guard self != nil else { return }
             switch result {
             case .success:
+                self?.loadFriendsFromRealm()
                 print("Fetch friends successful!")
             case .failure(let requestError):
                 switch requestError {
@@ -94,7 +90,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    private func updateFriendsDictionary(with searchText: String?) -> [Character:[Friend]]{
+    private func updateFriendsDictionary(with searchText: String?) -> [Character:[User]]{
         var friendsCopy = Array(friends!)
         if let text = searchText?.lowercased(), searchText != "" {
             friendsCopy = friendsCopy.filter{

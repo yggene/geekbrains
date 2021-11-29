@@ -13,7 +13,7 @@ class AllGroupsTableViewCell: UITableViewCell {
     @IBOutlet var allGroupsImageView: UIImageView!
     @IBOutlet var allGroupsNameLabel: UILabel!
     
-    func configure(with group: Group) {
+    func configure(with group: Community) {
         Nuke.loadImage(with: group.photoURL, into: allGroupsImageView)
         allGroupsNameLabel.text = group.name
         
