@@ -106,8 +106,10 @@ extension NewsTableViewController {
         
         if myNews[section].sourceId > 0 {
             Nuke.loadImage(with: newsProfiles.first(where: { $0.id == myNews[section].sourceId })?.avatarURL, into: view.avatar)
-            view.nameLabel.text = newsProfiles.first(where: { $0.id == myNews[section].sourceId })!.firstName + " " +
-            newsProfiles.first(where: { $0.id == myNews[section].sourceId })!.lastName
+            view.nameLabel.text = newsProfiles.first(
+                where: { $0.id == myNews[section].sourceId })!
+                .firstName + " " + newsProfiles.first(
+                    where: { $0.id == myNews[section].sourceId })!.lastName
         } else {
             Nuke.loadImage(with: newsCommunities.first(where: { $0.id == -myNews[section].sourceId })?.photoURL, into: view.avatar)
             view.nameLabel.text = newsCommunities.first(where: { $0.id == -myNews[section].sourceId })?.name
