@@ -13,6 +13,10 @@
 		1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */; };
 		1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */; };
 		1A23241726D5816700B2E43C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A23241626D5816700B2E43C /* User.swift */; };
+		1A31DCDF2756E35300992D86 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31DCDE2756E35300992D86 /* AsyncOperation.swift */; };
+		1A31DCE12756E45600992D86 /* FetchFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31DCE02756E45600992D86 /* FetchFriends.swift */; };
+		1A31DCE32756E46000992D86 /* ParseFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31DCE22756E46000992D86 /* ParseFriends.swift */; };
+		1A31DCE52756E47200992D86 /* SaveFriendsToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A31DCE42756E47200992D86 /* SaveFriendsToRealm.swift */; };
 		1A35C66426C5B9860054456D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A35C66326C5B9860054456D /* AppDelegate.swift */; };
 		1A35C66626C5B9860054456D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A35C66526C5B9860054456D /* SceneDelegate.swift */; };
 		1A35C66826C5B9860054456D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A35C66726C5B9860054456D /* LoginViewController.swift */; };
@@ -59,6 +63,10 @@
 		1A1AF35826F16A36001E1CE8 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		1A1AF35B26F2877F001E1CE8 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A23241626D5816700B2E43C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1A31DCDE2756E35300992D86 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		1A31DCE02756E45600992D86 /* FetchFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFriends.swift; sourceTree = "<group>"; };
+		1A31DCE22756E46000992D86 /* ParseFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFriends.swift; sourceTree = "<group>"; };
+		1A31DCE42756E47200992D86 /* SaveFriendsToRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFriendsToRealm.swift; sourceTree = "<group>"; };
 		1A35C66026C5B9850054456D /* fakeVKapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fakeVKapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A35C66326C5B9860054456D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A35C66526C5B9860054456D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +161,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1A31DCDD2756E33200992D86 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				1A31DCDE2756E35300992D86 /* AsyncOperation.swift */,
+				1A31DCE02756E45600992D86 /* FetchFriends.swift */,
+				1A31DCE22756E46000992D86 /* ParseFriends.swift */,
+				1A31DCE42756E47200992D86 /* SaveFriendsToRealm.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 		1A35C65726C5B9850054456D = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +191,7 @@
 		1A35C66226C5B9850054456D /* fakeVKapp */ = {
 			isa = PBXGroup;
 			children = (
+				1A31DCDD2756E33200992D86 /* Operations */,
 				1A1AF35726F16A1F001E1CE8 /* Extensions */,
 				1A35C66326C5B9860054456D /* AppDelegate.swift */,
 				1A35C66526C5B9860054456D /* SceneDelegate.swift */,
@@ -376,6 +396,7 @@
 				1ADACF4226ED6CD1005E1FE7 /* NewsTableViewController.swift in Sources */,
 				1AE0D152271DB6A000184CEC /* RealmService.swift in Sources */,
 				1A1AF35C26F2877F001E1CE8 /* LoadingViewController.swift in Sources */,
+				1A31DCE12756E45600992D86 /* FetchFriends.swift in Sources */,
 				1A74C34B26F38F00002BAD2A /* FriendPhotoViewController.swift in Sources */,
 				1A1AF35926F16A36001E1CE8 /* HideKeyboard.swift in Sources */,
 				1A55C8E6271B7F33009161DC /* City.swift in Sources */,
@@ -388,14 +409,17 @@
 				1ADACF4026ED5DE1005E1FE7 /* NewsTableViewCell.swift in Sources */,
 				1A17D3E3270B9F4900E3BD02 /* VKLoginController.swift in Sources */,
 				1A52A6AA26D8A36F00C5A912 /* AllGroupsTableViewController.swift in Sources */,
+				1A31DCDF2756E35300992D86 /* AsyncOperation.swift in Sources */,
 				1A1A0D6E274317E900ED5D80 /* NewsFooterView.swift in Sources */,
 				1ABC352826D70C580086B441 /* FriendPhotoCollectionViewController.swift in Sources */,
 				1A926BBD26E5249B00D8B371 /* FriendLikeControl.swift in Sources */,
+				1A31DCE32756E46000992D86 /* ParseFriends.swift in Sources */,
 				1AA48539270904F5008E6673 /* Session.swift in Sources */,
 				1A6DE2DD2714F5D40089C967 /* VKResponse.swift in Sources */,
 				1A55C8E4271B6E99009161DC /* Double + Ext.swift in Sources */,
 				1A17D3E5270BA9DC00E3BD02 /* NetworkService.swift in Sources */,
 				1A74C34926F36B33002BAD2A /* HeaderCollectionReusableView.swift in Sources */,
+				1A31DCE52756E47200992D86 /* SaveFriendsToRealm.swift in Sources */,
 				1A93C04926EAA1C700386D50 /* Photo.swift in Sources */,
 				1A35C66626C5B9860054456D /* SceneDelegate.swift in Sources */,
 				1A23241726D5816700B2E43C /* User.swift in Sources */,

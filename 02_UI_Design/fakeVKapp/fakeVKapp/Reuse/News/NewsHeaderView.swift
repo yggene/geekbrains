@@ -47,17 +47,19 @@ class NewsHeaderView: UITableViewHeaderFooterView {
             
         ])
         
+        // avatar styles with dummy image
         avatar.contentMode = UIView.ContentMode.scaleAspectFill
         avatar.layer.borderColor = UIColor.darkGray.cgColor
         avatar.layer.borderWidth = 0.1
         avatar.layer.cornerRadius = avatar.frame.height / 2
         avatar.clipsToBounds = true
-        
         avatar.image = UIImage(named: "3")
         
+        // name label styles with dummy text
         nameLabel.font = UIFont.systemFont(ofSize: 17.0)
         nameLabel.text = "No Name"
         
+        // date label styles
         dateLabel.font = UIFont.systemFont(ofSize: 10.0)
         dateLabel.textColor = .lightGray
         dateLabel.text = news.date.date()
