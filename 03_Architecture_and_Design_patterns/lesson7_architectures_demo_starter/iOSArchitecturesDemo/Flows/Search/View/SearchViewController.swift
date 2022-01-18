@@ -12,8 +12,9 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let presenter: SearchViewOutput
-    init(presenter: SearchViewOutput) {
+    private let presenter: AppSearchViewOutput
+    
+    init(presenter: AppSearchViewOutput) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,8 +23,8 @@ final class SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var searchView: SearchView {
-        return self.view as! SearchView
+    private var searchView: SearchViewInterface {
+        return self.view as! SearchViewInterface
     }
     
     private let searchService = ITunesSearchService()
@@ -43,7 +44,7 @@ final class SearchViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.view = SearchView()
+        self.view = SearchViewInterface()
     }
 
     override func viewDidLoad() {
@@ -59,28 +60,6 @@ final class SearchViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.throbber(show: false)
     }
-    
-    // MARK: - Private
-    
-//    private func throbber(show: Bool) {
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = show
-//    }
-//    
-//    private func showError(error: Error) {
-//        let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
-//        let actionOk = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//        alert.addAction(actionOk)
-//        self.present(alert, animated: true, completion: nil)
-//    }
-//    
-//    private func showNoResults() {
-//        self.searchView.emptyResultView.isHidden = false
-//    }
-//    
-//    private func hideNoResults() {
-//        self.searchView.emptyResultView.isHidden = true
-//    }
-    
 }
 
 //MARK: - UITableViewDataSource
@@ -108,12 +87,7 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let app = searchResults[indexPath.row]
-        self.presenter.viewDidSelectApp(app);
-
-        
-//        let appDetaillViewController = AppDetailViewController(app: app)
-//        //appDetaillViewController.app = app
-//        navigationController?.pushViewController(appDetaillViewController, animated: true)
+        self.presenter.viewDidSelectApp(app)
     }
 }
 
@@ -134,7 +108,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 // MARK: - Input
-extension SearchViewController: SearchViewInput {
+extension SearchViewController: AppSearchViewInput {
     
     func showError(error: Error) {
         let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
@@ -144,13 +118,13 @@ extension SearchViewController: SearchViewInput {
     }
     
     func showNoResults() {
-        self.emptyResultView.isHidden = false
+        self.searchView.emptyResultView.isHidden = false
         self.searchResults = []
-        self.tableView.reloadData()
+        self.searchView.tableView.reloadData()
     }
     
     func hideNoResults() {
-        self.emptyResultView.isHidden = true
+        self.searchView.emptyResultView.isHidden = true
     }
     
     func throbber(show: Bool) {

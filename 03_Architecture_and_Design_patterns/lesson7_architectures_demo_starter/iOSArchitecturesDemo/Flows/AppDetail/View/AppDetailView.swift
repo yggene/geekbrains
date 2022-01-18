@@ -12,6 +12,7 @@ final class AppDetailView: UIView {
     
     // MARK: - Subviews
     
+    let scrollView = UIScrollView()
     let imageView = UIImageView()
     let throbber = UIActivityIndicatorView(style: .gray)
     
@@ -58,6 +59,6 @@ final class AppDetailView: UIView {
             
             self.throbber.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.throbber.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-            ])
+        ])
     }
 }

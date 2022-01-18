@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SearchView: UIView {
+final class SearchViewInterface: UIView {
     
     // MARK: - Subviews
     

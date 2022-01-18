@@ -51,6 +51,7 @@ final class AppDetailHeaderView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.sizeToFit()
         return label
     }()
     
@@ -96,8 +97,8 @@ final class AppDetailHeaderView: UIView {
             
             self.ratingLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 24.0),
             self.ratingLabel.leftAnchor.constraint(equalTo: self.imageView.leftAnchor),
-            self.ratingLabel.widthAnchor.constraint(equalToConstant: 100.0),
-            
+            self.ratingLabel.widthAnchor.constraint(equalToConstant: 150.0),
+
             self.ratingLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
