@@ -38,6 +38,15 @@ final class AppDetailWhatsNewView: UIView {
         return label
     }()
     
+    private(set) lazy var currentVersionReleaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.textAlignment = .right
+        return label
+    }()
+    
     private(set) lazy var releaseNotesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,8 +73,9 @@ final class AppDetailWhatsNewView: UIView {
     
     private func setupLayout() {
         self.addSubview(self.titleLabel)
-        self.addSubview(self.versionLabel)
         self.addSubview(self.versionPreLabel)
+        self.addSubview(self.versionLabel)
+        self.addSubview(self.currentVersionReleaseDateLabel)
         self.addSubview(self.releaseNotesLabel)
         
         NSLayoutConstraint.activate([
@@ -80,8 +90,12 @@ final class AppDetailWhatsNewView: UIView {
             
             self.versionLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 12.0),
             self.versionLabel.leftAnchor.constraint(equalTo: self.versionPreLabel.rightAnchor),
-            self.versionLabel.rightAnchor.constraint(equalTo: self.titleLabel.rightAnchor),
+            self.versionLabel.rightAnchor.constraint(equalTo: self.currentVersionReleaseDateLabel.leftAnchor, constant: 12.0),
             self.versionLabel.heightAnchor.constraint(equalToConstant: 18.0),
+            
+            self.currentVersionReleaseDateLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 12.0),
+            self.currentVersionReleaseDateLabel.leftAnchor.constraint(equalTo: self.versionLabel.rightAnchor, constant: 12.0),
+            self.currentVersionReleaseDateLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -12.0),
             
             self.releaseNotesLabel.topAnchor.constraint(equalTo: self.versionLabel.bottomAnchor, constant: 12.0),
             self.releaseNotesLabel.leftAnchor.constraint(equalTo: self.versionPreLabel.leftAnchor),

@@ -49,7 +49,7 @@ final class AppDetailHeaderViewController: UIViewController {
         self.downloadImage()
         self.appDetailHeaderView.titleLabel.text = app.appName
         self.appDetailHeaderView.subtitleLabel.text = app.company
-        self.appDetailHeaderView.ratingLabel.text = "Rating: " + app.averageRating.flatMap { "\($0)" }!
+        self.appDetailHeaderView.ratingLabel.text = app.averageRating.flatMap { "\($0)" }
     }
     
     private func downloadImage() {
