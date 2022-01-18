@@ -12,15 +12,15 @@ final class SearchModuleBuilder {
     
     static func appBuild() -> (UIViewController & AppSearchViewInput) {
         let presenter = AppSearchPresenter()
-        let viewController = SearchViewController(presenter: presenter)
+        let viewController = AppSearchViewController(presenter: presenter)
         presenter.viewInput = viewController
         return viewController
     }
     
-//    static func songBuild() -> (UIViewController & SongSearchViewInput) {
-//        let presenter = SongSearchPresenter()
-//        let viewController = SongSearchViewController(presenter: presenter)
-//        presenter.viewInput = viewController
-//        return viewController
-//    }
+    static func songBuild() -> (UIViewController & SongSearchViewInput) {
+        let presenter = SongSearchPresenter()
+        let viewController = SongSearchViewController(presenter: presenter)
+        presenter.viewInput = viewController
+        return viewController
+    }
 }

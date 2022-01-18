@@ -61,14 +61,14 @@ final class SongSearchPresenter {
 }
 
 // MARK: - SearchViewOutput
-//extension SongSearchPresenter: SongSearchViewOutput {
-//    
-//    func viewDidSearch(with query: String) {
-//        self.viewInput?.throbber(show: true)
-//        self.requestSongs(with: query)
-//    }
+extension SongSearchPresenter: SongSearchViewOutput {
     
-//    func viewDidSelectSong(_ song: ITunesSong) {
+    func viewDidSearch(with query: String) {
+        self.viewInput?.throbber(show: true)
+        self.requestSongs(with: query)
+    }
+    
+    func viewDidSelectSong(_ song: ITunesSong) {
 //        self.openSongDetails(with: song)
-//    }
-//}
+    }
+}
