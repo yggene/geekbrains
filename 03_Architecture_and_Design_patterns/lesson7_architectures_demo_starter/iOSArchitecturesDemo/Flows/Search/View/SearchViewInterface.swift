@@ -16,6 +16,7 @@ final class SearchViewInterface: UIView {
     let tableView = UITableView()
     let emptyResultView = UIView()
     let emptyResultLabel = UILabel()
+    let searchTypeSegmentedControl = UISegmentedControl(items: ["Apps", "Songs"])
     
     // MARK: - Init
     
@@ -36,6 +37,7 @@ final class SearchViewInterface: UIView {
         self.addSearchBar()
         self.addTableView()
         self.addEmptyResultView()
+        self.addSearchTypeSegmentedControl()
         self.setupConstraints()
     }
     
@@ -69,11 +71,35 @@ final class SearchViewInterface: UIView {
         self.emptyResultView.addSubview(self.emptyResultLabel)
     }
     
+    private func addSearchTypeSegmentedControl() {
+        self.searchTypeSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        self.searchTypeSegmentedControl.selectedSegmentIndex = 0
+        self.searchTypeSegmentedControl.addTarget(self, action: #selector(handleSegmentedControllerValueChanged(_:)), for: .touchUpInside)
+        self.addSubview(self.searchTypeSegmentedControl)
+    }
+    
+    // TODO: - Complete the type selection logic
+    @objc func handleSegmentedControllerValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            return
+        case 1:
+            return
+        default:
+            return
+        }
+    }
+    
     private func setupConstraints() {
         let safeArea = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            self.searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: 8.0),
+            self.searchTypeSegmentedControl.topAnchor.constraint(equalTo: self.topAnchor),
+            self.searchTypeSegmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            self.searchTypeSegmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            self.searchTypeSegmentedControl.heightAnchor.constraint(equalToConstant: 50.0),
+            
+            self.searchBar.topAnchor.constraint(equalTo: self.searchTypeSegmentedControl.bottomAnchor),
             self.searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             self.searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
@@ -88,7 +114,7 @@ final class SearchViewInterface: UIView {
             self.emptyResultView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             self.emptyResultLabel.topAnchor.constraint(equalTo: self.emptyResultView.topAnchor, constant: 12.0),
             self.emptyResultLabel.leadingAnchor.constraint(equalTo: self.emptyResultView.leadingAnchor),
-            self.emptyResultLabel.trailingAnchor.constraint(equalTo: self.emptyResultView.trailingAnchor)
-            ])
+            self.emptyResultLabel.trailingAnchor.constraint(equalTo: self.emptyResultView.trailingAnchor),
+        ])
     }
 }

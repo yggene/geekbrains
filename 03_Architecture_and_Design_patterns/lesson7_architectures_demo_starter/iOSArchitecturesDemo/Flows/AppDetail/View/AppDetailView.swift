@@ -12,7 +12,6 @@ final class AppDetailView: UIView {
     
     // MARK: - Subviews
     
-    //let scrollView = UIScrollView()
     let imageView = UIImageView()
     let throbber = UIActivityIndicatorView(style: .gray)
     

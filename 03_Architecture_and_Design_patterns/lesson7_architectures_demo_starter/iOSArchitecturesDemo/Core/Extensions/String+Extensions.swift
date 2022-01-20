@@ -9,7 +9,7 @@
 import Foundation
 
 public extension String {
-    static func iTunesDateFormatted(_ date: String) -> String {
+    static func iTunesDateFormattedDateOnly(_ date: String) -> String {
         guard let endOfDate = date.firstIndex(of: "T") else { return "Not a date" }
         return String(date[..<endOfDate])
     }

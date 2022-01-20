@@ -46,6 +46,6 @@ class AppDetailWhatsNewViewController: UIViewController {
     private func fillData() {
         self.appDetailWhatsNewViewController.versionLabel.text = app.version
         self.appDetailWhatsNewViewController.releaseNotesLabel.text = app.releaseNotes
-        self.appDetailWhatsNewViewController.currentVersionReleaseDateLabel.text = String.iTunesDateFormatted(app.currentVersionReleaseDate!)
+        self.appDetailWhatsNewViewController.currentVersionReleaseDateLabel.text = String.iTunesDateFormattedDateOnly(app.currentVersionReleaseDate!)
     }
 }
