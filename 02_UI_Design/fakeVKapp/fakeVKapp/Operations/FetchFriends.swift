@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class FetchFriends: AsyncOperation {
-    
-    let friendsResponse = VKResponse<Friend>?
-    
-}
+//final class FetchFriends: AsyncOperation {
+//    
+//    let friendsResponse = VKResponse<User>
+//    
+//}
