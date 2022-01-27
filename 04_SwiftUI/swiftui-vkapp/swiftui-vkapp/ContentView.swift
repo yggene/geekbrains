@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var login = ""
     @State private var password = ""
     
@@ -35,7 +36,8 @@ struct ContentView: View {
                         Spacer()
                         TextField("", text: $login)
                             .frame(maxWidth: 150)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .textFieldStyle(.roundedBorder)
+                            .border(colorScheme == .dark ? .white : .init(uiColor: .separator))
                     }
                     
                     HStack {
@@ -43,7 +45,8 @@ struct ContentView: View {
                         Spacer()
                         SecureField("", text: $password)
                             .frame(maxWidth: 150)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .textFieldStyle(.roundedBorder)
+                            .border(colorScheme == .dark ? .white : .init(uiColor: .separator))
                     }
                     .padding(.bottom, 50)
                     
@@ -62,8 +65,8 @@ struct ContentView: View {
 struct LoginButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], 50)
-            .padding([.top, .bottom], 20)
+            .padding([.leading, .trailing], 48)
+            .padding([.top, .bottom], 18)
             .background(Color(red: 13/255, green: 112/255, blue: 247/255))
             .foregroundColor(.white)
             .clipShape(Capsule())
@@ -75,6 +78,7 @@ struct LoginButton: ButtonStyle {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
     }
 }
