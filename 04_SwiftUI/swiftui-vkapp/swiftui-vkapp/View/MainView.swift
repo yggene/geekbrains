@@ -10,35 +10,17 @@ import SwiftUI
 struct MainView: View {
     @State private var login = "foo"
     @State private var password = "bar"
+    @State private var showIncorrentCredentialsWarning = false
     
     var body: some View {
         ZStack(alignment: .top) {
             backgroundImage
-            
             ScrollView {
                 VStack {
                     logo
-                    
-                    HStack {
-                        Text("Login")
-                        Spacer()
-                        TextField("", text: $login)
-                            .modifier(MainViewTextFieldModifier())
-                    }
-                    
-                    HStack {
-                        Text("Password")
-                        Spacer()
-                        SecureField("", text: $password)
-                            .modifier(MainViewTextFieldModifier())
-                    }
-                    .padding(.bottom, 30)
-                    
-                    Button(action: { print("Button pressed") }) {
-                        Text("Log in")
-                    }
-                    .buttonStyle(LoginButton())
-                    .disabled(login.isEmpty || password.isEmpty)
+                    loginStack
+                    passwordStack
+                    loginButton
                 }
                 .frame(maxWidth: 250)
             }
@@ -46,7 +28,8 @@ struct MainView: View {
     }
 }
 
-// MARK: - Content View ext
+
+// MARK: - Login View ext
 private extension MainView {
     var backgroundImage: some View {
         GeometryReader { geometry in
@@ -69,6 +52,32 @@ private extension MainView {
             .padding([.top, .bottom], 30)
     }
     
+    var loginStack: some View {
+        HStack {
+            Text("Login")
+            Spacer()
+            TextField("", text: $login)
+                .modifier(MainViewTextFieldModifier())
+        }
+    }
+    
+    var passwordStack: some View {
+        HStack {
+            Text("Password")
+            Spacer()
+            SecureField("", text: $password)
+                .modifier(MainViewTextFieldModifier())
+        }
+        .padding(.bottom, 30)
+    }
+    
+    var loginButton: some View {
+        Button(action: { print("aha") }) {
+            Text("Log in")
+        }
+        .buttonStyle(LoginButton())
+        .disabled(login.isEmpty || password.isEmpty)
+    }
 }
 
 // MARK: - Login Button style
@@ -89,10 +98,10 @@ struct LoginButton: ButtonStyle {
 }
 
 // MARK: - Preview
-struct ContentView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .preferredColorScheme(.light)
-            .previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.portrait)
     }
 }

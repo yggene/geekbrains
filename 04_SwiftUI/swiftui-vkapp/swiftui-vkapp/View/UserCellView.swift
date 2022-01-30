@@ -15,10 +15,15 @@ struct UserCellView: View {
     var body: some View {
         
         HStack {
-            UserAvatarView {
-                Image(avatar)
-                    .resizable()
-            }
+            
+            Image(avatar)
+                .resizable()
+                .clipShape(Circle())
+                .frame(maxWidth: 50.0,
+                       maxHeight: 50.0)
+                .overlay(Circle().stroke(.white, lineWidth: 0.3))
+                .shadow(radius: 2.0)
+            
             
             VStack(alignment: .leading) {
                 Text(name)
