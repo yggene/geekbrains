@@ -13,6 +13,7 @@
 		1AB1972A27A4A7C300D8EE1B /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1972927A4A7C300D8EE1B /* ViewModifiers.swift */; };
 		1AB1972C27A4A84200D8EE1B /* ViewBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB1972B27A4A84200D8EE1B /* ViewBuilders.swift */; };
 		1AC025CC27A682240072230C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC025CB27A682240072230C /* MainView.swift */; };
+		1AC025CE27A752DF0072230C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC025CD27A752DF0072230C /* ContentView.swift */; };
 		1ADD6E52279F5CE50039DED6 /* swiftui_vkappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD6E51279F5CE50039DED6 /* swiftui_vkappApp.swift */; };
 		1ADD6E56279F5CE60039DED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ADD6E55279F5CE60039DED6 /* Assets.xcassets */; };
 		1ADD6E59279F5CE60039DED6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ADD6E58279F5CE60039DED6 /* Preview Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		1AB1972927A4A7C300D8EE1B /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		1AB1972B27A4A84200D8EE1B /* ViewBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilders.swift; sourceTree = "<group>"; };
 		1AC025CB27A682240072230C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1AC025CD27A752DF0072230C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1ADD6E4E279F5CE50039DED6 /* swiftui-vkapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-vkapp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ADD6E51279F5CE50039DED6 /* swiftui_vkappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_vkappApp.swift; sourceTree = "<group>"; };
 		1ADD6E55279F5CE60039DED6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 		1AB1972427A42C3300D8EE1B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1AC025CD27A752DF0072230C /* ContentView.swift */,
 				1AC025CB27A682240072230C /* MainView.swift */,
 				1AB1972527A42CEF00D8EE1B /* UserCellView.swift */,
 				1AB1972727A42D8200D8EE1B /* CommunityCellView.swift */,
@@ -170,6 +173,7 @@
 			files = (
 				1AB1972A27A4A7C300D8EE1B /* ViewModifiers.swift in Sources */,
 				1AC025CC27A682240072230C /* MainView.swift in Sources */,
+				1AC025CE27A752DF0072230C /* ContentView.swift in Sources */,
 				1A325E4327A5A6D300A17F19 /* Color+Ext.swift in Sources */,
 				1AB1972C27A4A84200D8EE1B /* ViewBuilders.swift in Sources */,
 				1AB1972627A42CEF00D8EE1B /* UserCellView.swift in Sources */,

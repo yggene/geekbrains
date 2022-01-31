@@ -8,16 +8,25 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var login = "foo"
-    @State private var password = "bar"
+    @State private var login = "bar"
+    @State private var password = "foo"
     @State private var showIncorrentCredentialsWarning = false
+    @State private var easterEgg = false
+    @Binding var isLoggedIn: Bool
     
     var body: some View {
         ZStack(alignment: .top) {
             backgroundImage
             ScrollView {
                 VStack {
-                    logo
+                    Button(action: { easterEgg = true }) {
+                        logo
+                    }.alert(isPresented: $easterEgg) {
+                        Alert(title: Text("Sorry"),
+                              message: Text("This is not the button you need"),
+                              dismissButton: Alert.Button.default(Text("OK"),
+                                                                  action: { easterEgg = false }))
+                    }
                     loginStack
                     passwordStack
                     loginButton
@@ -25,6 +34,15 @@ struct MainView: View {
                 .frame(maxWidth: 250)
             }
         }
+    }
+    
+    private func verifyLoginData() {
+        if login == "bar" && password == "foo" {
+            isLoggedIn = true
+        } else {
+            showIncorrentCredentialsWarning = true
+        }
+        password = ""
     }
 }
 
@@ -72,11 +90,17 @@ private extension MainView {
     }
     
     var loginButton: some View {
-        Button(action: { print("aha") }) {
+        Button(action: verifyLoginData) {
             Text("Log in")
         }
         .buttonStyle(LoginButton())
         .disabled(login.isEmpty || password.isEmpty)
+        .alert(isPresented: $showIncorrentCredentialsWarning) {
+            Alert(
+                title: Text("Error"),
+                message: Text("Incorrect Login/Password"),
+                dismissButton: .cancel(Text("OK")))
+        }
     }
 }
 
@@ -98,9 +122,9 @@ struct LoginButton: ButtonStyle {
 }
 
 // MARK: - Preview
-struct LoginView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(isLoggedIn: .constant(false))
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
     }
