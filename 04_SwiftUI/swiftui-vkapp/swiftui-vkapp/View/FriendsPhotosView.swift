@@ -9,27 +9,25 @@ import SwiftUI
 import ASCollectionView
 
 struct FriendsPhotosView: View {
-    let friend: Friend
+    let friend: User
     
-    init(_ friend: Friend) {
+    init(_ friend: User) {
         self.friend = friend
     }
     
-    init() {
-        self.friend = friends[0]
-    }
-    
     var body: some View {
-        ASCollectionView(data: friend.photos) { photo, context in
+        ASCollectionView(data: friend.photos) { photo, _ in
             NavigationLink {
                 FriendsSinglePhotoView(photo)
             } label: {
                 FriendsSinglePhotoView(photo)
             }
         }
-        .layout { .grid(layoutMode: .fixedNumberOfColumns(2),
-                        itemSpacing: 16,
-                        lineSpacing: 16)
+        .layout
+        { .grid(
+            layoutMode: .fixedNumberOfColumns(2),
+            itemSpacing: 16,
+            lineSpacing: 16)
         }
     }
 }
@@ -37,6 +35,6 @@ struct FriendsPhotosView: View {
 
 struct FriendsPhotosView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendsPhotosView()
+        FriendsPhotosView(friends[0])
     }
 }

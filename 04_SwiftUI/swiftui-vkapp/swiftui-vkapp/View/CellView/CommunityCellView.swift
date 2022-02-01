@@ -35,7 +35,6 @@ struct CommunityCellView: View {
                 Text(communityDescription)
                     .font(.caption2)
             }
-            Spacer()
         }
     }
 }

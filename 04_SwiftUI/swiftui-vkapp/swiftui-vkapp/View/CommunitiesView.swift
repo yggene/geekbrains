@@ -12,11 +12,10 @@ struct CommunitiesView: View {
     var body: some View {
         List(communities) {
             CommunityCellView($0)
-        }
-        .navigationTitle("Communities")
-        Spacer()
+        }.navigationTitle("Communities")
     }
 }
+
 
 struct CommunitiesView_Previews: PreviewProvider {
     static var previews: some View {

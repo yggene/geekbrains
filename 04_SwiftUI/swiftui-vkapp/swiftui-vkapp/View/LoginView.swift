@@ -12,27 +12,38 @@ struct LoginView: View {
     @State private var password = "foo"
     @State private var showIncorrentCredentialsWarning = false
     @State private var logoTapped = false
-    @Binding var isLoggedIn: Bool
+    @State var isLoggedIn: Bool
     
     var body: some View {
-        ZStack(alignment: .top) {
-            backgroundImage
-            ScrollView {
-                VStack {
-                    Button(action: { logoTapped = true }) {
-                        logo
-                    }.alert(isPresented: $logoTapped) {
-                        Alert(title: Text("Sorry"),
-                              message: Text("This is not the button you need"),
-                              dismissButton: Alert.Button.default(Text("OK"),
-                                                                  action: { logoTapped = false }))
+        NavigationView {
+            ZStack(alignment: .top) {
+                backgroundImage
+                ScrollView {
+                    VStack {
+                        Button(action: { logoTapped = true }) {
+                            logo
+                        }.alert(isPresented: $logoTapped) {
+                            Alert(title: Text("Sorry"),
+                                  message: Text("This is not the button you need"),
+                                  dismissButton: Alert.Button.default(Text("OK"),
+                                                                      action: { logoTapped = false }))
+                        }
+                        loginStack
+                        passwordStack
+                        loginButton
+                        
+                        NavigationLink(isActive: $isLoggedIn) {
+                            ContentView()
+                        } label: {
+                            EmptyView()
+                        }
                     }
-                    loginStack
-                    passwordStack
-                    loginButton
+                    .frame(maxWidth: 250)
                 }
-                .frame(maxWidth: 250)
+                
             }
+            .navigationBarHidden(true)
+            
         }
     }
     
@@ -124,7 +135,7 @@ struct LoginButton: ButtonStyle {
 // MARK: - Preview
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(isLoggedIn: .constant(false))
+        LoginView(isLoggedIn: false)
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
     }

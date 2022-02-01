@@ -12,7 +12,7 @@ struct UserCellView: View {
     var origin: String
     var avatar: String
     
-    init(_ friend: Friend) {
+    init(_ friend: User) {
         self.name = friend.name
         self.origin = friend.origin
         self.avatar = friend.avatar
@@ -27,19 +27,15 @@ struct UserCellView: View {
     
     var body: some View {
         HStack {
-            Image(avatar)
-                .resizable()
-                .clipShape(Circle())
-                .frame(maxWidth: 50.0,
-                       maxHeight: 50.0)
-                .overlay(Circle().stroke(.white, lineWidth: 0.3))
-                .shadow(radius: 2.0)
+            UserAvatarView {
+                Image(avatar)
+                    .resizable()
+            }
             VStack(alignment: .leading) {
                 Text(name)
                 Text(origin)
                     .font(.caption2)
             }
-            Spacer()
         }
     }
 }

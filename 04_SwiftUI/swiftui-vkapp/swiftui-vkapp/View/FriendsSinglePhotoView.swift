@@ -14,10 +14,6 @@ struct FriendsSinglePhotoView: View {
         self.photo = photo
     }
     
-    init() {
-        self.photo = Photo(name: "default-avatar")
-    }
-    
     var body: some View {
         Image("\(photo.name)")
                 .resizable()
@@ -28,6 +24,6 @@ struct FriendsSinglePhotoView: View {
 
 struct FriendsSinglePhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendsSinglePhotoView()
+        FriendsSinglePhotoView(Photo(name: "default-avatar"))
     }
 }

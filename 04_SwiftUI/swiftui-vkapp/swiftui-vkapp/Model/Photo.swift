@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Photo: Identifiable {
+final class Photo: Identifiable {
     private(set) var name: String
     private(set) var id: UUID = UUID()
     

@@ -8,21 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var shouldShowFriendsView: Bool = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                LoginView(isLoggedIn: $shouldShowFriendsView)
-                NavigationLink(isActive: $shouldShowFriendsView) {
-                    FriendsView()
-                } label: {
-                    EmptyView()
+        TabView {
+            FriendsView()
+                //.navigationTitle("Wow")
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Friends")
                 }
-            }.navigationBarHidden(true)
+            
+            CommunitiesView()
+                //.navigationTitle("Communities")
+                .tabItem {
+                    Image(systemName: "star")
+                    Text("Communities")
+                }
+            NewsView()
+                //.navigationTitle("Communities")
+                .tabItem {
+                    Image(systemName: "moon")
+                    Text("News")
+                }
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
