@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var shouldShowUserCellView: Bool = false
+    @State var shouldShowFriendsView: Bool = false
     
     var body: some View {
         NavigationView {
             VStack {
-                MainView(isLoggedIn: $shouldShowUserCellView)
-                NavigationLink(isActive: $shouldShowUserCellView) {
-                    UserCellView()
+                LoginView(isLoggedIn: $shouldShowFriendsView)
+                NavigationLink(isActive: $shouldShowFriendsView) {
+                    FriendsView()
                 } label: {
                     EmptyView()
                 }

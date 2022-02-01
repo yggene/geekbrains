@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct UserCellView: View {
-    var name: String = "Rick Sanchez"
-    var origin: String = "Dimension C-137"
-    var avatar: String = "default-avatar"
+    var name: String
+    var origin: String
+    var avatar: String
+    
+    init(_ friend: Friend) {
+        self.name = friend.name
+        self.origin = friend.origin
+        self.avatar = friend.avatar
+    }
+    
+    // default init
+    init() {
+        self.name = "Random name"
+        self.origin = "Random origin"
+        self.avatar = "default-avatar"
+    }
     
     var body: some View {
-        
         HStack {
-            
             Image(avatar)
                 .resizable()
                 .clipShape(Circle())
@@ -23,8 +34,6 @@ struct UserCellView: View {
                        maxHeight: 50.0)
                 .overlay(Circle().stroke(.white, lineWidth: 0.3))
                 .shadow(radius: 2.0)
-            
-            
             VStack(alignment: .leading) {
                 Text(name)
                 Text(origin)
@@ -32,9 +41,6 @@ struct UserCellView: View {
             }
             Spacer()
         }
-        .frame(height: 60.0)
-        .offset(x: 10.0, y: 0.0)
-        
     }
 }
 

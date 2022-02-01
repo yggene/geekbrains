@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct LoginView: View {
     @State private var login = "bar"
     @State private var password = "foo"
     @State private var showIncorrentCredentialsWarning = false
-    @State private var easterEgg = false
+    @State private var logoTapped = false
     @Binding var isLoggedIn: Bool
     
     var body: some View {
@@ -19,13 +19,13 @@ struct MainView: View {
             backgroundImage
             ScrollView {
                 VStack {
-                    Button(action: { easterEgg = true }) {
+                    Button(action: { logoTapped = true }) {
                         logo
-                    }.alert(isPresented: $easterEgg) {
+                    }.alert(isPresented: $logoTapped) {
                         Alert(title: Text("Sorry"),
                               message: Text("This is not the button you need"),
                               dismissButton: Alert.Button.default(Text("OK"),
-                                                                  action: { easterEgg = false }))
+                                                                  action: { logoTapped = false }))
                     }
                     loginStack
                     passwordStack
@@ -48,7 +48,7 @@ struct MainView: View {
 
 
 // MARK: - Login View ext
-private extension MainView {
+private extension LoginView {
     var backgroundImage: some View {
         GeometryReader { geometry in
             Image("pattern-28")
@@ -122,9 +122,9 @@ struct LoginButton: ButtonStyle {
 }
 
 // MARK: - Preview
-struct MainView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(isLoggedIn: .constant(false))
+        LoginView(isLoggedIn: .constant(false))
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
     }
