@@ -11,7 +11,8 @@ import SwiftUI
 struct swiftui_vkappApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            LoginView(isLoggedIn: false)
         }
     }
 }
+
