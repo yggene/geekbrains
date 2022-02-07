@@ -12,54 +12,35 @@ struct LoginView: View {
     @State private var password = "foo"
     @State private var showIncorrentCredentialsWarning = false
     @State private var logoTapped = false
-    @State var isLoggedIn: Bool
+    @State var isLoggedIn: Bool = false
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .top) {
-                backgroundImage
-                ScrollView {
-                    VStack {
-                        Button(action: { logoTapped = true }) {
-                            logo
-                        }.alert(isPresented: $logoTapped) {
-                            Alert(title: Text("Sorry"),
-                                  message: Text("This is not the button you need"),
-                                  dismissButton: Alert.Button.default(Text("OK"),
-                                                                      action: { logoTapped = false }))
-                        }
-                        loginStack
-                        passwordStack
-                        loginButton
-                        
-                        NavigationLink(isActive: $isLoggedIn) {
-                            ContentView()
-                        } label: {
-                            EmptyView()
-                        }
-                    }
-                    .frame(maxWidth: 250)
-                }
-                
-            }
-            .navigationBarHidden(true)
-            
-        }
-    }
-    
-    private func verifyLoginData() {
-        if login == "bar" && password == "foo" {
-            isLoggedIn = true
+        if isLoggedIn {
+            ContentView()
         } else {
-            showIncorrentCredentialsWarning = true
+            mainView
         }
-        password = ""
     }
 }
 
-
 // MARK: - Login View ext
 private extension LoginView {
+    
+    var mainView: some View {
+        ZStack(alignment: .top) {
+            backgroundImage
+            ScrollView {
+                VStack {
+                    logoButton
+                    loginStack
+                    passwordStack
+                    loginButton
+                }
+                .frame(maxWidth: 250)
+            }
+        }
+    }
+    
     var backgroundImage: some View {
         GeometryReader { geometry in
             Image("pattern-28")
@@ -79,6 +60,17 @@ private extension LoginView {
                    height: 85.0,
                    alignment: .center)
             .padding([.top, .bottom], 30)
+    }
+    
+    var logoButton: some View {
+        Button(action: { logoTapped = true }) {
+            logo
+        }.alert(isPresented: $logoTapped) {
+            Alert(title: Text("Sorry"),
+                  message: Text("This is not the button you need"),
+                  dismissButton: Alert.Button.default(Text("OK"),
+                                                      action: { logoTapped = false }))
+        }
     }
     
     var loginStack: some View {
@@ -112,6 +104,15 @@ private extension LoginView {
                 message: Text("Incorrect Login/Password"),
                 dismissButton: .cancel(Text("OK")))
         }
+    }
+    
+    private func verifyLoginData() {
+        if login == "bar" && password == "foo" {
+            isLoggedIn.toggle()
+        } else {
+            showIncorrentCredentialsWarning = true
+        }
+        password = ""
     }
 }
 

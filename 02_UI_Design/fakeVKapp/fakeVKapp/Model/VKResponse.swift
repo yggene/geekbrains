@@ -14,13 +14,3 @@ extension VKResponse: Codable {
         case response
     }
 }
-
-//struct NewsResponse<T: Codable> {
-//    let response: [T]
-//}
-//
-//extension NewsResponse: Codable {
-//    enum CodingKeys: String, CodingKey {
-//        case response
-//    }
-//}

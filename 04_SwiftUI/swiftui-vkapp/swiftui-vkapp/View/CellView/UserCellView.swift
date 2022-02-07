@@ -46,5 +46,6 @@ struct UserCellView_Previews: PreviewProvider {
         UserCellView()
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

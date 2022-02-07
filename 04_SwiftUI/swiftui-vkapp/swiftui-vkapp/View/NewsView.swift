@@ -13,7 +13,8 @@ struct NewsView: View {
         List(news) {
             NewsCellView($0)
                 .padding(.bottom)
-        }.navigationTitle("News")
+        }
+        .navigationTitle("News")
     }
 }
 

@@ -11,32 +11,48 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            FriendsView()
-                //.navigationTitle("Wow")
-                .tabItem {
-                    Image(systemName: "person")
+            NavigationView {
+                FriendsView()
+            }
+            .tabItem {
+                Label {
                     Text("Friends")
+                } icon: {
+                    Image(systemName: "person")
                 }
+            }
             
-            CommunitiesView()
-                //.navigationTitle("Communities")
-                .tabItem {
+            NavigationView {
+                CommunitiesView()
+            }
+            .tabItem {
+                Label {
+                    Text("COmmunities")
+                } icon: {
                     Image(systemName: "star")
-                    Text("Communities")
                 }
-            NewsView()
-                //.navigationTitle("Communities")
-                .tabItem {
-                    Image(systemName: "moon")
+            }
+            
+            NavigationView {
+                NewsView()
+            }
+            .tabItem {
+                Label {
                     Text("News")
+                } icon: {
+                    Image(systemName: "cloud")
                 }
+            }
         }
     }
 }
 
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TabView {
+            ContentView()
+        }
     }
 }

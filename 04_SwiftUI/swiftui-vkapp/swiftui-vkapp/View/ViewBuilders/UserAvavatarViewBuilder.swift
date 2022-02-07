@@ -16,7 +16,6 @@ struct UserAvatarView<Content: View>: View {
     
     var body: some View {
         content
-        //                .resizable()
             .clipShape(Circle())
             .frame(maxWidth: 50.0,
                    maxHeight: 50.0)

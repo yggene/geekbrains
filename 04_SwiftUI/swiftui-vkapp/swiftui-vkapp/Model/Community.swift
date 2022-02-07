@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class Community: Identifiable {
+struct Community: Identifiable {
     private(set) var name: String
     private(set) var description: String
     private(set) var image: String
