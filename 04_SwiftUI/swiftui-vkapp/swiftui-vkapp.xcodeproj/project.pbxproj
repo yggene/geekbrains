@@ -154,13 +154,6 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
-		1AC74B4E27A8949400FB0678 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		1AC74B5127A895F300FB0678 /* CellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,7 +189,6 @@
 				1A325E4127A5A6BC00A17F19 /* Extensions */,
 				1A86387127A8754600DE92DE /* Model */,
 				1AB1972427A42C3300D8EE1B /* View */,
-				1AC74B4E27A8949400FB0678 /* Service */,
 				1ADD6E55279F5CE60039DED6 /* Assets.xcassets */,
 				1ADD6E57279F5CE60039DED6 /* Preview Content */,
 			);
