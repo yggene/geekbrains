@@ -12,7 +12,8 @@ struct CommunitiesView: View {
     var body: some View {
         List(communities) {
             CommunityCellView($0)
-        }.navigationTitle("Communities")
+        }
+        .navigationBarTitle("Communities")
     }
 }
 

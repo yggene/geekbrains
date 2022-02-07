@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class News: Identifiable {
+struct News: Identifiable {
     var author: String
     var date: String
     var avatar: String

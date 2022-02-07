@@ -67,5 +67,6 @@ struct NewsCellView_Previews: PreviewProvider {
         NewsCellView()
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

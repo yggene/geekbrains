@@ -45,5 +45,6 @@ struct CommunityCellView_Previews: PreviewProvider {
         CommunityCellView()
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

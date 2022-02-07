@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class User: Identifiable {
+struct User: Identifiable {
     private(set) var name: String
     private(set) var origin: String
     private(set) var avatar: String
@@ -34,5 +34,4 @@ extension User: Equatable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
 }

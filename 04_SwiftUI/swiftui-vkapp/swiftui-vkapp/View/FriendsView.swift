@@ -19,14 +19,13 @@ struct FriendsView: View {
                         NavigationLink {
                             FriendsPhotosView(friends.first(where: { $0.name == value })!)
                         } label: {
-                        UserCellView(friends.first(where: { $0.name == value })!)
+                            UserCellView(friends.first(where: { $0.name == value })!)
                         }
                         .navigationTitle("Friends")
-//                        .navigationBarHidden(true)
                     }
                 }
             }
-        }.navigationTitle("qqq")
+        }
         .onAppear {
             groupedArray = Dictionary(
                 grouping: inputArray,
