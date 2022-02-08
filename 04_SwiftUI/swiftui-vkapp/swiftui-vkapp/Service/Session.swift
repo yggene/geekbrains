@@ -5,4 +5,13 @@
 //  Created by Evgeny Alekseev on 07.02.2022.
 //
 
-import Foundation
+class Session {
+    
+    static public let instance = Session()
+    
+    private init() {}
+    
+    var token: String = ""
+    var userID: Int = 0
+    
+}

@@ -15,7 +15,7 @@ struct CommunityCellView: View {
     init(_ community: Community) {
         self.communityName = community.name
         self.communityDescription = community.description
-        self.communityImage = community.image
+        self.communityImage = community.photo
     }
     
     // default init

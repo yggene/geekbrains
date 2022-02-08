@@ -5,4 +5,12 @@
 //  Created by Evgeny Alekseev on 07.02.2022.
 //
 
-import Foundation
+struct VKResponse<T: Codable> {
+    let response: T
+}
+
+extension VKResponse: Codable {
+    enum CodingKeys: String, CodingKey {
+        case response
+    }
+}
