@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A325E4327A5A6D300A17F19 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A325E4227A5A6D300A17F19 /* Color+Ext.swift */; };
+		1A3B8F4E27B17BCE007A9454 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3B8F4D27B17BCE007A9454 /* City.swift */; };
 		1A4E8E5127A89BFD0085A5D4 /* FriendsPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E8E5027A89BFD0085A5D4 /* FriendsPhotosView.swift */; };
 		1A4E8E5327A8A6380085A5D4 /* FriendsSinglePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E8E5227A8A6380085A5D4 /* FriendsSinglePhotoView.swift */; };
 		1A4E8E5627A8A74F0085A5D4 /* ASCollectionView in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4E8E5527A8A74F0085A5D4 /* ASCollectionView */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		1A325E4227A5A6D300A17F19 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		1A3B8F4D27B17BCE007A9454 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		1A4E8E5027A89BFD0085A5D4 /* FriendsPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosView.swift; sourceTree = "<group>"; };
 		1A4E8E5227A8A6380085A5D4 /* FriendsSinglePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsSinglePhotoView.swift; sourceTree = "<group>"; };
 		1A4E8E5C27A8AE5C0085A5D4 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				1AC74B4C27A88EB500FB0678 /* Community.swift */,
 				1ABB244C27A94EB30083B7CF /* NewsModel.swift */,
 				1A4E8E5C27A8AE5C0085A5D4 /* Photo.swift */,
+				1A3B8F4D27B17BCE007A9454 /* City.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				1A4E8E5D27A8AE5C0085A5D4 /* Photo.swift in Sources */,
 				1A86387327A8798E00DE92DE /* User.swift in Sources */,
 				1AC74B5527A8992A00FB0678 /* CommunitiesView.swift in Sources */,
+				1A3B8F4E27B17BCE007A9454 /* City.swift in Sources */,
 				1AC74B5327A8974900FB0678 /* Communities.swift in Sources */,
 				1AB1972827A42D8200D8EE1B /* CommunityCellView.swift in Sources */,
 				1ADD6E52279F5CE50039DED6 /* swiftui_vkappApp.swift in Sources */,

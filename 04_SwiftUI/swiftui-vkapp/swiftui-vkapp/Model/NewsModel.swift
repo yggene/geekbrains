@@ -7,35 +7,95 @@
 
 import SwiftUI
 
-struct News: Identifiable {
-    var author: String
-    var date: String
-    var avatar: String
-    var newsText: String
-    var newsImage: String
-    var id: UUID = UUID()
+struct Newsfeed: Codable {
+    var items: [News]
+    var profiles: [User]
+    var groups: [Community]
     
-    init(author: String,
-         date: String,
-         avatar: String,
-         newsText: String,
-         newsImage: String
-    ){
-        self.author = author
-        self.date = date
-        self.avatar = avatar
-        self.newsText = newsText
-        self.newsImage = newsImage
+    enum CodingKeys: String, CodingKey {
+        case items
+        case profiles
+        case groups
     }
 }
 
-extension News: Equatable, Hashable {
-    static func == (lhs: News, rhs: News) -> Bool {
-        lhs.id == rhs.id
-    }
+// MARK: News
+final class News: Identifiable {
+    var sourceId: Int
+    var date: Double
+    var text: String
+    var attachments: [Attachments]?
+    var comments: Comments?
+    var likes: Likes?
+    var views: Views?
+    var reposts: Reposts?
+    var markedAsAds: Int?
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+    var attachmentPhotoUrl: URL? {
+        guard
+            let image = attachments?.first(where: { $0.type == "photo"} ),
+            let size = image.photo?.sizes.first(where: { $0.type == "x"} )
+        else { return nil }
+        return URL(string: size.url)
     }
-    
+}
+
+extension News: Codable {
+    enum CodingKeys: String, CodingKey {
+        case sourceId = "source_id"
+        case date
+        case text
+        case attachments
+        case comments
+        case likes
+        case views
+        case reposts
+        case markedAsAds
+    }
+}
+
+// MARK: Attachments
+final class Attachments {
+    var type: String
+    var photo: Photo?
+}
+
+extension Attachments: Codable {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case photo
+    }
+}
+
+// MARK: Comments
+final class Comments {
+    var count: Int
+}
+
+extension Comments: Codable {
+    enum CodingKeys: String, CodingKey {
+        case count
+    }
+}
+
+// MARK: Views
+final class Views {
+    var count: Int
+}
+
+extension Views: Codable {
+    enum CodingKeys: String, CodingKey {
+        case count
+    }
+}
+
+// MARK: Reposts
+final class Reposts {
+    var count: Int
+}
+
+extension Reposts: Codable {
+    enum CodingKeys: String, CodingKey {
+        case count
+    }
 }

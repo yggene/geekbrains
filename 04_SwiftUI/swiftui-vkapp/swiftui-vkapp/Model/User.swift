@@ -7,31 +7,26 @@
 
 import SwiftUI
 
-struct User: Identifiable {
-    private(set) var name: String
-    private(set) var origin: String
-    private(set) var avatar: String
-    private(set) var photos: [Photo]
-    private(set) var id: UUID = UUID()
-    
-    init(name: String,
-         origin: String,
-         avatar: String,
-         photos: [Photo]
-    ){
-        self.name = name
-        self.origin = origin
-        self.avatar = avatar
-        self.photos = photos
-    }
+struct Users: Codable {
+    var items: [User]
 }
 
-extension User: Equatable, Hashable {
-    static func == (lhs: User, rhs: User) -> Bool {
-        lhs.id == rhs.id
+struct User: Codable, Identifiable {
+    var id: Int
+    var firstName: String
+    var lastName: String
+    var avatar: String
+    var city: City?
+    
+    var avatarURL: URL? {
+        URL(string: avatar)
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case avatar = "photo_100"
+        case city
     }
 }

@@ -7,18 +7,28 @@
 
 import SwiftUI
 
+struct UserGroups: Codable {
+    var items: [Community]
+}
+
+struct popularGroups: Codable {
+    var items: [Community]
+}
+
 struct Community: Identifiable {
-    private(set) var name: String
-    private(set) var description: String
-    private(set) var image: String
-    private(set) var id: UUID = UUID()
+    var id: Int
+    var name: String
+    var photo: String
     
-    init(name: String,
-         description: String,
-         image: String
-    ){
-        self.name = name
-        self.description = description
-        self.image = image
+    var photoURL: URL? {
+        URL(string: photo)
+    }
+}
+
+extension Community: Codable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case photo = "photo_200"
     }
 }
