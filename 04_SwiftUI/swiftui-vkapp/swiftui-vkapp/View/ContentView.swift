@@ -9,10 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var userViewModel = UsersViewModel()
+    @ObservedObject var communityViewModel = CommunitiesViewModel()
+    @ObservedObject var newsViewModel = NewsViewModel()
+    
+    let networkService = NetworkService()
+    
     var body: some View {
         TabView {
             NavigationView {
-                FriendsView()
+                UserView()
             }
             .tabItem {
                 Label {
@@ -27,7 +33,7 @@ struct ContentView: View {
             }
             .tabItem {
                 Label {
-                    Text("COmmunities")
+                    Text("Communities")
                 } icon: {
                     Image(systemName: "star")
                 }

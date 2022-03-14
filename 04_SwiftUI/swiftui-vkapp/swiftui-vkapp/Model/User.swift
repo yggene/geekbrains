@@ -6,17 +6,22 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct Users: Codable {
     var items: [User]
 }
 
-struct User: Codable, Identifiable {
-    var id: Int
-    var firstName: String
-    var lastName: String
-    var avatar: String
-    var city: City?
+class User: Object, Codable {
+    @Persisted(primaryKey: true) var id: Int = 0
+    @Persisted(indexed: true) var firstName: String = ""
+    @Persisted(indexed: true) var lastName: String = ""
+    @Persisted var avatar: String = ""
+    @Persisted var city: City? = nil
+    
+    var name: String {
+        firstName + " " + lastName
+    }
     
     var avatarURL: URL? {
         URL(string: avatar)
@@ -30,3 +35,4 @@ struct User: Codable, Identifiable {
         case city
     }
 }
+

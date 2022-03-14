@@ -1,5 +1,5 @@
 //
-//  FriendsView.swift
+//  UserPhotoView.swift
 //  swiftui-vkapp
 //
 //  Created by Evgeny Alekseev on 31.01.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FriendsSinglePhotoView: View {
+struct UserPhotoView: View {
     let photo: Photo
     
     init(_ photo: Photo) {

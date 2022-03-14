@@ -5,11 +5,12 @@
 //  Created by Evgeny Alekseev on 07.02.2022.
 //
 
-import Foundation
+import SwiftUI
+import RealmSwift
 
-class City: Codable, Identifiable {
-    var id: Int
-    var title: String
+class City: Object, Codable {
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var title: String
     
     enum CodingKeys: String, CodingKey {
         case id, title

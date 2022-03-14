@@ -6,20 +6,25 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct UserPhotos: Codable {
     var items: [Photo]
 }
 
-class Photo: Codable, Identifiable {
-    var id: Int
-    var ownerID: Int
-    var sizes: [Size]
-    var likes: Likes?
+class Photo: Object, Codable {
+    @Persisted var id: Int = 0
+    @Persisted var ownerID: Int = 0
+    var sizes: [Size] = []
+    var likes: Likes? = nil
     
     var url: URL? {
         guard let image = sizes.first(where: { $0.type == "x"} ) else { return nil }
         return URL(string: image.url)
+    }
+    
+    override static func primaryKey() -> String? {
+        "id"
     }
     
     enum CodingKeys: String, CodingKey {
@@ -29,9 +34,11 @@ class Photo: Codable, Identifiable {
     }
 }
 
-final class Size {
+final class Size: Object {
     var type: String = ""
     var url: String = ""
+    let owner = LinkingObjects(fromType: Photo.self, property: "sizes")
+    
 }
 
 extension Size: Codable {
@@ -40,9 +47,10 @@ extension Size: Codable {
     }
 }
 
-final class Likes {
+final class Likes: Object {
     var userLikes: Int = 0
     var count: Int = 0
+    let owner = LinkingObjects(fromType: Photo.self, property: "likes")
 }
 
 extension Likes: Codable {

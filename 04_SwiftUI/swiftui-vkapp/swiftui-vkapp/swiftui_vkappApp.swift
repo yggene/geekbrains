@@ -11,7 +11,8 @@ import SwiftUI
 struct swiftui_vkappApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            VKLoginWebView()
+//            LoginView()
         }
     }
 }

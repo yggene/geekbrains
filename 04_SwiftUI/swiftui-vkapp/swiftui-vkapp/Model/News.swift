@@ -1,5 +1,5 @@
 //
-//  Photo.swift
+//  News.swift
 //  swiftui-vkapp
 //
 //  Created by Evgeny Alekseev on 01.02.2022.
@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct Newsfeed: Codable {
-    var items: [News]
+    var items: [NewsItem]
     var profiles: [User]
-    var groups: [Community]
+    var communities: [Community]
     
     enum CodingKeys: String, CodingKey {
         case items
         case profiles
-        case groups
+        case communities
     }
 }
 
 // MARK: News
-final class News: Identifiable {
+final class NewsItem {
     var sourceId: Int
     var date: Double
     var text: String
-    var attachments: [Attachments]?
+    var attachments: [Attachment]?
     var comments: Comments?
     var likes: Likes?
     var views: Views?
@@ -40,7 +40,7 @@ final class News: Identifiable {
     }
 }
 
-extension News: Codable {
+extension NewsItem: Codable {
     enum CodingKeys: String, CodingKey {
         case sourceId = "source_id"
         case date
@@ -55,12 +55,12 @@ extension News: Codable {
 }
 
 // MARK: Attachments
-final class Attachments {
+final class Attachment {
     var type: String
     var photo: Photo?
 }
 
-extension Attachments: Codable {
+extension Attachment: Codable {
     enum CodingKeys: String, CodingKey {
         case type
         case photo

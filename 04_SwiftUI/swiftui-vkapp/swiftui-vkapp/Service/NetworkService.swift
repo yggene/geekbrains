@@ -94,7 +94,7 @@ final class NetworkService {
     }
     
     // MARK: Get popular groups
-    func getPopularGroups(completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
+    func getPopularCommunities(completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.path += "groups.getCatalog"
         requestUrl.queryItems?.append(
@@ -135,9 +135,9 @@ final class NetworkService {
     }
     
     
-    // MARK: Get user groups
-    func getGroups(ofUser userID: Int = Session.instance.userID,
-                   completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
+    // MARK: Get user communities
+    func getCommunities(ofUser userID: Int = Session.instance.userID,
+                        completion: @escaping (Result<[Community], RequestErrors>) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.path += "groups.get"
         
@@ -250,7 +250,6 @@ final class NetworkService {
     
     
     // MARK: Get newsfeed
-    
     func getNews(completion: @escaping (Result<Newsfeed, RequestErrors>) -> Void) {
         var requestUrl = urlConstructor
         requestUrl.path += "newsfeed.get"
