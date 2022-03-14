@@ -9,19 +9,19 @@ import SwiftUI
 
 struct UserCellView: View {
     var name: String
-    var origin: String
+    var city: String
     var avatar: String
     
     init(_ friend: User) {
-        self.name = friend.name
-        self.origin = friend.origin
+        self.name = friend.firstName + friend.lastName
+        self.city = friend.city?.title ?? "default city"
         self.avatar = friend.avatar
     }
     
     // default init
     init() {
         self.name = "Random name"
-        self.origin = "Random origin"
+        self.city = "Random origin"
         self.avatar = "default-avatar"
     }
     
@@ -33,7 +33,7 @@ struct UserCellView: View {
             }
             VStack(alignment: .leading) {
                 Text(name)
-                Text(origin)
+                Text(city)
                     .font(.caption2)
             }
         }

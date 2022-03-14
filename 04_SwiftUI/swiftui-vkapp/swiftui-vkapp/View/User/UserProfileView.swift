@@ -1,5 +1,5 @@
 //
-//  FriendsView.swift
+//  UserProfileView.swift
 //  swiftui-vkapp
 //
 //  Created by Evgeny Alekseev on 31.01.2022.
@@ -8,7 +8,7 @@
 import SwiftUI
 import ASCollectionView
 
-struct FriendsPhotosView: View {
+struct UserProfileView: View {
     let friend: User
     
     init(_ friend: User) {

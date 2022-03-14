@@ -6,32 +6,33 @@
 //
 
 import SwiftUI
+import RealmSwift
 
-struct User: Identifiable {
-    private(set) var name: String
-    private(set) var origin: String
-    private(set) var avatar: String
-    private(set) var photos: [Photo]
-    private(set) var id: UUID = UUID()
+struct Users: Codable {
+    var items: [User]
+}
+
+class User: Object, Codable {
+    @Persisted(primaryKey: true) var id: Int = 0
+    @Persisted(indexed: true) var firstName: String = ""
+    @Persisted(indexed: true) var lastName: String = ""
+    @Persisted var avatar: String = ""
+    @Persisted var city: City? = nil
     
-    init(name: String,
-         origin: String,
-         avatar: String,
-         photos: [Photo]
-    ){
-        self.name = name
-        self.origin = origin
-        self.avatar = avatar
-        self.photos = photos
+    var name: String {
+        firstName + " " + lastName
+    }
+    
+    var avatarURL: URL? {
+        URL(string: avatar)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case avatar = "photo_100"
+        case city
     }
 }
 
-extension User: Equatable, Hashable {
-    static func == (lhs: User, rhs: User) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
