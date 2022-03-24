@@ -32,6 +32,14 @@ extension RequestRouter {
     }
     
     func asURLRequest() throws -> URLRequest {
-        <#code#>
+        var URLRequest = URLRequest(url: fullURL)
+        URLRequest.httpMethod = method.rawValue
+        
+        switch self.encoding {
+        case .url:
+            return try URLEncoding.default.encode(URLRequest, with: parameters)
+        case .json:
+            return try JSONEncoding.default.encode(URLRequest, with: parameters)
+        }
     }
 }
