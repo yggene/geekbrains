@@ -8,11 +8,6 @@
 import Foundation
 import Alamofire
 
-enum Gender: String {
-    case m = "m"
-    case f = "f"
-}
-
 protocol ChangeUserDataRequestFactory {
     func change(userID: Int,
                 username: String,

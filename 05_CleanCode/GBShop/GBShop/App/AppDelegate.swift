@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                          username: "User2",
                          password: "password2",
                          email: "user2@test.com",
-                         gender: Gender.m.rawValue,
+                         gender: "m",
                          creditCard: "1111222233334444",
                          bio: "I am Groot") { response in
             switch response.result {
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                        username: "newUserName",
                        password: "newPassword",
                        email: "newEmail@",
-                       gender: Gender.f.rawValue,
+                       gender: "f",
                        creditCard: "9999888877776666",
                        bio: "I am not Groot") { response in
             switch response.result {
