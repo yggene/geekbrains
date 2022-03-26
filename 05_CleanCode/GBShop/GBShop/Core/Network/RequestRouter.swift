@@ -21,7 +21,6 @@ protocol RequestRouter: URLRequestConvertible {
     var encoding: RequestRouterEncoding { get }
 }
 
-
 extension RequestRouter {
     var fullURL: URL {
         return baseURL.appendingPathComponent(path)

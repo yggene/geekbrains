@@ -8,7 +8,6 @@
 import Foundation
 
 class ErrorParser: AbstractErrorParser {
-    
     func parse(_ result: Error) -> Error {
         result
     }
@@ -16,5 +15,4 @@ class ErrorParser: AbstractErrorParser {
     func parse(response: HTTPURLResponse?, data: Data?, error: Error?) -> Error? {
         error
     }
-    
 }

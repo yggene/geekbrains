@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct LoginResult: Codable {
+struct ResponseResult: Codable {
     let result: Int
-    let user: User
+    let user: User?
+    let authToken: String?
+    let userMessage: String?
 }
