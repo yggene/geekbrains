@@ -118,6 +118,7 @@ extension CommonRequest: LogoutRequestFactory {
 
 // MARK: Change user data
 extension CommonRequest: ChangeUserDataRequestFactory {
+    
     struct ChangeUserData: RequestRouter {
         let baseURL: URL
         let method: HTTPMethod = .get

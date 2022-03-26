@@ -9,36 +9,39 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     let requestFactory = RequestFactory()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // insert test methods here
+        // insert test methods below
+        authRequest()
+        logoutRequest()
+        registrationRequest()
         changeUserDataRequest()
         return true
     }
     
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-    // MARK: test login request
-    private func loginRequest() {
+    
+    // MARK: test auth request
+    private func authRequest() {
         let request = requestFactory.makeAuthRequestFactory()
         request.login(username: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let result):
-                print("Result: ", result)
+                print("Auth result: ", result)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -51,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         request.logout(userID: 1) { response in
             switch response.result {
             case .success(let result):
-                print("Result: ", result)
+                print("Logout result: ", result)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -65,12 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                          username: "User2",
                          password: "password2",
                          email: "user2@test.com",
-                         gender: "m",
+                         gender: Gender.m.rawValue,
                          creditCard: "111",
                          bio: "I am Groot") { response in
             switch response.result {
             case .success(let result):
-                print("Result: ", result)
+                print("Registration result: ", result)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -84,17 +87,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                        username: "newUserName",
                        password: "newPassword",
                        email: "newEmail",
-                       gender: "f",
+                       gender: Gender.f.rawValue,
                        creditCard: "999888",
                        bio: "I am not Groot") { response in
             switch response.result {
             case .success(let result):
-                print("Result: ", result)
+                print("Change user data result: ", result)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-
 }
 

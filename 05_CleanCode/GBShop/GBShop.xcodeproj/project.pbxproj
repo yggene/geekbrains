@@ -233,11 +233,11 @@
 			isa = PBXGroup;
 			children = (
 				1A527B0127E78133006A17F4 /* CommonRequest.swift */,
+				1A527B0327E7813F006A17F4 /* RequestFactory.swift */,
 				1A527AFF27E7812A006A17F4 /* AuthRequestFactory.swift */,
 				1A92759027ECF8D900D3296B /* RegisterUserRequestFactory.swift */,
 				1A92759227ECF92A00D3296B /* LogoutRequestFactory.swift */,
 				1A92759427ECFB1A00D3296B /* ChangeUserDataRequestFactory.swift */,
-				1A527B0327E7813F006A17F4 /* RequestFactory.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
