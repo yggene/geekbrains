@@ -86,6 +86,17 @@ extension CommonRequest: RegisterUserRequestFactory {
                   creditCard: String,
                   bio: String,
                   completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+        
+        guard creditCard.count == 16 else {
+            print("Incorrect credit card number")
+            return
+        }
+        
+        guard email.contains("@") else {
+            print("Incorect email")
+            return
+        }
+        
         let requestModel = Registration(baseURL: baseURL,
                                         userID: userID,
                                         username: username,
@@ -152,6 +163,17 @@ extension CommonRequest: ChangeUserDataRequestFactory {
                 creditCard: String,
                 bio: String,
                 completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+        
+        guard creditCard.count == 16 else {
+            print("Incorrect credit card number")
+            return
+        }
+        
+        guard email.contains("@") else {
+            print("Incorect email")
+            return
+        }
+        
         let requestModel = ChangeUserData(baseURL: baseURL,
                                           userID: userID,
                                           username: username,

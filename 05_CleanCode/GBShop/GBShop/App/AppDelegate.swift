@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                          password: "password2",
                          email: "user2@test.com",
                          gender: Gender.m.rawValue,
-                         creditCard: "111",
+                         creditCard: "1111222233334444",
                          bio: "I am Groot") { response in
             switch response.result {
             case .success(let result):
@@ -86,9 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         request.change(userID: 2,
                        username: "newUserName",
                        password: "newPassword",
-                       email: "newEmail",
+                       email: "newEmail@",
                        gender: Gender.f.rawValue,
-                       creditCard: "999888",
+                       creditCard: "9999888877776666",
                        bio: "I am not Groot") { response in
             switch response.result {
             case .success(let result):
