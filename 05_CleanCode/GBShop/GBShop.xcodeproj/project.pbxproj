@@ -21,7 +21,7 @@
 		1A527AF927E780C7006A17F4 /* AbstractRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527AF827E780C7006A17F4 /* AbstractRequestFactory.swift */; };
 		1A527AFD27E780F9006A17F4 /* RequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527AFC27E780F9006A17F4 /* RequestRouter.swift */; };
 		1A527B0027E7812A006A17F4 /* AuthRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527AFF27E7812A006A17F4 /* AuthRequestFactory.swift */; };
-		1A527B0227E78133006A17F4 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527B0127E78133006A17F4 /* Auth.swift */; };
+		1A527B0227E78133006A17F4 /* CommonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527B0127E78133006A17F4 /* CommonRequest.swift */; };
 		1A527B0427E7813F006A17F4 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527B0327E7813F006A17F4 /* RequestFactory.swift */; };
 		1A527B0627E7815B006A17F4 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527B0527E7815B006A17F4 /* ResponseResult.swift */; };
 		1A527B0827E78161006A17F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527B0727E78161006A17F4 /* User.swift */; };
@@ -65,7 +65,7 @@
 		1A527AF827E780C7006A17F4 /* AbstractRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractRequestFactory.swift; sourceTree = "<group>"; };
 		1A527AFC27E780F9006A17F4 /* RequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRouter.swift; sourceTree = "<group>"; };
 		1A527AFF27E7812A006A17F4 /* AuthRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestFactory.swift; sourceTree = "<group>"; };
-		1A527B0127E78133006A17F4 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		1A527B0127E78133006A17F4 /* CommonRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRequest.swift; sourceTree = "<group>"; };
 		1A527B0327E7813F006A17F4 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		1A527B0527E7815B006A17F4 /* ResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
 		1A527B0727E78161006A17F4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		1A527AFE27E7811A006A17F4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				1A527B0127E78133006A17F4 /* Auth.swift */,
+				1A527B0127E78133006A17F4 /* CommonRequest.swift */,
 				1A527AFF27E7812A006A17F4 /* AuthRequestFactory.swift */,
 				1A92759027ECF8D900D3296B /* RegisterUserRequestFactory.swift */,
 				1A92759227ECF92A00D3296B /* LogoutRequestFactory.swift */,
@@ -388,7 +388,7 @@
 				1A1B49DE27E391B500ED11BB /* DataRequest.swift in Sources */,
 				1A92759127ECF8D900D3296B /* RegisterUserRequestFactory.swift in Sources */,
 				1A10623C27DF460100C04C09 /* AppDelegate.swift in Sources */,
-				1A527B0227E78133006A17F4 /* Auth.swift in Sources */,
+				1A527B0227E78133006A17F4 /* CommonRequest.swift in Sources */,
 				1A527B0027E7812A006A17F4 /* AuthRequestFactory.swift in Sources */,
 				1A10623E27DF460100C04C09 /* SceneDelegate.swift in Sources */,
 				1A527AF927E780C7006A17F4 /* AbstractRequestFactory.swift in Sources */,

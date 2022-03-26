@@ -13,17 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let requestFactory = RequestFactory()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        let auth = requestFactory.makeAuthRequestFactory()
-        auth.login(userName: "Somebody", password: "mypassword") { response in
-            switch response.result {
-            case .success(let login):
-                print(login)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-
+        // insert test methods here
+        changeUserDataRequest()
         return true
     }
     
@@ -41,6 +32,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    // MARK: test login request
+    private func loginRequest() {
+        let request = requestFactory.makeAuthRequestFactory()
+        request.login(username: "Somebody", password: "mypassword") { response in
+            switch response.result {
+            case .success(let result):
+                print("Result: ", result)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: test logout request
+    private func logoutRequest() {
+        let request = requestFactory.makeLogoutRequestFactory()
+        request.logout(userID: 1) { response in
+            switch response.result {
+            case .success(let result):
+                print("Result: ", result)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: test registration request
+    private func registrationRequest() {
+        let request = requestFactory.makeRegisterUserRequestFactory()
+        request.register(userID: 2,
+                         username: "User2",
+                         password: "password2",
+                         email: "user2@test.com",
+                         gender: "m",
+                         creditCard: "111",
+                         bio: "I am Groot") { response in
+            switch response.result {
+            case .success(let result):
+                print("Result: ", result)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: test change user data
+    private func changeUserDataRequest() {
+        let request = requestFactory.makeChangeUserDataRequestFactory()
+        request.change(userID: 2,
+                       username: "newUserName",
+                       password: "newPassword",
+                       email: "newEmail",
+                       gender: "f",
+                       creditCard: "999888",
+                       bio: "I am not Groot") { response in
+            switch response.result {
+            case .success(let result):
+                print("Result: ", result)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 
 }
 
