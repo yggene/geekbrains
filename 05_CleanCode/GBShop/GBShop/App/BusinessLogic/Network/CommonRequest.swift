@@ -189,6 +189,7 @@ extension CommonRequest: ChangeUserDataRequestFactory {
     }
 }
 
+// MARK: Get product info
 extension CommonRequest: ProductRequestFactory {
     struct GetProduct: RequestRouter {
         let baseURL: URL
@@ -202,12 +203,13 @@ extension CommonRequest: ProductRequestFactory {
     }
     
     func getProduct(productID: Int,
-                    completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
+                    completionHandler: @escaping (AFDataResponse<Product>) -> Void) {
         let requestModel = GetProduct(baseURL: baseURL, productID: productID)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
+// MARK: Get catalog info
 extension CommonRequest: CatalogRequestFactory {
     struct GetCatalog: RequestRouter {
         let baseURL: URL
@@ -226,7 +228,7 @@ extension CommonRequest: CatalogRequestFactory {
     
     func getCatalog(pageNumber: Int,
                     categoryID: Int,
-                    completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
+                    completionHandler: @escaping (AFDataResponse<Catalog>) -> Void) {
         let requestModel = GetCatalog(baseURL: baseURL, pageNumber: pageNumber, categotyID: categoryID)
         self.request(request: requestModel, completionHandler: completionHandler)
     }

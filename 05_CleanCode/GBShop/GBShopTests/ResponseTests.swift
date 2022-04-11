@@ -32,10 +32,9 @@ class ResponseTests: XCTestCase {
         
         request.login(username: "Somebody", password: "mypassword") { response in
             switch response.result {
-            case .success(let result):
-                print("*** Login result: \(result) ***")
-            case .failure(let error):
-                print(error)
+            case .success:
+                break
+            case .failure:
                 XCTFail()
             }
             expectation.fulfill()
@@ -50,8 +49,8 @@ class ResponseTests: XCTestCase {
         
         request.logout(userID: 1) { response in
             switch response.result {
-            case .success(let result):
-                print("*** Logout result: \(result) ***")
+            case .success:
+                break
             case .failure:
                 XCTFail()
             }
@@ -96,8 +95,8 @@ class ResponseTests: XCTestCase {
                        creditCard: "9999888877776666",
                        bio: "I am not Groot") { response in
             switch response.result {
-            case .success(let result):
-                print("*** Change user data result: \(result) ***")
+            case .success:
+                break
             case .failure:
                 XCTFail()
             }
@@ -106,15 +105,15 @@ class ResponseTests: XCTestCase {
         waitForExpectations(timeout: waitingTime)
     }
     
-    // MARK: test logout request
+    // MARK: test get product request
     func test_getProductRequest() {
         let request = requestFactory.makeGetProductRequestFactory()
         let expectation = expectation(description: "Product received")
-        
+
         request.getProduct(productID: 123) { response in
             switch response.result {
-            case .success(let result):
-                print("*** Product info: \(result) ***")
+            case .success:
+                break
             case .failure:
                 XCTFail()
             }
@@ -123,21 +122,21 @@ class ResponseTests: XCTestCase {
         waitForExpectations(timeout: waitingTime)
     }
     
+    // MARK: test get catalog request
     func test_getCatalogRequest() {
         let request = requestFactory.makeGetCatalogRequestFactory()
         let expectation = expectation(description: "Catalog received")
-        
+
         request.getCatalog(pageNumber: 1, categoryID: 1) { response in
             switch response.result {
             case .success(let result):
-                print("*** Category info: \(result) ***")
+                print("***\nCategory info: \(result) \n***")
             case .failure(let error):
-                print(error)
+                print("\n***\nError! \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
         }
         waitForExpectations(timeout: waitingTime)
     }
-    
 }
