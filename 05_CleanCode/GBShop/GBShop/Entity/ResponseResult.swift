@@ -12,4 +12,10 @@ struct ResponseResult: Codable {
     let user: User?
     let authToken: String?
     let userMessage: String?
+    let errorMessage: String?
+}
+
+struct ProductResponseResult: Codable {
+    let result: Int
+    let 
 }
