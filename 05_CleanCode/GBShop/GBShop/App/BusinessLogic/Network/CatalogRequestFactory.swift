@@ -10,6 +10,6 @@ import Alamofire
 
 protocol CatalogRequestFactory {
     func getCatalog(pageNumber: Int,
-                    categoryId: Int,
-                    completionHandler: @escaping (AFDataResponse<Catalog>) -> Void)
+                    categoryID: Int,
+                    completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void)
 }

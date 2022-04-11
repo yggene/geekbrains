@@ -25,6 +25,7 @@ class CommonRequest: AbstractRequestFactory {
 
 // MARK: User login
 extension CommonRequest: AuthRequestFactory {
+    
     struct Login: RequestRouter {
         let baseURL: URL
         let method: HTTPMethod = .get
@@ -67,13 +68,14 @@ extension CommonRequest: RegisterUserRequestFactory {
         let bio: String
         
         var parameters: Parameters? {
-            return ["id_user": userID,
-                    "username": username,
-                    "password": password,
-                    "email": email,
-                    "gender": gender,
-                    "creditCard": creditCard,
-                    "bio": bio
+            return [
+                "id_user": userID,
+                "username": username,
+                "password": password,
+                "email": email,
+                "gender": gender,
+                "creditCard": creditCard,
+                "bio": bio
             ]
         }
     }
@@ -144,13 +146,14 @@ extension CommonRequest: ChangeUserDataRequestFactory {
         let bio: String
         
         var parameters: Parameters? {
-            return ["id_user": userID,
-                    "username": username,
-                    "password": password,
-                    "email": email,
-                    "gender": gender,
-                    "creditCard": creditCard,
-                    "bio": bio
+            return [
+                "id_user": userID,
+                "username": username,
+                "password": password,
+                "email": email,
+                "gender": gender,
+                "creditCard": creditCard,
+                "bio": bio
             ]
         }
     }
@@ -184,4 +187,48 @@ extension CommonRequest: ChangeUserDataRequestFactory {
                                           bio: bio)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
+}
+
+extension CommonRequest: ProductRequestFactory {
+    struct GetProduct: RequestRouter {
+        let baseURL: URL
+        let method: HTTPMethod = .get
+        let path: String = "getGoodById.json"
+        
+        let productID: Int
+        var parameters: Parameters? {
+            return ["id_product": productID]
+        }
+    }
+    
+    func getProduct(productID: Int,
+                    completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
+        let requestModel = GetProduct(baseURL: baseURL, productID: productID)
+        self.request(request: requestModel, completionHandler: completionHandler)
+    }
+}
+
+extension CommonRequest: CatalogRequestFactory {
+    struct GetCatalog: RequestRouter {
+        let baseURL: URL
+        let method: HTTPMethod = .get
+        let path: String = "catalogData.json"
+        
+        let pageNumber: Int
+        let categotyID: Int
+        var parameters: Parameters? {
+            return [
+                "page_number": pageNumber,
+                "id_category": categotyID
+            ]
+        }
+    }
+    
+    func getCatalog(pageNumber: Int,
+                    categoryID: Int,
+                    completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
+        let requestModel = GetCatalog(baseURL: baseURL, pageNumber: pageNumber, categotyID: categoryID)
+        self.request(request: requestModel, completionHandler: completionHandler)
+    }
+    
 }

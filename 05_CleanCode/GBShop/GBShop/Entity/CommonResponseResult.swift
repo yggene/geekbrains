@@ -9,18 +9,21 @@ import Foundation
 
 struct CommonResponseResult: Codable {
     let result: Int?
+    let user: User?
+    let product: Product?
+    let catalog: Catalog?
     let userMessage: String?
     let errorMessage: String?
 }
 
-struct UserResponseResult: Codable {
-    let user: User?
-}
-
-struct ProductResponseResult: Codable {
-    let product: Product?
-}
-
-struct CatalogResponseResult: Codable {
-    let catalog: Catalog?
-}
+//struct UserResponseResult: Codable {
+//    let user: User?
+//}
+//
+//struct ProductResponseResult: Codable {
+//    let product: Product?
+//}
+//
+//struct CatalogResponseResult: Codable {
+//    let catalog: Catalog?
+//}

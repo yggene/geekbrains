@@ -30,11 +30,12 @@ class ResponseTests: XCTestCase {
         let request = requestFactory.makeAuthRequestFactory()
         let expectation = expectation(description: "Login complete")
         
-        request.login(username: "Somebody", password: "mypassword" ) { response in
+        request.login(username: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let result):
                 print("*** Login result: \(result) ***")
-            case .failure:
+            case .failure(let error):
+                print(error)
                 XCTFail()
             }
             expectation.fulfill()
@@ -104,4 +105,39 @@ class ResponseTests: XCTestCase {
         }
         waitForExpectations(timeout: waitingTime)
     }
+    
+    // MARK: test logout request
+    func test_getProductRequest() {
+        let request = requestFactory.makeGetProductRequestFactory()
+        let expectation = expectation(description: "Product received")
+        
+        request.getProduct(productID: 123) { response in
+            switch response.result {
+            case .success(let result):
+                print("*** Product info: \(result) ***")
+            case .failure:
+                XCTFail()
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: waitingTime)
+    }
+    
+    func test_getCatalogRequest() {
+        let request = requestFactory.makeGetCatalogRequestFactory()
+        let expectation = expectation(description: "Catalog received")
+        
+        request.getCatalog(pageNumber: 1, categoryID: 1) { response in
+            switch response.result {
+            case .success(let result):
+                print("*** Category info: \(result) ***")
+            case .failure(let error):
+                print(error)
+                XCTFail()
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: waitingTime)
+    }
+    
 }
