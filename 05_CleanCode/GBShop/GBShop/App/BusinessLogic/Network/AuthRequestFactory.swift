@@ -11,5 +11,5 @@ import Alamofire
 protocol AuthRequestFactory {
     func login(username: String,
                password: String,
-               completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void)
+               completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void)
 }

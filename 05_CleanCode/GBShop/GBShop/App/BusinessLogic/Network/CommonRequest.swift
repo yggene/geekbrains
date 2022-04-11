@@ -42,7 +42,7 @@ extension CommonRequest: AuthRequestFactory {
     
     func login(username: String,
                password: String,
-               completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+               completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
         let requestModel = Login(baseURL: baseURL,
                                  username: username,
                                  password: password)
@@ -85,7 +85,7 @@ extension CommonRequest: RegisterUserRequestFactory {
                   gender: String,
                   creditCard: String,
                   bio: String,
-                  completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+                  completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
         
         guard creditCard.count == 16 else {
             print("Incorrect credit card number")
@@ -121,7 +121,7 @@ extension CommonRequest: LogoutRequestFactory {
         }
     }
     
-    func logout(userID: Int, completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+    func logout(userID: Int, completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
         let requestModel = Logout(baseURL: baseURL, userID: userID)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
@@ -162,7 +162,7 @@ extension CommonRequest: ChangeUserDataRequestFactory {
                 gender: String,
                 creditCard: String,
                 bio: String,
-                completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+                completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
         
         guard creditCard.count == 16 else {
             print("Incorrect credit card number")
