@@ -8,17 +8,17 @@
 import Foundation
 
 struct Product: Codable {
-    let result: Int?
-    let productID: Int?
-    let productName: String
-    let productPrice: Double
+    let result: Int
+    let productName: String?
+    let productPrice: Double?
     let productDescription: String?
+    let errorMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case result
-        case productID = "id_product"
         case productName = "product_name"
         case productPrice = "product_price"
         case productDescription = "product_description"
+        case errorMessage
     }
 }

@@ -43,7 +43,7 @@ extension CommonRequest: AuthRequestFactory {
     
     func login(username: String,
                password: String,
-               completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
+               completionHandler: @escaping (AFDataResponse<UserResponse>) -> Void) {
         let requestModel = Login(baseURL: baseURL,
                                  username: username,
                                  password: password)
@@ -107,7 +107,8 @@ extension CommonRequest: RegisterUserRequestFactory {
                                         gender: gender,
                                         creditCard: creditCard,
                                         bio: bio)
-        self.request(request: requestModel, completionHandler: completionHandler)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -124,8 +125,10 @@ extension CommonRequest: LogoutRequestFactory {
     }
     
     func logout(userID: Int, completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
-        let requestModel = Logout(baseURL: baseURL, userID: userID)
-        self.request(request: requestModel, completionHandler: completionHandler)
+        let requestModel = Logout(baseURL: baseURL,
+                                  userID: userID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -185,7 +188,8 @@ extension CommonRequest: ChangeUserDataRequestFactory {
                                           gender: gender,
                                           creditCard: creditCard,
                                           bio: bio)
-        self.request(request: requestModel, completionHandler: completionHandler)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -204,8 +208,10 @@ extension CommonRequest: ProductRequestFactory {
     
     func getProduct(productID: Int,
                     completionHandler: @escaping (AFDataResponse<Product>) -> Void) {
-        let requestModel = GetProduct(baseURL: baseURL, productID: productID)
-        self.request(request: requestModel, completionHandler: completionHandler)
+        let requestModel = GetProduct(baseURL: baseURL,
+                                      productID: productID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -228,9 +234,11 @@ extension CommonRequest: CatalogRequestFactory {
     
     func getCatalog(pageNumber: Int,
                     categoryID: Int,
-                    completionHandler: @escaping (AFDataResponse<Catalog>) -> Void) {
-        let requestModel = GetCatalog(baseURL: baseURL, pageNumber: pageNumber, categotyID: categoryID)
-        self.request(request: requestModel, completionHandler: completionHandler)
+                    completionHandler: @escaping (AFDataResponse<[CatalogItem]>) -> Void) {
+        let requestModel = GetCatalog(baseURL: baseURL,
+                                      pageNumber: pageNumber,
+                                      categotyID: categoryID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
-    
 }

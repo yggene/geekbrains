@@ -9,14 +9,24 @@ import Foundation
 
 struct Catalog: Codable {
     let result: Int?
-    let pageNumber: Int
-    let products: [Product]
+    let products: [CatalogItem]?
     let errorMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case result
-        case pageNumber = "page_number"
-        case products
+        case products = ""
         case errorMessage
+    }
+}
+
+struct CatalogItem: Codable {
+    let productID: Int
+    let productName: String
+    let productPrice: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case productID = "id_product"
+        case productName = "product_name"
+        case productPrice = "price"
     }
 }
