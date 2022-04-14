@@ -25,7 +25,7 @@ class ResponseTests: XCTestCase {
         waitingTime = nil
     }
     
-    // MARK: test auth request
+    // MARK: test login request
     func test_loginRequest() {
         let request = requestFactory.makeAuthRequestFactory()
         let expectation = expectation(description: "Login complete")
@@ -34,7 +34,8 @@ class ResponseTests: XCTestCase {
             switch response.result {
             case .success:
                 break
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Login error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -51,7 +52,8 @@ class ResponseTests: XCTestCase {
             switch response.result {
             case .success:
                 break
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Logout error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -74,7 +76,8 @@ class ResponseTests: XCTestCase {
             switch response.result {
             case .success(let result):
                 print("*** Registration result: \(result) ***")
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Registration error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -97,7 +100,8 @@ class ResponseTests: XCTestCase {
             switch response.result {
             case .success:
                 break
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Update error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()

@@ -12,7 +12,7 @@ class CommonRequest: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseURL = URL(string: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
+    let baseURL = URL(string: "https://frozen-temple-04935.herokuapp.com/")!
     
     init(errorParser: AbstractErrorParser,
          sessionManager: Session,
@@ -28,8 +28,8 @@ extension CommonRequest: AuthRequestFactory {
     
     struct Login: RequestRouter {
         let baseURL: URL
-        let method: HTTPMethod = .get
-        let path: String = "login.json"
+        let method: HTTPMethod = .post
+        let path: String = "login"
         
         let username: String
         let password: String
@@ -56,8 +56,8 @@ extension CommonRequest: AuthRequestFactory {
 extension CommonRequest: RegisterUserRequestFactory {
     struct Registration: RequestRouter {
         let baseURL: URL
-        let method: HTTPMethod = .get
-        let path: String = "registerUser.json"
+        let method: HTTPMethod = .post
+        let path: String = "register"
         
         let userID: Int
         let username: String
@@ -69,7 +69,7 @@ extension CommonRequest: RegisterUserRequestFactory {
         
         var parameters: Parameters? {
             return [
-                "id_user": userID,
+                "userID": userID,
                 "username": username,
                 "password": password,
                 "email": email,
@@ -116,11 +116,11 @@ extension CommonRequest: RegisterUserRequestFactory {
 extension CommonRequest: LogoutRequestFactory {
     struct Logout: RequestRouter {
         let baseURL: URL
-        let method: HTTPMethod = .get
-        let path: String = "logout.json"
+        let method: HTTPMethod = .post
+        let path: String = "logout"
         let userID: Int
         var parameters: Parameters? {
-            return ["id_user": userID]
+            return ["userID": userID]
         }
     }
     
@@ -137,8 +137,8 @@ extension CommonRequest: ChangeUserDataRequestFactory {
     
     struct ChangeUserData: RequestRouter {
         let baseURL: URL
-        let method: HTTPMethod = .get
-        let path: String = "changeUserData.json"
+        let method: HTTPMethod = .put
+        let path: String = "update"
         
         let userID: Int
         let username: String
@@ -150,7 +150,7 @@ extension CommonRequest: ChangeUserDataRequestFactory {
         
         var parameters: Parameters? {
             return [
-                "id_user": userID,
+                "userID": userID,
                 "username": username,
                 "password": password,
                 "email": email,
