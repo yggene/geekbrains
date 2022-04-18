@@ -10,5 +10,5 @@ import Alamofire
 
 protocol LogoutRequestFactory {
     func logout(userID: Int,
-                completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void)
+                completionHandler: @escaping (AFDataResponse<CommonResponse>) -> Void)
 }
