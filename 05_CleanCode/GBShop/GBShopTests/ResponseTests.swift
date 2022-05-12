@@ -16,7 +16,7 @@ class ResponseTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         requestFactory = RequestFactory()
-        waitingTime = 10
+        waitingTime = 10.0
     }
     
     override func tearDownWithError() throws {
@@ -25,16 +25,18 @@ class ResponseTests: XCTestCase {
         waitingTime = nil
     }
     
-    // MARK: test auth request
+    // MARK: test login request
     func test_loginRequest() {
         let request = requestFactory.makeAuthRequestFactory()
         let expectation = expectation(description: "Login complete")
         
         request.login(username: "Somebody", password: "mypassword") { response in
             switch response.result {
-            case .success:
+            case .success(let data):
+                print("\n***\n Login data: \(data) \n***\n")
                 break
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Login error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -49,9 +51,11 @@ class ResponseTests: XCTestCase {
         
         request.logout(userID: 1) { response in
             switch response.result {
-            case .success:
+            case .success(let data):
+                print("\n***\n Logout data: \(data) \n***\n")
                 break
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Logout error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -72,9 +76,10 @@ class ResponseTests: XCTestCase {
                          creditCard: "1111222233334444",
                          bio: "I am Groot") { response in
             switch response.result {
-            case .success(let result):
-                print("*** Registration result: \(result) ***")
-            case .failure:
+            case .success(let data):
+                print("\n***\n Registration result: \(data) \n***\n")
+            case .failure(let error):
+                print("\n***\n Registration error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -95,9 +100,11 @@ class ResponseTests: XCTestCase {
                        creditCard: "9999888877776666",
                        bio: "I am not Groot") { response in
             switch response.result {
-            case .success:
+            case .success(let data):
+                print("\n***\n Update data: \(data) \n***\n")
                 break
-            case .failure:
+            case .failure(let error):
+                print("\n***\n Update error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -112,9 +119,10 @@ class ResponseTests: XCTestCase {
 
         request.getProduct(productID: 123) { response in
             switch response.result {
-            case .success:
-                break
-            case .failure:
+            case .success(let data):
+                print("\n***\n Get Product data: \(data) \n***\n")
+            case .failure(let error):
+                print("\n***\n Get Product error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()
@@ -129,10 +137,10 @@ class ResponseTests: XCTestCase {
 
         request.getCatalog(pageNumber: 1, categoryID: 1) { response in
             switch response.result {
-            case .success(let result):
-                print("***\nCategory info: \(result) \n***")
+            case .success(let data):
+                print("\n***\n Get Catalog data: \(data) \n***\n")
             case .failure(let error):
-                print("\n***\nError! \(error) \n***\n")
+                print("\n***\n Get Catalog error: \(error) \n***\n")
                 XCTFail()
             }
             expectation.fulfill()

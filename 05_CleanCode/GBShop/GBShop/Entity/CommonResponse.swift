@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct CommonResponseResult: Codable {
+struct CommonResponse: Codable {
     let result: Int
     let userMessage: String?
-    let errorMessage: String?
 }
