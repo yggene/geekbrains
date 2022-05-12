@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct UserResponse: Codable {
+    let result: Int
+    let user: User?
+    let errorMessage: String?
+}
+
 struct User: Codable {
     let id: Int
     let login: String

@@ -25,6 +25,7 @@ class CommonRequest: AbstractRequestFactory {
 
 // MARK: User login
 extension CommonRequest: AuthRequestFactory {
+    
     struct Login: RequestRouter {
         let baseURL: URL
         let method: HTTPMethod = .get
@@ -42,7 +43,7 @@ extension CommonRequest: AuthRequestFactory {
     
     func login(username: String,
                password: String,
-               completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+               completionHandler: @escaping (AFDataResponse<UserResponse>) -> Void) {
         let requestModel = Login(baseURL: baseURL,
                                  username: username,
                                  password: password)
@@ -67,13 +68,14 @@ extension CommonRequest: RegisterUserRequestFactory {
         let bio: String
         
         var parameters: Parameters? {
-            return ["id_user": userID,
-                    "username": username,
-                    "password": password,
-                    "email": email,
-                    "gender": gender,
-                    "creditCard": creditCard,
-                    "bio": bio
+            return [
+                "id_user": userID,
+                "username": username,
+                "password": password,
+                "email": email,
+                "gender": gender,
+                "creditCard": creditCard,
+                "bio": bio
             ]
         }
     }
@@ -85,7 +87,7 @@ extension CommonRequest: RegisterUserRequestFactory {
                   gender: String,
                   creditCard: String,
                   bio: String,
-                  completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+                  completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
         
         guard creditCard.count == 16 else {
             print("Incorrect credit card number")
@@ -105,7 +107,8 @@ extension CommonRequest: RegisterUserRequestFactory {
                                         gender: gender,
                                         creditCard: creditCard,
                                         bio: bio)
-        self.request(request: requestModel, completionHandler: completionHandler)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -121,9 +124,11 @@ extension CommonRequest: LogoutRequestFactory {
         }
     }
     
-    func logout(userID: Int, completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
-        let requestModel = Logout(baseURL: baseURL, userID: userID)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func logout(userID: Int, completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
+        let requestModel = Logout(baseURL: baseURL,
+                                  userID: userID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -144,13 +149,14 @@ extension CommonRequest: ChangeUserDataRequestFactory {
         let bio: String
         
         var parameters: Parameters? {
-            return ["id_user": userID,
-                    "username": username,
-                    "password": password,
-                    "email": email,
-                    "gender": gender,
-                    "creditCard": creditCard,
-                    "bio": bio
+            return [
+                "id_user": userID,
+                "username": username,
+                "password": password,
+                "email": email,
+                "gender": gender,
+                "creditCard": creditCard,
+                "bio": bio
             ]
         }
     }
@@ -162,7 +168,7 @@ extension CommonRequest: ChangeUserDataRequestFactory {
                 gender: String,
                 creditCard: String,
                 bio: String,
-                completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void) {
+                completionHandler: @escaping (AFDataResponse<CommonResponseResult>) -> Void) {
         
         guard creditCard.count == 16 else {
             print("Incorrect credit card number")
@@ -182,6 +188,57 @@ extension CommonRequest: ChangeUserDataRequestFactory {
                                           gender: gender,
                                           creditCard: creditCard,
                                           bio: bio)
-        self.request(request: requestModel, completionHandler: completionHandler)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
+    }
+}
+
+// MARK: Get product info
+extension CommonRequest: ProductRequestFactory {
+    struct GetProduct: RequestRouter {
+        let baseURL: URL
+        let method: HTTPMethod = .get
+        let path: String = "getGoodById.json"
+        
+        let productID: Int
+        var parameters: Parameters? {
+            return ["id_product": productID]
+        }
+    }
+    
+    func getProduct(productID: Int,
+                    completionHandler: @escaping (AFDataResponse<Product>) -> Void) {
+        let requestModel = GetProduct(baseURL: baseURL,
+                                      productID: productID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
+    }
+}
+
+// MARK: Get catalog info
+extension CommonRequest: CatalogRequestFactory {
+    struct GetCatalog: RequestRouter {
+        let baseURL: URL
+        let method: HTTPMethod = .get
+        let path: String = "catalogData.json"
+        
+        let pageNumber: Int
+        let categotyID: Int
+        var parameters: Parameters? {
+            return [
+                "page_number": pageNumber,
+                "id_category": categotyID
+            ]
+        }
+    }
+    
+    func getCatalog(pageNumber: Int,
+                    categoryID: Int,
+                    completionHandler: @escaping (AFDataResponse<[CatalogItem]>) -> Void) {
+        let requestModel = GetCatalog(baseURL: baseURL,
+                                      pageNumber: pageNumber,
+                                      categotyID: categoryID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
