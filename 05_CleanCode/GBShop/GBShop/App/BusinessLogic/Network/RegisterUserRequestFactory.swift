@@ -16,5 +16,5 @@ protocol RegisterUserRequestFactory {
                   gender: String,
                   creditCard: String,
                   bio: String,
-                  completionHandler: @escaping (AFDataResponse<ResponseResult>) -> Void)
+                  completionHandler: @escaping (AFDataResponse<CommonResponse>) -> Void)
 }

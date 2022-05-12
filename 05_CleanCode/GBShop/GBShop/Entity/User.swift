@@ -2,21 +2,17 @@
 //  User.swift
 //  GBShop
 //
-//  Created by Evgeny Alekseev on 20.03.2022.
+//  Created by Evgeny Alekseev on 18.04.2022.
 //
 
 import Foundation
 
 struct User: Codable {
-    let id: Int
-    let login: String
-    let name: String
-    let lastname: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id_user"
-        case login = "user_login"
-        case name = "user_name"
-        case lastname = "user_lastname"
-    }
+    let userID: Int
+    let username: String
+    let password: String
+    let email: String
+    let gender: String
+    let creditCard: String
+    let bio: String
 }

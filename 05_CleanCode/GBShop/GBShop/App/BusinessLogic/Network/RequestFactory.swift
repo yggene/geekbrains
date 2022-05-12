@@ -23,7 +23,7 @@ class RequestFactory {
     
     let sessionQueue = DispatchQueue.global(qos: .utility)
     
-    func makeAuthRequestFactory() -> AuthRequestFactory {
+    func makeAuthRequestFactory() -> LoginRequestFactory {
         let errorParser = makeErrorParser()
         return CommonRequest(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
@@ -39,6 +39,16 @@ class RequestFactory {
     }
     
     func makeChangeUserDataRequestFactory() -> ChangeUserDataRequestFactory {
+        let errorParser = makeErrorParser()
+        return CommonRequest(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeGetProductRequestFactory() -> ProductRequestFactory {
+        let errorParser = makeErrorParser()
+        return CommonRequest(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeGetCatalogRequestFactory() -> CatalogRequestFactory {
         let errorParser = makeErrorParser()
         return CommonRequest(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
