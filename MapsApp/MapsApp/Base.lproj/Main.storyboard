@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jiB-HP-BJB">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="0xj-5w-ikF">
+            <objects>
+                <viewController id="jiB-HP-BJB" customClass="MapViewController" customModule="MapsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ACs-tu-lAg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCR-Nd-8vw" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jug-59-61e">
+                                <rect key="frame" x="268.5" y="804" width="125.5" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Marker">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapAddMarkerButton:" destination="jiB-HP-BJB" eventType="touchUpInside" id="kHI-pt-FqJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-ay-q07">
+                                <rect key="frame" x="20" y="804" width="176" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Request Location">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapRequestLocation:" destination="jiB-HP-BJB" eventType="touchUpInside" id="pvy-RS-90q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7BJ-QG-lRp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7BJ-QG-lRp" firstAttribute="trailing" secondItem="YCR-Nd-8vw" secondAttribute="trailing" id="7EC-am-aCL"/>
+                            <constraint firstItem="JwS-ay-q07" firstAttribute="leading" secondItem="7BJ-QG-lRp" secondAttribute="leading" constant="20" id="F1x-Hg-fSv"/>
+                            <constraint firstItem="7BJ-QG-lRp" firstAttribute="bottom" secondItem="JwS-ay-q07" secondAttribute="bottom" constant="20" id="KdX-Sm-QMG"/>
+                            <constraint firstItem="7BJ-QG-lRp" firstAttribute="bottom" secondItem="jug-59-61e" secondAttribute="bottom" constant="20" id="NrI-Rf-CgT"/>
+                            <constraint firstItem="7BJ-QG-lRp" firstAttribute="trailing" secondItem="jug-59-61e" secondAttribute="trailing" constant="20" id="ORq-OD-pZO"/>
+                            <constraint firstItem="YCR-Nd-8vw" firstAttribute="leading" secondItem="7BJ-QG-lRp" secondAttribute="leading" id="ZzQ-5A-yt3"/>
+                            <constraint firstItem="7BJ-QG-lRp" firstAttribute="bottom" secondItem="YCR-Nd-8vw" secondAttribute="bottom" id="gCM-MP-5xB"/>
+                            <constraint firstItem="YCR-Nd-8vw" firstAttribute="top" secondItem="7BJ-QG-lRp" secondAttribute="top" id="pxd-YP-YB4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="YCR-Nd-8vw" id="Plq-i3-4KI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iog-tM-rxF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-310" y="-166"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
